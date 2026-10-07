@@ -1,8 +1,8 @@
 {
-  "version": "0.5.1",
+  "version": "0.6.0",
   "windows-amd64": {
-    "archivo": "mentor-0.5.1-windows-amd64.exe",
-    "sha256": "34adb00724819022f9920a3d4b9d602a0e582085a431148148a9a32e41d402a8",
-    "tamano": 7494656
+    "archivo": "mentor-0.6.0-windows-amd64.exe",
+    "sha256": "a5afe1cc2f3a9dc46ffec31f65aaaa4ad8e0959480bc762d30c51949a1949cfd",
+    "tamano": 7857664
   }
 }
