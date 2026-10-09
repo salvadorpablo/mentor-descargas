@@ -1,8 +1,8 @@
 {
   "tipo": "mentor-webs",
   "formato": 1,
-  "version": 20261009112408,
-  "fecha": "2026-10-09T11:24:08Z",
+  "version": 20261009122743,
+  "fecha": "2026-10-09T12:27:43Z",
   "webs": {
     "chatgpt": {
       "qué es": "Cómo encuentra Mentor cada cosa en la página de ChatGPT. Cada lista es una cadena: se prueba la primera y, si no encuentra nada, la siguiente. Primero las anclas que la web usa para sí misma (identificadores y atributos de datos), nunca textos traducibles. El perfil entra por defecto en la caja: el plan gratuito limita los archivos que se suben, y cada chat nuevo gastaría uno. Como adjunto se puede elegir en el panel; su ficha no se ha visto todavía, y Mentor la busca por el nombre del archivo. Un chat nuevo es el que no tiene «/c/» en su dirección. Delante, las de la página que ChatGPT estrenó el 06/10/2026; detrás, las de la anterior, comprobada con la sesión iniciada el 05/10/2026, por si vuelve. En la nueva, mientras la IA escribe, el botón de dictar está desactivado, y el de parar lleva aria-busy solo el primer instante: «parar» es un botón del formulario con aria-busy y desactivado. Detrás de cada cadena, las de ChatGPT sin la sesión iniciada, que es otra aplicación, mirada el 09/10/2026 en un navegador sin ninguna cuenta: la caja es un textarea (name=prompt) en un formulario marcado data-logged-out; cada mensaje, un li con data-message-role, y su id; la respuesta, en data-assistant-markdown, y la pregunta, en data-user-message-copy, porque el li lleva además «Tú dijiste:»; mientras se escribe, la respuesta lleva data-message-streaming y se ve el icono de parar; y la conversación pasa a /uc/\u003cid\u003e, que tampoco es un chat nuevo. Desde M6, este archivo va también en la configuración firmada que baja la app de Mentor.",
@@ -11,7 +11,12 @@
       "chatNuevo": "^(?!.*/u?c/)",
       "conversacion": "^/(.+/)?u?c/[^/]+",
       "caja": [
-        "#mentor-no-esta"
+        "form[data-chatgpt-composer] [contenteditable='true']",
+        "#prompt-textarea",
+        "form[data-logged-out] textarea[name='prompt']",
+        "form[data-type='unified-composer'] [contenteditable='true']",
+        "main form [contenteditable='true']",
+        "form textarea:not([style*='display: none'])"
       ],
       "marco": [
         "form"
