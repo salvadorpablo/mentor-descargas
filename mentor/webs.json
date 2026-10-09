@@ -1,0 +1,310 @@
+{
+  "tipo": "mentor-webs",
+  "formato": 1,
+  "version": 20261009111523,
+  "fecha": "2026-10-09T11:15:23Z",
+  "webs": {
+    "chatgpt": {
+      "qué es": "Cómo encuentra Mentor cada cosa en la página de ChatGPT. Cada lista es una cadena: se prueba la primera y, si no encuentra nada, la siguiente. Primero las anclas que la web usa para sí misma (identificadores y atributos de datos), nunca textos traducibles. El perfil entra por defecto en la caja: el plan gratuito limita los archivos que se suben, y cada chat nuevo gastaría uno. Como adjunto se puede elegir en el panel; su ficha no se ha visto todavía, y Mentor la busca por el nombre del archivo. Un chat nuevo es el que no tiene «/c/» en su dirección. Delante, las de la página que ChatGPT estrenó el 06/10/2026; detrás, las de la anterior, comprobada con la sesión iniciada el 05/10/2026, por si vuelve. En la nueva, mientras la IA escribe, el botón de dictar está desactivado, y el de parar lleva aria-busy solo el primer instante: «parar» es un botón del formulario con aria-busy y desactivado. Detrás de cada cadena, las de ChatGPT sin la sesión iniciada, que es otra aplicación, mirada el 09/10/2026 en un navegador sin ninguna cuenta: la caja es un textarea (name=prompt) en un formulario marcado data-logged-out; cada mensaje, un li con data-message-role, y su id; la respuesta, en data-assistant-markdown, y la pregunta, en data-user-message-copy, porque el li lleva además «Tú dijiste:»; mientras se escribe, la respuesta lleva data-message-streaming y se ve el icono de parar; y la conversación pasa a /uc/\u003cid\u003e, que tampoco es un chat nuevo. Desde M6, este archivo va también en la configuración firmada que baja la app de Mentor.",
+      "web": "ChatGPT",
+      "comprobado": "2026-10-09",
+      "chatNuevo": "^(?!.*/u?c/)",
+      "conversacion": "^/(.+/)?u?c/[^/]+",
+      "caja": [
+        "form[data-chatgpt-composer] [contenteditable='true']",
+        "#prompt-textarea",
+        "form[data-logged-out] textarea[name='prompt']",
+        "form[data-type='unified-composer'] [contenteditable='true']",
+        "main form [contenteditable='true']",
+        "form textarea:not([style*='display: none'])"
+      ],
+      "marco": [
+        "form"
+      ],
+      "respuesta": [
+        "[data-chatgpt-search-unit-key$=':assistant'] [data-chatgpt-selection-message-id]",
+        "[data-message-author-role='assistant']",
+        "li[data-message-role='assistant']"
+      ],
+      "pregunta": [
+        "[data-user-message-bubble='true']",
+        "[data-message-author-role='user']",
+        "li[data-message-role='user']"
+      ],
+      "contenidoDeRespuesta": [
+        "[data-markdown-text-style='assistant-message']",
+        ".markdown",
+        "[data-assistant-markdown]",
+        ":scope"
+      ],
+      "contenidoDePregunta": [
+        ".whitespace-pre-wrap",
+        "[data-user-message-copy]",
+        ":scope"
+      ],
+      "fuera": [],
+      "identificador": [
+        "data-chatgpt-selection-message-id",
+        "data-message-id",
+        "id"
+      ],
+      "codigo": [
+        "[data-markdown-copy='code-block']",
+        "pre"
+      ],
+      "escribiendo": [
+        {
+          "atributo": "data-markdown-talvt-render-state",
+          "valor": "pending"
+        }
+      ],
+      "adjunto": {
+        "porDefecto": false,
+        "via": "pegar",
+        "campo": [],
+        "ficha": [],
+        "quitar": []
+      },
+      "parar": [
+        "form[data-chatgpt-composer] button[aria-busy][disabled]",
+        "[data-testid='stop-button']",
+        "li[data-message-role='assistant'][data-message-streaming]",
+        "form[data-logged-out] [data-composer-stop-icon]:not([hidden])"
+      ]
+    },
+    "claude": {
+      "qué es": "Cómo encuentra Mentor cada cosa en la página de Claude. Cada lista es una cadena: se prueba la primera y, si no encuentra nada, la siguiente. Solo anclas que la web usa para sí misma (data-testid y otros atributos de datos), nunca textos traducibles. El perfil entra por defecto como archivo adjunto: Claude no recoge un archivo pegado, pero sí el de su campo de subir archivos, y lo enseña en una ficha con su botón de quitar. Comprobado con la sesión iniciada el 06/10/2026, en chats de incógnito: la caja es un editor ProseMirror; la respuesta lleva data-is-streaming=true mientras se escribe, y se escribe poco a poco; el razonamiento va en su propia línea de estado (TurnStatus), fuera del texto de la respuesta; los mensajes no llevan identificador; y un chat de incógnito sigue en /new aunque ya tenga mensajes. Sin la sesión iniciada, Claude lleva a /login, que no es un chat: ahí Mentor no dice nada (sinChat). Visto el 09/10/2026. Desde M6, este archivo va también en la configuración firmada que baja la app de Mentor.",
+      "web": "Claude",
+      "comprobado": "2026-10-06",
+      "chatNuevo": "^/new/?$",
+      "conversacion": "^/chat/[^/]+",
+      "sinChat": "^/(login|logout|signup|magic-link)",
+      "caja": [
+        "[data-testid='chat-input'][contenteditable='true']",
+        "fieldset [contenteditable='true'][role='textbox']"
+      ],
+      "marco": [
+        "fieldset",
+        "form"
+      ],
+      "respuesta": [
+        "[data-testid='assistant-message']"
+      ],
+      "pregunta": [
+        "[data-testid='user-message']"
+      ],
+      "contenidoDeRespuesta": [
+        "[data-cds='Prose']",
+        "[data-perf-reply-text]",
+        ":scope"
+      ],
+      "contenidoDePregunta": [
+        ":scope"
+      ],
+      "fuera": [
+        "[data-testid='TurnStatus']"
+      ],
+      "identificador": [],
+      "codigo": [
+        "pre"
+      ],
+      "escribiendo": [
+        {
+          "atributo": "data-is-streaming",
+          "valor": "true"
+        }
+      ],
+      "adjunto": {
+        "porDefecto": true,
+        "via": "campo",
+        "campo": [
+          "[data-testid='file-upload']",
+          "fieldset input[type='file']"
+        ],
+        "ficha": [
+          "[data-testid='file-thumbnail']"
+        ],
+        "quitar": [
+          "[data-cds-attachment-remove]"
+        ]
+      },
+      "parar": [
+        "[data-testid='assistant-message'][data-is-streaming='true']"
+      ]
+    },
+    "deepseek": {
+      "qué es": "Cómo encuentra Mentor cada cosa en la página de DeepSeek. Cada lista es una cadena: se prueba la primera y, si no encuentra nada, la siguiente. DeepSeek apenas tiene atributos propios: las anclas son su campo de texto (textarea con name=search), la estructura alrededor y las clases de su sistema de diseño, que tienen nombre (ds-message, ds-markdown, ds-think-content), nunca las generadas ni textos traducibles. El perfil entra por defecto como archivo adjunto: DeepSeek recoge un archivo pegado y lo enseña en una ficha encima de la caja, con su botón de quitar. Comprobado con la sesión iniciada el 08/10/2026, con «Pensamiento Profundo» y «Búsqueda inteligente» encendidos: la caja es un textarea normal; cada mensaje va en un ds-message; el de la persona, con su texto en ds-collapsible-text; la respuesta, con el razonamiento en ds-think-content y el texto en ds-assistant-message-main-content; los bloques de código, un \u003cpre\u003e con una línea en cada span; no hay ninguna señal de que la IA escribe, pero la barra de botones de copiar y regenerar sale detrás de la respuesta al terminar, así que mientras escribe la respuesta es lo último de su fila; solo están en la página los mensajes que se ven; un chat nuevo está en / y la conversación pasa a /a/chat/s/\u003cid\u003e. No hay chat temporal. Sin la sesión iniciada, DeepSeek lleva a /sign_in, que no es un chat: ahí Mentor no dice nada (sinChat). Visto el 09/10/2026. Desde M6, este archivo va también en la configuración firmada que baja la app de Mentor.",
+      "web": "DeepSeek",
+      "comprobado": "2026-10-08",
+      "chatNuevo": "^/$",
+      "conversacion": "^/a/chat/s/[^/]+",
+      "sinChat": "^/(sign_in|sign_up)",
+      "caja": [
+        "textarea[name='search']",
+        "textarea#chat-input"
+      ],
+      "marco": [
+        "div:has(\u003e div \u003e div \u003e textarea[name='search'])",
+        "div:has(textarea[name='search']):has(input[type='file'])",
+        "div:has(\u003e div \u003e div \u003e textarea)"
+      ],
+      "respuesta": [
+        ".ds-message:has(.ds-think-content, .ds-assistant-message-main-content)",
+        ".ds-message:has(.ds-markdown)"
+      ],
+      "pregunta": [
+        ".ds-message:has(.ds-collapsible-text)",
+        ".ds-message:not(:has(.ds-markdown, .ds-think-content))"
+      ],
+      "contenidoDeRespuesta": [
+        ".ds-assistant-message-main-content",
+        ":scope"
+      ],
+      "contenidoDePregunta": [
+        ".ds-collapsible-text",
+        ":scope"
+      ],
+      "fuera": [
+        ".ds-think-content"
+      ],
+      "identificador": [],
+      "codigo": [
+        "pre"
+      ],
+      "escribiendo": [],
+      "adjunto": {
+        "porDefecto": true,
+        "via": "pegar",
+        "campo": [],
+        "ficha": [
+          ".ds-animated-size-item"
+        ],
+        "quitar": [
+          "[tabindex='0']:has(\u003e .ds-icon)",
+          "[role='button']"
+        ]
+      },
+      "parar": [
+        ".ds-message:has(.ds-think-content, .ds-markdown):last-child"
+      ]
+    },
+    "gemini": {
+      "qué es": "Cómo encuentra Mentor cada cosa en la página de Gemini. Cada lista es una cadena: se prueba la primera y, si no encuentra nada, la siguiente. Solo anclas que la web usa para sí misma (sus elementos propios, como rich-textarea o model-response, y atributos de datos), nunca textos traducibles. El perfil entra por defecto como archivo adjunto: Gemini recoge un archivo pegado y lo enseña en una ficha con su botón de cerrar. Comprobado con la sesión iniciada el 06/10/2026, en conversaciones temporales: la caja es un editor Quill que no recoge un pegado hecho por Mentor, y el texto entra como tecleado; mientras la IA escribe, el botón de enviar lleva el icono «stop»; la respuesta aparece cuando ese botón se va, primero vacía y enseguida entera; cada respuesta lleva su identificador en el id de message-content; y una conversación temporal sigue en /app aunque ya tenga mensajes. Sin la sesión iniciada, el 09/10/2026, la página es la misma y valen las mismas anclas; la conversación cambia de dirección con cada mensaje. Desde M6, este archivo va también en la configuración firmada que baja la app de Mentor.",
+      "web": "Gemini",
+      "comprobado": "2026-10-06",
+      "chatNuevo": "^(/u/\\d+)?/app/?$",
+      "conversacion": "^(/u/\\d+)?/app/[^/]+",
+      "caja": [
+        "rich-textarea [contenteditable='true'][role='textbox']",
+        "input-area-v2 [contenteditable='true'][role='textbox']"
+      ],
+      "marco": [
+        "input-area-v2",
+        "input-container",
+        "form"
+      ],
+      "respuesta": [
+        "model-response message-content"
+      ],
+      "pregunta": [
+        "user-query"
+      ],
+      "contenidoDeRespuesta": [
+        "#model-response-message-content",
+        ".markdown",
+        ":scope"
+      ],
+      "contenidoDePregunta": [
+        ".query-text",
+        "user-query-content",
+        ":scope"
+      ],
+      "fuera": [
+        "model-thoughts",
+        "thinking-overlay"
+      ],
+      "identificador": [
+        "id"
+      ],
+      "codigo": [
+        "code-block",
+        "pre"
+      ],
+      "escribiendo": [],
+      "adjunto": {
+        "porDefecto": true,
+        "via": "pegar",
+        "campo": [],
+        "ficha": [
+          "uploader-file-preview"
+        ],
+        "quitar": [
+          "button:has(mat-icon[fonticon='close'])"
+        ]
+      },
+      "parar": [
+        "input-area-v2 mat-icon[fonticon='stop']"
+      ]
+    },
+    "grok": {
+      "qué es": "Cómo encuentra Mentor cada cosa en la página de Grok. Cada lista es una cadena: se prueba la primera y, si no encuentra nada, la siguiente. Solo anclas que la web usa para sí misma (data-testid, el id de cada respuesta y clases con nombre, no generadas), nunca textos traducibles. El perfil entra por defecto como archivo adjunto: Grok recoge un archivo pegado y lo enseña en una ficha de la lista de adjuntos, con su botón de quitar. Comprobado con la sesión iniciada el 08/10/2026, en un chat privado y en uno normal: la caja es un editor Tiptap, que recoge el pegado y pone cada línea en un párrafo, dentro de la barra que se ve (query-bar) del formulario data-composer, que en un chat nuevo es más ancho que ella; cada mensaje va en un div con id «response-» y su identificador, y dentro, el de la persona en data-testid=user-message y la respuesta en data-testid=assistant-message; el razonamiento va en su propio contenedor (thinking-container), con un indicador mientras piensa (canvas-working-indicator); la respuesta se va pintando palabra a palabra, cada una en un span con data-sd-animate, también después de que se vaya el botón de parar, y al terminar se vuelve a pintar sin ellos; un chat nuevo está en /, la conversación pasa a /c/\u003cid\u003e y un chat privado está en /c, también con mensajes. Desde M6, este archivo va también en la configuración firmada que baja la app de Mentor.",
+      "web": "Grok",
+      "comprobado": "2026-10-08",
+      "chatNuevo": "^/(c/?)?$",
+      "conversacion": "^/c/[^/]+",
+      "caja": [
+        "form[data-composer] [data-testid='chat-input'] [contenteditable='true']",
+        "[data-testid='chat-input'] [contenteditable='true']",
+        "form [contenteditable='true'][role='textbox']"
+      ],
+      "marco": [
+        ".query-bar",
+        "form[data-composer]",
+        "form"
+      ],
+      "respuesta": [
+        "[id^='response-']:has(\u003e [data-testid='assistant-message'])",
+        "[data-testid='assistant-message']"
+      ],
+      "pregunta": [
+        "[data-testid='user-message']"
+      ],
+      "contenidoDeRespuesta": [
+        ".response-content-markdown",
+        "[data-testid='assistant-message']",
+        ":scope"
+      ],
+      "contenidoDePregunta": [
+        ":scope"
+      ],
+      "fuera": [
+        ".thinking-container",
+        "[data-testid='canvas-trigger']"
+      ],
+      "identificador": [
+        "id"
+      ],
+      "codigo": [
+        "[data-testid='code-block']",
+        "pre"
+      ],
+      "escribiendo": [],
+      "adjunto": {
+        "porDefecto": true,
+        "via": "pegar",
+        "campo": [],
+        "ficha": [
+          "[role='listitem']"
+        ],
+        "quitar": [
+          "button:not([data-state])",
+          "button:last-of-type"
+        ]
+      },
+      "parar": [
+        "[data-testid='assistant-message'] [data-sd-animate]",
+        "[data-testid='canvas-working-indicator']"
+      ]
+    }
+  }
+}
