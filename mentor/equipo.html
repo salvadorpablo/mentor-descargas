@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mentor · Una invitación a un equipo</title>
+  <style>
+    :root { --paper: #F1F3F5; --card: #FFFFFF; --ink: #131A24; --ink-soft: #43505F; --rule: #D3DAE1; --accent: #8C6520; color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) { :root { --paper: #0F141A; --card: #161D25; --ink: #E7EBEF; --ink-soft: #A9B4C0; --rule: #2B343E; --accent: #D8AF61; } }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
+    main { max-width: 44rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
+    h1 { font: 600 2.2rem/1.15 "Newsreader", "Iowan Old Style", Georgia, serif; margin: 0 0 .75rem; }
+    ol { padding-left: 1.3rem; }
+    li { margin: .5rem 0; }
+    pre { background: var(--card); border: 1px solid var(--rule); border-radius: .5rem; padding: .6rem .8rem; white-space: pre-wrap; word-break: break-all; }
+    button { font: inherit; padding: .35rem .9rem; border-radius: .5rem; border: 1px solid var(--rule); background: var(--card); color: var(--ink); cursor: pointer; }
+    a { color: var(--accent); }
+    .nota { color: var(--ink-soft); font-size: .95rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 data-t="titulo">Te han invitado a un equipo de Mentor</h1>
+    <p data-t="lead">Mentor pone tu memoria delante de la IA que uses. En el equipo, cada persona tiene la suya, que nadie más ve: tampoco quien paga.</p>
+    <ol>
+      <li data-t="paso1">Instala Mentor, si todavía no lo tienes: <a href="https://descargas.radamant.eu/mentor/">la app para Windows y la extensión</a>.</li>
+      <li data-t="paso2">En el panel de Mentor, en «Tu suscripción», pega este enlace en «Unirme a un equipo»:</li>
+    </ol>
+    <pre id="enlace"></pre>
+    <p><button id="copiar" data-t="copiar">Copiar</button></p>
+    <p class="nota" data-t="nota">La invitación vale una vez. Si no funciona, pide otra a quien paga el equipo.</p>
+  </main>
+  <script>
+    const ingles = !(navigator.language || "es").toLowerCase().startsWith("es");
+    const EN = {
+      titulo: "You've been invited to a Mentor team",
+      lead: "Mentor puts your memory in front of the AI you use. In the team, each person has their own, which nobody else sees: not even whoever pays.",
+      paso1: "Install Mentor, if you don't have it yet: <a href=\"https://descargas.radamant.eu/mentor/\">the Windows app and the extension</a>.",
+      paso2: "In Mentor's panel, in «Tu suscripción», paste this link in «Unirme a un equipo»:",
+      copiar: "Copy",
+      nota: "The invitation works once. If it doesn't, ask whoever pays the team for another one.",
+    };
+    if (ingles) {
+      document.documentElement.lang = "en";
+      for (const n of document.querySelectorAll("[data-t]")) if (EN[n.dataset.t]) n.innerHTML = EN[n.dataset.t];
+    }
+    // El token va detrás de «#»: el navegador no lo manda a ningún servidor.
+    document.getElementById("enlace").textContent = location.href;
+    document.getElementById("copiar").addEventListener("click", () => navigator.clipboard.writeText(location.href));
+  </script>
+</body>
+</html>

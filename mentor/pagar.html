@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mentor · Empieza tu prueba</title>
+  <style>
+    :root { --paper: #F1F3F5; --card: #FFFFFF; --ink: #131A24; --ink-soft: #43505F; --rule: #D3DAE1; --accent: #8C6520; --ok: #2F6B3F; --bad: #9B2C2C; color-scheme: light dark; }
+    @media (prefers-color-scheme: dark) { :root { --paper: #0F141A; --card: #161D25; --ink: #E7EBEF; --ink-soft: #A9B4C0; --rule: #2B343E; --accent: #D8AF61; --ok: #7CC48F; --bad: #E58A8A; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
+    main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
+    h1 { font: 600 2.2rem/1.15 "Newsreader", "Iowan Old Style", Georgia, serif; margin: 0 0 .75rem; }
+    h2 { font: 600 1.25rem/1.3 "Newsreader", "Iowan Old Style", Georgia, serif; margin: 0 0 .25rem; }
+    .lead { color: var(--ink-soft); margin: 0 0 1.5rem; }
+    .pruebas { border: 1px dashed var(--accent); padding: .5rem .75rem; border-radius: .5rem; margin: 0 0 1.5rem; }
+    .cadencia { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: .2rem; margin: 0 0 1.25rem; }
+    .cadencia button { border: 0; background: none; color: var(--ink); padding: .35rem .9rem; border-radius: 999px; font: inherit; cursor: pointer; }
+    .cadencia button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+    .planes { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; }
+    .plan { background: var(--card); border: 1px solid var(--rule); border-radius: .75rem; padding: 1.1rem; display: flex; flex-direction: column; gap: .5rem; }
+    .plan[hidden] { display: none; }
+    .precio { font: 600 1.6rem/1.2 "Newsreader", Georgia, serif; }
+    .precio small { font: 400 .9rem/1.4 "IBM Plex Sans", "Segoe UI", sans-serif; color: var(--ink-soft); }
+    .plan p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
+    .plan button.elegir { margin-top: auto; border: 0; border-radius: .5rem; background: var(--accent); color: #fff; padding: .6rem .9rem; font: 600 1rem/1.2 inherit; cursor: pointer; }
+    .plan label { font-size: .95rem; }
+    .plan input { width: 5rem; font: inherit; padding: .2rem .4rem; }
+    .antes { background: var(--card); border: 1px solid var(--rule); border-radius: .75rem; padding: 1rem 1.1rem; margin: 1.5rem 0 0; }
+    .antes ul { margin: .25rem 0 0; padding-left: 1.2rem; }
+    .aviso { border-left: 4px solid var(--bad); padding: .5rem .75rem; background: var(--card); margin: 0 0 1.5rem; }
+    .hecho { border-left: 4px solid var(--ok); padding: .75rem 1rem; background: var(--card); margin: 1.5rem 0 0; }
+    .nota { color: var(--ink-soft); font-size: .9rem; }
+    a { color: var(--accent); }
+    footer { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 1rem; color: var(--ink-soft); font-size: .9rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 data-t="titulo">Empieza tu prueba de Mentor</h1>
+    <p class="lead" data-t="lead">14 días con todo, y hoy no se cobra nada.</p>
+    <p id="pruebas" class="pruebas" hidden data-t="pruebas">Esta es la cuenta de pruebas de Paddle: no se cobra nada de verdad. Para probar, la tarjeta 4242 4242 4242 4242, con cualquier fecha futura y cualquier código.</p>
+    <p id="sinBoveda" class="aviso" hidden data-t="sinBoveda">Abre esta página desde el panel de Mentor, en «Tu suscripción», «Empezar la prueba»: así el pago va a tu memoria.</p>
+
+    <div class="cadencia" role="group" aria-label="Cadencia">
+      <button type="button" id="anual" aria-pressed="true" data-t="anual">Anual</button>
+      <button type="button" id="mensual" aria-pressed="false" data-t="mensual">Mes a mes</button>
+    </div>
+
+    <div class="planes">
+      <section class="plan" id="planFundador" hidden>
+        <h2 data-t="fundador">Personal, precio de fundador</h2>
+        <div class="precio"><span data-importe="fundador-año"></span> <small data-t="alAño">al año</small></div>
+        <p data-t="fundadorTexto">Todo lo de Personal, para los 500 primeros, y para siempre mientras no te des de baja.</p>
+        <p id="quedan"></p>
+        <button class="elegir" data-plan="fundador-año" data-t="elegir">Empezar la prueba</button>
+      </section>
+      <section class="plan">
+        <h2>Personal</h2>
+        <div class="precio"><span data-importe="personal"></span> <small data-cadencia></small></div>
+        <p data-t="personalTexto">Mentor en ChatGPT, Claude, Gemini, Grok, DeepSeek y tus programas de IA, con lo apuntado viajando entre ellas y tu memoria sincronizada entre tus dispositivos.</p>
+        <button class="elegir" data-plan="personal" data-t="elegir">Empezar la prueba</button>
+      </section>
+      <section class="plan">
+        <h2>Profesional</h2>
+        <div class="precio"><span data-importe="profesional"></span> <small data-cadencia></small></div>
+        <p data-t="profesionalTexto">Todo lo de Personal, una memoria por cliente sin límite y el contrato de encargo del tratamiento, con la factura a tu nombre.</p>
+        <button class="elegir" data-plan="profesional" data-t="elegir">Empezar la prueba</button>
+      </section>
+      <section class="plan">
+        <h2>Equipos</h2>
+        <div class="precio"><span data-importe="equipos"></span> <small data-t="porPlaza">por plaza y mes, más IVA</small></div>
+        <p data-t="equiposTexto">Profesional para cada persona, cada una con su memoria, que nadie más ve. Las plazas se llevan desde tu panel, con una factura y el contrato con la empresa.</p>
+        <label><span data-t="plazas">Plazas</span> <input id="plazas" type="number" min="3" max="100" value="3"></label>
+        <button class="elegir" data-plan="equipos" data-t="elegir">Empezar la prueba</button>
+      </section>
+    </div>
+
+    <div class="antes">
+      <strong data-t="antesTitulo">Antes de poner la tarjeta</strong>
+      <ul>
+        <li data-t="antes1">Hoy no se cobra nada. La prueba dura 14 días, hasta el <span data-fin></span>.</li>
+        <li data-t="antes2">El <span data-cobro></span> se cobra el plan que elijas, y después cada mes o cada año, salvo que te des de baja antes.</li>
+        <li data-t="antes3">Te das de baja con un clic, en el panel de Mentor, en «Tu suscripción», sin escribir a nadie. El panel te avisa tres días antes del primer cobro, y Paddle te manda un correo siete días antes.</li>
+        <li data-t="antes4">Si te das de baja, Mentor deja de ponerse en tus chats al acabar la prueba o lo pagado. Tu carpeta sigue siendo tuya, entera, en cada dispositivo; la copia cifrada del almacén de Radamant se borra a los 30 días.</li>
+        <li data-t="antes5">Cobra Paddle, en nombre de Radamant, y guarda tu correo y tu tarjeta. Radamant no ve nunca tu tarjeta ni tu memoria.</li>
+      </ul>
+      <p class="nota" data-t="moneda">Los precios en euros llevan el IVA incluido, salvo Equipos. Fuera de la Unión Europea, las mismas cifras en dólares, y los impuestos según tu país. El importe exacto, antes de pagar, en la ventana de Paddle.</p>
+    </div>
+
+    <div id="hecho" class="hecho" hidden>
+      <strong data-t="hechoTitulo">Listo: estás en la prueba.</strong>
+      <p data-t="hechoTexto">Vuelve a la pestaña del panel de Mentor: en unos segundos dirá hasta cuándo dura. Puedes cerrar esta.</p>
+    </div>
+
+    <footer>
+      <span data-t="pie">Mentor es de Radamant.</span> <a href="privacidad.html" data-t="privacidad">Privacidad</a>
+    </footer>
+  </main>
+
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    // La página de pago de Mentor (M8b). La abre el panel de Mentor, desde
+    // «Tu suscripción», con el identificador de la memoria en la dirección:
+    // va a Paddle como custom_data, y Paddle se lo dice a Radamant en sus
+    // avisos. Ni la página ni Radamant ven la tarjeta.
+    const ingles = !(navigator.language || "es").toLowerCase().startsWith("es");
+    const EN = {
+      titulo: "Start your Mentor trial",
+      lead: "14 days with everything, and nothing is charged today.",
+      pruebas: "This is Paddle's test account: nothing is really charged. To try it, card 4242 4242 4242 4242, any future date and any code.",
+      sinBoveda: "Open this page from Mentor's panel, in «Tu suscripción», «Empezar la prueba»: that way the payment goes to your memory.",
+      anual: "Yearly", mensual: "Monthly",
+      fundador: "Personal, founder price",
+      alAño: "a year",
+      fundadorTexto: "Everything in Personal, for the first 500, and forever while you don't cancel.",
+      elegir: "Start the trial",
+      personalTexto: "Mentor in ChatGPT, Claude, Gemini, Grok, DeepSeek and your AI programs, with what's noted travelling between them and your memory synced across your devices.",
+      profesionalTexto: "Everything in Personal, one memory per client with no limit, and the data processing agreement, invoiced to you.",
+      porPlaza: "per seat a month, plus VAT",
+      equiposTexto: "Profesional for each person, each with their own memory that nobody else sees. Seats are managed from your panel, with one invoice and the agreement with the company.",
+      plazas: "Seats",
+      antesTitulo: "Before you enter your card",
+      antes1: "Nothing is charged today. The trial lasts 14 days, until <span data-fin></span>.",
+      antes2: "On <span data-cobro></span> the plan you choose is charged, and then every month or every year, unless you cancel before.",
+      antes3: "You cancel with one click, in Mentor's panel, in «Tu suscripción», without writing to anyone. The panel warns you three days before the first charge, and Paddle emails you seven days before.",
+      antes4: "If you cancel, Mentor stops appearing in your chats when the trial or the paid period ends. Your folder is still yours, whole, on every device; the encrypted copy in Radamant's storage is deleted after 30 days.",
+      antes5: "Paddle charges on behalf of Radamant and keeps your email and your card. Radamant never sees your card or your memory.",
+      moneda: "Prices in euros include VAT, except Equipos. Outside the European Union, the same figures in dollars, with taxes depending on your country. The exact amount, before paying, in Paddle's window.",
+      hechoTitulo: "Done: you're on the trial.",
+      hechoTexto: "Go back to Mentor's panel tab: in a few seconds it will say until when it lasts. You can close this one.",
+      pie: "Mentor is made by Radamant.", privacidad: "Privacy",
+      mes: "a month", año: "a year", quedan: (n) => `${n} of 500 left.`,
+    };
+    const ES = { mes: "al mes", año: "al año", quedan: (n) => `Quedan ${n} de 500.` };
+    const T = ingles ? EN : ES;
+    if (ingles) {
+      document.documentElement.lang = "en";
+      for (const n of document.querySelectorAll("[data-t]")) if (typeof EN[n.dataset.t] === "string") n.innerHTML = EN[n.dataset.t];
+    }
+
+    const boveda = new URLSearchParams(location.search).get("boveda") ?? "";
+    const valida = /^[a-z2-7]{16}$/.test(boveda);
+    document.getElementById("sinBoveda").hidden = valida;
+
+    const euros = (c) => new Intl.NumberFormat(ingles ? "en-IE" : "es-ES", { style: "currency", currency: "EUR" }).format(c / 100);
+    const fecha = (d) => d.toLocaleDateString(ingles ? "en-GB" : "es-ES", { day: "numeric", month: "long", year: "numeric" });
+
+    let pago = null;
+    let cadencia = "año";
+
+    function pintar() {
+      document.getElementById("anual").setAttribute("aria-pressed", String(cadencia === "año"));
+      document.getElementById("mensual").setAttribute("aria-pressed", String(cadencia === "mes"));
+      for (const n of document.querySelectorAll("[data-cadencia]")) n.textContent = T[cadencia];
+      for (const n of document.querySelectorAll("[data-importe]")) {
+        const id = n.dataset.importe;
+        const p = pago.precios[id.includes("-") ? id : `${id}-${cadencia}`];
+        if (!p) continue;
+        // Equipos se enseña por plaza y mes también pagando el año.
+        n.textContent = id === "equipos" && cadencia === "año" ? euros(p.eur / 12) : euros(p.eur);
+      }
+      const fin = new Date(Date.now() + pago.prueba * 86400000);
+      for (const n of document.querySelectorAll("[data-fin], [data-cobro]")) n.textContent = fecha(fin);
+    }
+
+    function abrir(plan) {
+      if (!valida) return;
+      const id = plan.includes("-") ? plan : `${plan}-${cadencia}`;
+      const p = pago.precios[id];
+      if (!p) return;
+      let cantidad = 1;
+      if (plan === "equipos") cantidad = Math.min(100, Math.max(3, parseInt(document.getElementById("plazas").value, 10) || 3));
+      Paddle.Checkout.open({
+        items: [{ priceId: p.precio, quantity: cantidad }],
+        customData: { boveda },
+        settings: { displayMode: "overlay", locale: ingles ? "en" : "es", showAddDiscounts: false },
+      });
+    }
+
+    async function empezar() {
+      pago = await (await fetch("pago.json", { cache: "no-cache" })).json();
+      document.getElementById("pruebas").hidden = pago.entorno !== "sandbox";
+      if (pago.entorno === "sandbox") Paddle.Environment.set("sandbox");
+      Paddle.Initialize({
+        token: pago.token,
+        eventCallback: (e) => {
+          if (e.name === "checkout.completed") document.getElementById("hecho").hidden = false;
+        },
+      });
+      pintar();
+      // El precio de fundador, mientras quede alguna de las 500 plazas: las
+      // cuenta el programa de bóvedas, con quien está en la prueba o pagando.
+      try {
+        const r = await (await fetch("https://almacen.radamant.eu/_cobro/fundadores", { cache: "no-cache" })).json();
+        if (r.quedan > 0) {
+          document.getElementById("planFundador").hidden = false;
+          document.getElementById("quedan").textContent = T.quedan(r.quedan);
+        }
+      } catch {}
+    }
+
+    document.getElementById("anual").addEventListener("click", () => { cadencia = "año"; pintar(); });
+    document.getElementById("mensual").addEventListener("click", () => { cadencia = "mes"; pintar(); });
+    for (const b of document.querySelectorAll("button.elegir")) {
+      b.disabled = !valida;
+      b.addEventListener("click", () => abrir(b.dataset.plan));
+    }
+    empezar();
+  </script>
+</body>
+</html>

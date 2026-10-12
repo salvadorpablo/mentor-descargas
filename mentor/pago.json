@@ -1,0 +1,76 @@
+{
+  "entorno": "sandbox",
+  "precios": {
+    "equipos-año": {
+      "cadencia": "año",
+      "eur": 18000,
+      "impuestos": "external",
+      "plan": "equipos",
+      "plazas": [
+        3,
+        100
+      ],
+      "precio": "pri_01m4r647130rjge77tadzm8nhq",
+      "usd": 18000
+    },
+    "equipos-mes": {
+      "cadencia": "mes",
+      "eur": 1800,
+      "impuestos": "external",
+      "plan": "equipos",
+      "plazas": [
+        3,
+        100
+      ],
+      "precio": "pri_01m4r646s1tc89qse1ep916hpr",
+      "usd": 1800
+    },
+    "fundador-año": {
+      "cadencia": "año",
+      "eur": 7200,
+      "impuestos": "location",
+      "plan": "fundador",
+      "plazas": null,
+      "precio": "pri_01m4r6459vcwvnhcsxvrqjhek9",
+      "usd": 7200
+    },
+    "personal-año": {
+      "cadencia": "año",
+      "eur": 9900,
+      "impuestos": "location",
+      "plan": "personal",
+      "plazas": null,
+      "precio": "pri_01m4r6450vry573sfjwhy7ts38",
+      "usd": 9900
+    },
+    "personal-mes": {
+      "cadencia": "mes",
+      "eur": 990,
+      "impuestos": "location",
+      "plan": "personal",
+      "plazas": null,
+      "precio": "pri_01m4r644h3gq145xea05xbf2mk",
+      "usd": 990
+    },
+    "profesional-año": {
+      "cadencia": "año",
+      "eur": 18000,
+      "impuestos": "location",
+      "plan": "profesional",
+      "plazas": null,
+      "precio": "pri_01m4r6466kza9yx8f753bqamqr",
+      "usd": 18000
+    },
+    "profesional-mes": {
+      "cadencia": "mes",
+      "eur": 1800,
+      "impuestos": "location",
+      "plan": "profesional",
+      "plazas": null,
+      "precio": "pri_01m4r645xnpk63gkb5124591nk",
+      "usd": 1800
+    }
+  },
+  "prueba": 14,
+  "token": "test_0c27b1f0fcbbd4fa6defb7be708"
+}
