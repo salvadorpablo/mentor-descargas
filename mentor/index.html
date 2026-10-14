@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mentor para Windows</title>
-  <meta name="description" content="Descarga la app de Mentor para Windows: tu memoria, en una carpeta tuya, delante de la IA que uses.">
+  <title>Mentor para Windows y Mac</title>
+  <meta name="description" content="Descarga la app de Mentor para Windows o para Mac: tu memoria, en una carpeta tuya, delante de la IA que uses.">
   <style>
     :root {
       --paper: #F1F3F5; --surface: #FAFBFB; --ink: #131A24; --ink-soft: #43505F; --ink-faint: #64707D;
@@ -22,7 +22,9 @@
     h1 { font: 600 2.6rem/1.1 var(--display); margin: 0 0 .5rem; }
     h2 { font: 600 1.35rem/1.3 var(--display); margin: 2.5rem 0 .75rem; }
     .lema { color: var(--ink-soft); font-size: 1.15rem; margin: 0 0 2rem; }
-    .descarga { display: inline-block; background: var(--ink); color: var(--paper); padding: .85rem 1.4rem; border-radius: .5rem; text-decoration: none; font-weight: 600; }
+    .descargas { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .descarga { display: inline-block; background: var(--ink); color: var(--paper); border: 2px solid var(--ink); padding: .75rem 1.3rem; border-radius: .5rem; text-decoration: none; font-weight: 600; }
+    .descarga.otra { background: transparent; color: var(--ink); }
     .descarga:focus-visible, a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
     .version { color: var(--ink-faint); font-size: .95rem; margin-top: .75rem; }
     ol { padding-left: 1.25rem; }
@@ -36,23 +38,40 @@
   <main>
     <h1>Mentor</h1>
     <p class="lema">Tu memoria, en una carpeta tuya, delante de la IA que uses: ChatGPT, Claude, Gemini, Grok o DeepSeek.</p>
-    <a class="descarga" href="Mentor-instalador.exe" download>Descargar Mentor para Windows</a>
-    <p class="version">Versión 0.14.0 · Windows 10 y 11 · Para Chrome, Edge, Brave, Opera y Vivaldi</p>
+    <div class="descargas">
+      <a class="descarga" data-sistema="windows" href="Mentor-instalador.exe" download>Descargar Mentor para Windows</a>
+      <a class="descarga" data-sistema="mac" href="Mentor.zip" download>Descargar Mentor para Mac</a>
+    </div>
+    <p class="version">Versión 0.15.0 · Windows 10 y 11, y macOS 13 Ventura o posterior, en los Mac con chip de Apple y con Intel · Para Chrome, Edge, Brave, Opera y Vivaldi</p>
 
     <h2>Cómo se instala</h2>
     <ol>
-      <li>Abre el archivo que has descargado. No pide permisos de administrador.</li>
+      <li>Abre lo que has descargado. En el Mac, Mentor.zip se abre en Mentor.app: ábrela. No pide permisos de administrador.</li>
       <li>Tu navegador se abre en la página de Mentor de su tienda: añade la extensión. Edge tiene su propia tienda; Chrome, Brave, Opera y Vivaldi usan la de Chrome.</li>
       <li>Mentor te lleva en tres pasos: empiezas la prueba de 14 días, guardas tu código y escribes tu perfil con una entrevista corta, en la IA que uses.</li>
     </ol>
     <p>La prueba pide la tarjeta, y hoy no se cobra nada: te das de baja con un clic, en el panel de Mentor, antes de que acabe.</p>
-    <p class="nota">Windows puede avisar de que no reconoce la app. Pulsa «Más información» y «Ejecutar de todas formas». Sale porque el instalador todavía no lleva la firma de Radamant.</p>
+    <p class="nota">Windows puede avisar de que no reconoce la app. Pulsa «Más información» y «Ejecutar de todas formas».</p>
+    <p class="nota">En el Mac, la primera vez macOS no la deja abrir: «No se ha abierto Mentor», porque Apple no ha podido verificarla. Pulsa «Aceptar», no «Trasladar a la Papelera»; abre Ajustes del Sistema, Privacidad y seguridad, baja hasta «Seguridad», donde pone «Se ha bloqueado Mentor para proteger tu Mac», y pulsa «Abrir igualmente». macOS pide tu contraseña; si vuelve a preguntar, otra vez «Abrir igualmente».</p>
+    <p>Los dos avisos salen porque la app todavía no lleva la firma de Radamant.</p>
 
     <h2>Qué hace en tu ordenador</h2>
-    <p>Tu memoria es una carpeta de archivos de texto, en <strong>Documentos\Mentor</strong> si no eliges otra. La app deja que la extensión de tu navegador la lea y escriba, y una vez al día mira aquí si hay una versión nueva. No manda nada de tu carpeta a ningún sitio.</p>
-    <p>Para quitarla: Configuración, Aplicaciones, Mentor, Desinstalar. Tu carpeta se queda donde está.</p>
+    <p>Tu memoria es una carpeta de archivos de texto: si no eliges otra, en <strong>Documentos\Mentor</strong> en Windows, y en el Mac en <strong>Mentor</strong>, dentro de tu carpeta de inicio. La app deja que la extensión de tu navegador la lea y escriba, y una vez al día mira aquí si hay una versión nueva. No manda nada de tu carpeta a ningún sitio.</p>
+    <p>Para quitarla en Windows: Configuración, Aplicaciones, Mentor, Desinstalar. En el Mac: abre Mentor, que está en la carpeta Aplicaciones de tu carpeta de inicio (en el Finder, menú Ir, Inicio), y pulsa «Desinstalar…». Tu carpeta se queda donde está.</p>
 
     <footer>Mentor es un producto de Radamant.</footer>
   </main>
+  <script>
+    // El botón del sistema de quien visita, delante y lleno; el otro, al lado.
+    (function () {
+      var mac = /Mac/.test(navigator.platform || navigator.userAgent || "");
+      var botones = document.querySelectorAll(".descarga");
+      for (var i = 0; i < botones.length; i++) {
+        var suyo = (botones[i].getAttribute("data-sistema") === "mac") === mac;
+        if (!suyo) botones[i].className += " otra";
+        else botones[i].parentNode.insertBefore(botones[i], botones[i].parentNode.firstChild);
+      }
+    })();
+  </script>
 </body>
 </html>
