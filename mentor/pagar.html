@@ -31,66 +31,85 @@
     .aviso { border-left: 4px solid var(--bad); padding: .5rem .75rem; background: var(--card); margin: 0 0 1.5rem; }
     .hecho { border-left: 4px solid var(--ok); padding: .75rem 1rem; background: var(--card); margin: 1.5rem 0 0; }
     .nota { color: var(--ink-soft); font-size: .9rem; }
+    .aviso p { margin: 0 0 .5rem; }
+    button.boton { border: 0; border-radius: .5rem; background: var(--accent); color: #fff; padding: .6rem .9rem; font: 600 1rem/1.2 inherit; cursor: pointer; }
     a { color: var(--accent); }
     footer { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 1rem; color: var(--ink-soft); font-size: .9rem; }
   </style>
 </head>
 <body>
   <main>
-    <h1 data-t="titulo">Empieza tu prueba de Mentor</h1>
-    <p class="lead" data-t="lead">14 días con todo, y hoy no se cobra nada.</p>
+    <div id="modoPrueba">
+      <h1 data-t="titulo">Empieza tu prueba de Mentor</h1>
+      <p class="lead" data-t="lead">14 días con todo, y hoy no se cobra nada.</p>
+    </div>
+    <div id="modoPago" hidden>
+      <h1 data-t="tituloPago">Tu pago de Mentor</h1>
+      <p class="lead" data-t="leadPago">Paddle abre aquí tu pago pendiente, o el cambio de tu tarjeta.</p>
+      <p><button type="button" id="abrirPago" class="boton" disabled data-t="abrirPago">Abrir el pago</button></p>
+    </div>
     <p id="pruebas" class="pruebas" hidden data-t="pruebas">Esta es la cuenta de pruebas de Paddle: no se cobra nada de verdad. Para probar, la tarjeta 4242 4242 4242 4242, con cualquier fecha futura y cualquier código.</p>
     <p id="sinBoveda" class="aviso" hidden data-t="sinBoveda">Abre esta página desde el panel de Mentor, en «Tu suscripción», «Empezar la prueba»: así el pago va a tu memoria.</p>
-
-    <div class="cadencia" role="group" aria-label="Cadencia">
-      <button type="button" id="anual" aria-pressed="true" data-t="anual">Anual</button>
-      <button type="button" id="mensual" aria-pressed="false" data-t="mensual">Mes a mes</button>
+    <div id="sinPago" class="aviso" hidden>
+      <p data-t="sinPago">No se ha podido cargar el pago. Vuelve a intentarlo en un rato.</p>
+      <p><button type="button" id="otraVez" class="boton" data-t="otraVez">Probar otra vez</button></p>
     </div>
 
-    <div class="planes">
-      <section class="plan" id="planFundador" hidden>
-        <h2 data-t="fundador">Personal, precio de fundador</h2>
-        <div class="precio"><span data-importe="fundador-año"></span> <small data-t="alAño">al año</small></div>
-        <p data-t="fundadorTexto">Todo lo de Personal, para los 500 primeros, y para siempre mientras no te des de baja.</p>
-        <p id="quedan"></p>
-        <button class="elegir" data-plan="fundador-año" data-t="elegir">Empezar la prueba</button>
-      </section>
-      <section class="plan">
-        <h2>Personal</h2>
-        <div class="precio"><span data-importe="personal"></span> <small data-cadencia></small></div>
-        <p data-t="personalTexto">Mentor en ChatGPT, Claude, Gemini, Grok, DeepSeek y tus programas de IA, con lo apuntado viajando entre ellas y tu memoria sincronizada entre tus dispositivos.</p>
-        <button class="elegir" data-plan="personal" data-t="elegir">Empezar la prueba</button>
-      </section>
-      <section class="plan">
-        <h2>Profesional</h2>
-        <div class="precio"><span data-importe="profesional"></span> <small data-cadencia></small></div>
-        <p data-t="profesionalTexto">Todo lo de Personal, una memoria por cliente sin límite y el contrato de encargo del tratamiento, con la factura a tu nombre.</p>
-        <button class="elegir" data-plan="profesional" data-t="elegir">Empezar la prueba</button>
-      </section>
-      <section class="plan">
-        <h2>Equipos</h2>
-        <div class="precio"><span data-importe="equipos"></span> <small data-t="porPlaza">por plaza y mes, más IVA</small></div>
-        <p data-t="equiposTexto">Profesional para cada persona, cada una con su memoria, que nadie más ve. Las plazas se llevan desde tu panel, con una factura y el contrato con la empresa.</p>
-        <label><span data-t="plazas">Plazas</span> <input id="plazas" type="number" min="3" max="100" value="3"></label>
-        <button class="elegir" data-plan="equipos" data-t="elegir">Empezar la prueba</button>
-      </section>
-    </div>
+    <div id="eleccion">
+      <div class="cadencia" role="group" aria-label="Cadencia">
+        <button type="button" id="anual" aria-pressed="true" data-t="anual">Anual</button>
+        <button type="button" id="mensual" aria-pressed="false" data-t="mensual">Mes a mes</button>
+      </div>
 
-    <div class="antes">
-      <strong data-t="antesTitulo">Antes de poner la tarjeta</strong>
-      <ul>
-        <li data-t="antes1">Hoy no se cobra nada. La prueba dura 14 días, hasta el <span data-fin></span>.</li>
-        <li data-t="antes2">El <span data-cobro></span> se cobra el plan que elijas, y después cada mes o cada año, salvo que te des de baja antes.</li>
-        <li data-t="antes3">Te das de baja con un clic, en el panel de Mentor, en «Tu suscripción», sin escribir a nadie. El panel te avisa tres días antes del primer cobro, y Paddle te manda un correo siete días antes.</li>
-        <li data-t="antes4">Si te das de baja, Mentor deja de ponerse en tus chats al acabar la prueba o lo pagado. Tu carpeta sigue siendo tuya, entera, en cada dispositivo; la copia cifrada del almacén de Radamant se borra a los 30 días.</li>
-        <li data-t="antes5">Cobra Paddle, en nombre de Radamant, y guarda tu correo y tu tarjeta. Radamant no ve nunca tu tarjeta ni tu memoria.</li>
-      </ul>
-      <p class="nota" data-t="moneda">Los precios en euros llevan el IVA incluido, salvo Equipos. Fuera de la Unión Europea, las mismas cifras en dólares, y los impuestos según tu país. El importe exacto, antes de pagar, en la ventana de Paddle.</p>
+      <div class="planes">
+        <section class="plan" id="planFundador" hidden>
+          <h2 data-t="fundador">Personal, precio de fundador</h2>
+          <div class="precio"><span data-importe="fundador-año"></span> <small data-t="alAño">al año</small></div>
+          <p data-t="fundadorTexto">Todo lo de Personal, para los 500 primeros, y para siempre mientras no te des de baja.</p>
+          <p id="quedan"></p>
+          <button class="elegir" data-plan="fundador-año" data-t="elegir" disabled>Empezar la prueba</button>
+        </section>
+        <section class="plan">
+          <h2>Personal</h2>
+          <div class="precio"><span data-importe="personal"></span> <small data-cadencia></small></div>
+          <p data-t="personalTexto">Mentor en ChatGPT, Claude, Gemini, Grok, DeepSeek y tus programas de IA, con lo apuntado viajando entre ellas y tu memoria sincronizada entre tus dispositivos.</p>
+          <button class="elegir" data-plan="personal" data-t="elegir" disabled>Empezar la prueba</button>
+        </section>
+        <section class="plan">
+          <h2>Profesional</h2>
+          <div class="precio"><span data-importe="profesional"></span> <small data-cadencia></small></div>
+          <p data-t="profesionalTexto">Todo lo de Personal, una memoria por cliente sin límite y el contrato de encargo del tratamiento, con la factura a tu nombre.</p>
+          <button class="elegir" data-plan="profesional" data-t="elegir" disabled>Empezar la prueba</button>
+        </section>
+        <section class="plan">
+          <h2>Equipos</h2>
+          <div class="precio"><span data-importe="equipos"></span> <small data-t="porPlaza">por plaza y mes, más IVA</small></div>
+          <p data-t="equiposTexto">Profesional para cada persona, cada una con su memoria, que nadie más ve. Las plazas se llevan desde tu panel, con una factura y el contrato con la empresa.</p>
+          <label><span data-t="plazas">Plazas</span> <input id="plazas" type="number" min="3" max="100" value="3"></label>
+          <button class="elegir" data-plan="equipos" data-t="elegir" disabled>Empezar la prueba</button>
+        </section>
+      </div>
+
+      <div class="antes">
+        <strong data-t="antesTitulo">Antes de poner la tarjeta</strong>
+        <ul>
+          <li data-t="antes1">Hoy no se cobra nada. La prueba dura 14 días, hasta el <span data-fin></span>.</li>
+          <li data-t="antes2">El <span data-cobro></span> se cobra el plan que elijas, y después cada mes o cada año, salvo que te des de baja antes.</li>
+          <li data-t="antes3">Te das de baja con un clic, en el panel de Mentor, en «Tu suscripción», sin escribir a nadie. El panel te avisa tres días antes del primer cobro, y Paddle te manda un correo siete días antes.</li>
+          <li data-t="antes4">Si te das de baja, Mentor deja de ponerse en tus chats al acabar la prueba o lo pagado. Tu carpeta sigue siendo tuya, entera, en cada dispositivo; la copia cifrada del almacén de Radamant se borra a los 30 días.</li>
+          <li data-t="antes5">Cobra Paddle, en nombre de Radamant, y guarda tu correo y tu tarjeta. Radamant no ve nunca tu tarjeta ni tu memoria.</li>
+        </ul>
+        <p class="nota" data-t="moneda">Los precios en euros llevan el IVA incluido, salvo Equipos. Fuera de la Unión Europea, las mismas cifras en dólares, y los impuestos según tu país. El importe exacto, antes de pagar, en la ventana de Paddle.</p>
+      </div>
     </div>
 
     <div id="hecho" class="hecho" hidden>
       <strong data-t="hechoTitulo">Listo: estás en la prueba.</strong>
       <p data-t="hechoTexto">El panel de Mentor cierra esta pestaña y sigue con tu código y tu primera conversación. Si no, vuelve a su pestaña.</p>
+    </div>
+    <div id="hechoPago" class="hecho" hidden>
+      <strong data-t="hechoPagoTitulo">Listo.</strong>
+      <p data-t="hechoPagoTexto">Puedes cerrar esta pestaña: Paddle se lo dice a Mentor.</p>
     </div>
 
     <footer>
@@ -104,12 +123,23 @@
     // «Tu suscripción», con el identificador de la memoria en la dirección:
     // va a Paddle como custom_data, y Paddle se lo dice a Radamant en sus
     // avisos. Ni la página ni Radamant ven la tarjeta.
+    //
+    // Es también el enlace de pago por defecto de Paddle (M11): Paddle manda
+    // aquí, con ?_ptxn=<transacción>, el pago de una transacción pendiente,
+    // como el cambio de la tarjeta tras un impago, también desde sus correos.
+    // Entonces la página abre el pago de esa transacción con Paddle.js, que
+    // es lo que dice su documentación, y no habla de la prueba.
     const ingles = !(navigator.language || "es").toLowerCase().startsWith("es");
     const EN = {
       titulo: "Start your Mentor trial",
       lead: "14 days with everything, and nothing is charged today.",
+      tituloPago: "Your Mentor payment",
+      leadPago: "Paddle opens your pending payment here, or the change of your card.",
+      abrirPago: "Open the payment",
       pruebas: "This is Paddle's test account: nothing is really charged. To try it, card 4242 4242 4242 4242, any future date and any code.",
       sinBoveda: "Open this page from Mentor's panel, in «Tu suscripción», «Empezar la prueba»: that way the payment goes to your memory.",
+      sinPago: "The payment couldn't be loaded. Try again in a while.",
+      otraVez: "Try again",
       anual: "Yearly", mensual: "Monthly",
       fundador: "Personal, founder price",
       alAño: "a year",
@@ -129,6 +159,8 @@
       moneda: "Prices in euros include VAT, except Equipos. Outside the European Union, the same figures in dollars, with taxes depending on your country. The exact amount, before paying, in Paddle's window.",
       hechoTitulo: "Done: you're on the trial.",
       hechoTexto: "Mentor's panel closes this tab and goes on with your code and your first conversation. If it doesn't, go back to its tab.",
+      hechoPagoTitulo: "Done.",
+      hechoPagoTexto: "You can close this tab: Paddle tells Mentor.",
       pie: "Mentor is made by Radamant.", privacidad: "Privacy",
       mes: "a month", año: "a year", quedan: (n) => `${n} of 500 left.`,
     };
@@ -139,10 +171,19 @@
       for (const n of document.querySelectorAll("[data-t]")) if (typeof EN[n.dataset.t] === "string") n.innerHTML = EN[n.dataset.t];
     }
 
-    const boveda = new URLSearchParams(location.search).get("boveda") ?? "";
+    const parametros = new URLSearchParams(location.search);
+    const boveda = parametros.get("boveda") ?? "";
     const valida = /^[a-z2-7]{16}$/.test(boveda);
-    document.getElementById("sinBoveda").hidden = valida;
+    const transaccion = parametros.get("_ptxn") ?? "";
+    const dePaddle = /^txn_[a-z0-9]+$/.test(transaccion);
+    document.getElementById("sinBoveda").hidden = valida || dePaddle;
+    document.getElementById("modoPrueba").hidden = dePaddle;
+    document.getElementById("modoPago").hidden = !dePaddle;
+    document.getElementById("eleccion").hidden = dePaddle;
+    if (dePaddle) document.title = ingles ? "Mentor · Your payment" : "Mentor · Tu pago";
 
+    const ajustes = { displayMode: "overlay", locale: ingles ? "en" : "es", showAddDiscounts: false };
+    const botones = [...document.querySelectorAll("button.elegir"), document.getElementById("abrirPago")];
     const euros = (c) => new Intl.NumberFormat(ingles ? "en-IE" : "es-ES", { style: "currency", currency: "EUR" }).format(c / 100);
     const fecha = (d) => d.toLocaleDateString(ingles ? "en-GB" : "es-ES", { day: "numeric", month: "long", year: "numeric" });
 
@@ -165,30 +206,66 @@
     }
 
     function abrir(plan) {
-      if (!valida) return;
-      const id = plan.includes("-") ? plan : `${plan}-${cadencia}`;
-      const p = pago.precios[id];
-      if (!p) return;
-      let cantidad = 1;
-      if (plan === "equipos") cantidad = Math.min(100, Math.max(3, parseInt(document.getElementById("plazas").value, 10) || 3));
-      Paddle.Checkout.open({
-        items: [{ priceId: p.precio, quantity: cantidad }],
-        customData: { boveda },
-        settings: { displayMode: "overlay", locale: ingles ? "en" : "es", showAddDiscounts: false },
-      });
+      if (!pago) return;
+      let opciones = { transactionId: transaccion, settings: ajustes };
+      if (!dePaddle) {
+        if (!valida) return;
+        const id = plan.includes("-") ? plan : `${plan}-${cadencia}`;
+        const p = pago.precios[id];
+        if (!p) return;
+        let cantidad = 1;
+        if (plan === "equipos") cantidad = Math.min(100, Math.max(3, parseInt(document.getElementById("plazas").value, 10) || 3));
+        opciones = { items: [{ priceId: p.precio, quantity: cantidad }], customData: { boveda }, settings: ajustes };
+      }
+      try {
+        Paddle.Checkout.open(opciones);
+      } catch (e) {
+        console.error(e);
+        sinPago();
+      }
+    }
+
+    // Sin paddle.js o sin pago.json no se puede pagar: se dice, en vez de
+    // dejar los precios vacíos y los botones sin hacer nada (M11).
+    function sinPago() {
+      pago = null;
+      document.getElementById("sinPago").hidden = false;
+      document.getElementById("eleccion").hidden = true;
+      for (const b of botones) b.disabled = true;
     }
 
     async function empezar() {
-      pago = await (await fetch("pago.json", { cache: "no-cache" })).json();
-      document.getElementById("pruebas").hidden = pago.entorno !== "sandbox";
-      if (pago.entorno === "sandbox") Paddle.Environment.set("sandbox");
-      Paddle.Initialize({
-        token: pago.token,
-        eventCallback: (e) => {
-          if (e.name === "checkout.completed") document.getElementById("hecho").hidden = false;
-        },
-      });
-      pintar();
+      try {
+        if (typeof Paddle === "undefined") throw new Error("no ha cargado paddle.js");
+        const r = await fetch("pago.json", { cache: "no-cache" });
+        if (!r.ok) throw new Error(`pago.json: ${r.status}`);
+        const p = await r.json();
+        if (!p.token || !p.precios) throw new Error("pago.json no trae el token y los precios");
+        pago = p;
+        document.getElementById("pruebas").hidden = pago.entorno !== "sandbox";
+        if (pago.entorno === "sandbox") Paddle.Environment.set("sandbox");
+        Paddle.Initialize({
+          token: pago.token,
+          checkout: { settings: ajustes },
+          eventCallback: (e) => {
+            if (e.name === "checkout.completed") document.getElementById(dePaddle ? "hechoPago" : "hecho").hidden = false;
+          },
+        });
+        if (dePaddle) {
+          // Abrirlo aquí pasa por delante del _ptxn, que Paddle.js abriría
+          // solo: así se abre una vez, con estos ajustes, y el botón lo
+          // vuelve a abrir si se cierra.
+          document.getElementById("abrirPago").disabled = false;
+          abrir();
+          return;
+        }
+        pintar();
+        for (const b of document.querySelectorAll("button.elegir")) b.disabled = !valida;
+      } catch (e) {
+        console.error(e);
+        sinPago();
+        return;
+      }
       // El precio de fundador, mientras quede alguna de las 500 plazas: las
       // cuenta el programa de bóvedas, con quien está en la prueba o pagando.
       try {
@@ -200,12 +277,10 @@
       } catch {}
     }
 
-    document.getElementById("anual").addEventListener("click", () => { cadencia = "año"; pintar(); });
-    document.getElementById("mensual").addEventListener("click", () => { cadencia = "mes"; pintar(); });
-    for (const b of document.querySelectorAll("button.elegir")) {
-      b.disabled = !valida;
-      b.addEventListener("click", () => abrir(b.dataset.plan));
-    }
+    document.getElementById("anual").addEventListener("click", () => { cadencia = "año"; if (pago) pintar(); });
+    document.getElementById("mensual").addEventListener("click", () => { cadencia = "mes"; if (pago) pintar(); });
+    for (const b of botones) b.addEventListener("click", () => abrir(b.dataset.plan));
+    document.getElementById("otraVez").addEventListener("click", () => location.reload());
     empezar();
   </script>
 </body>
