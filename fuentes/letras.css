@@ -1,5 +1,10 @@
 /* Las letras de Radamant, servidas desde el propio sitio: ningún tercero ve
-   la IP de quien visita. Las tres son SIL OFL; su licencia, al lado. */
+   la IP de quien visita. Las tres son SIL OFL; su licencia, al lado. Las dos
+   licencias reservan su nombre («Marcellus», «Plex»): una letra recortada o
+   cambiada no puede llevarlo. Por eso van sin tocar: IBM Plex, los recortes
+   en latín que publica la propia IBM (fonts/split/woff2/*-Latin1.woff2 de su
+   versión 1.1.0 la Sans y 2.5.0 la Mono), y Marcellus entera, de Google Fonts,
+   solo pasada a woff2. Lo vigila letras_test.go. */
 @font-face { font-family: "Marcellus"; font-weight: 400; font-style: normal; font-display: swap; src: url("marcellus-400.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans"; font-weight: 400; font-style: normal; font-display: swap; src: url("plex-sans-400.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans"; font-weight: 600; font-style: normal; font-display: swap; src: url("plex-sans-600.woff2") format("woff2"); }
