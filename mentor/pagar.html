@@ -50,7 +50,7 @@
       <p><button type="button" id="abrirPago" class="boton" disabled data-t="abrirPago">Abrir el pago</button></p>
     </div>
     <p id="pruebas" class="pruebas" hidden data-t="pruebas">Esta es la cuenta de pruebas de Paddle: no se cobra nada de verdad. Para probar, la tarjeta 4242 4242 4242 4242, con cualquier fecha futura y cualquier código.</p>
-    <p id="sinBoveda" class="aviso" hidden data-t="sinBoveda">Abre esta página desde el panel de Mentor, en «Tu suscripción», «Empezar la prueba»: así el pago va a tu memoria.</p>
+    <p id="sinBoveda" class="aviso" hidden data-t="sinBoveda">Abre esta página desde Mentor, en «Tu suscripción», «Empezar la prueba»: así el pago va a tu memoria.</p>
     <div id="sinPago" class="aviso" hidden>
       <p data-t="sinPago">No se ha podido cargar el pago. Vuelve a intentarlo en un rato.</p>
       <p><button type="button" id="otraVez" class="boton" data-t="otraVez">Probar otra vez</button></p>
@@ -85,7 +85,7 @@
         <section class="plan">
           <h2>Equipos</h2>
           <div class="precio"><span data-importe="equipos"></span> <small data-t="porPlaza">por plaza y mes, más IVA</small></div>
-          <p data-t="equiposTexto">Profesional para cada persona, cada una con su memoria, que nadie más ve. Las plazas se llevan desde tu panel, con una factura y el contrato con la empresa.</p>
+          <p data-t="equiposTexto">Profesional para cada persona, cada una con su memoria, que nadie más ve. Las plazas se llevan desde Mentor, con una factura y el contrato con la empresa.</p>
           <label><span data-t="plazas">Plazas</span> <input id="plazas" type="number" min="3" max="100" value="3"></label>
           <button class="elegir" data-plan="equipos" data-t="elegir" disabled>Empezar la prueba</button>
         </section>
@@ -96,7 +96,7 @@
         <ul>
           <li data-t="antes1">Hoy no se cobra nada. La prueba dura 14 días, hasta el <span data-fin></span>.</li>
           <li data-t="antes2">El <span data-cobro></span> se cobra el plan que elijas, y después cada mes o cada año, salvo que te des de baja antes.</li>
-          <li data-t="antes3">Te das de baja con un clic, en el panel de Mentor, en «Tu suscripción», sin escribir a nadie. El panel te avisa tres días antes del primer cobro, y Paddle te manda un correo siete días antes.</li>
+          <li data-t="antes3">Te das de baja con un clic, en Mentor, en «Tu suscripción», sin escribir a nadie. Mentor te avisa tres días antes del primer cobro, y Paddle te manda un correo siete días antes.</li>
           <li data-t="antes4">Si te das de baja, Mentor deja de ponerse en tus chats al acabar la prueba o lo pagado. Tu carpeta sigue siendo tuya, entera, en cada dispositivo; la copia cifrada del almacén de Radamant se borra a los 30 días.</li>
           <li data-t="antes5">Cobra Paddle, en nombre de Radamant, y guarda tu correo y tu tarjeta. Radamant no ve nunca tu tarjeta ni tu memoria.</li>
         </ul>
@@ -106,7 +106,7 @@
 
     <div id="hecho" class="hecho" hidden>
       <strong data-t="hechoTitulo">Listo: estás en la prueba.</strong>
-      <p data-t="hechoTexto">El panel de Mentor cierra esta pestaña y sigue con tu código y tu primera conversación. Si no, vuelve a su pestaña.</p>
+      <p data-t="hechoTexto">Vuelve a Mentor: sigue solo con tu código y tu primera conversación. Esta pestaña ya puedes cerrarla.</p>
     </div>
     <div id="hechoPago" class="hecho" hidden>
       <strong data-t="hechoPagoTitulo">Listo.</strong>
@@ -138,7 +138,7 @@
       leadPago: "Paddle opens your pending payment here, or the change of your card.",
       abrirPago: "Open the payment",
       pruebas: "This is Paddle's test account: nothing is really charged. To try it, card 4242 4242 4242 4242, any future date and any code.",
-      sinBoveda: "Open this page from Mentor's panel, in «Tu suscripción», «Empezar la prueba»: that way the payment goes to your memory.",
+      sinBoveda: "Open this page from Mentor, in «Tu suscripción», «Empezar la prueba»: that way the payment goes to your memory.",
       sinPago: "The payment couldn't be loaded. Try again in a while.",
       otraVez: "Try again",
       anual: "Yearly", mensual: "Monthly",
@@ -149,17 +149,17 @@
       personalTexto: "Mentor in ChatGPT, Claude, Gemini, Grok, DeepSeek and your AI programs, with what's noted travelling between them and your memory synced across your devices.",
       profesionalTexto: "Everything in Personal, one memory per client with no limit, and the data processing agreement, invoiced to you.",
       porPlaza: "per seat a month, plus VAT",
-      equiposTexto: "Profesional for each person, each with their own memory that nobody else sees. Seats are managed from your panel, with one invoice and the agreement with the company.",
+      equiposTexto: "Profesional for each person, each with their own memory that nobody else sees. Seats are managed from Mentor, with one invoice and the agreement with the company.",
       plazas: "Seats",
       antesTitulo: "Before you enter your card",
       antes1: "Nothing is charged today. The trial lasts 14 days, until <span data-fin></span>.",
       antes2: "On <span data-cobro></span> the plan you choose is charged, and then every month or every year, unless you cancel before.",
-      antes3: "You cancel with one click, in Mentor's panel, in «Tu suscripción», without writing to anyone. The panel warns you three days before the first charge, and Paddle emails you seven days before.",
+      antes3: "You cancel with one click, in Mentor, in «Tu suscripción», without writing to anyone. Mentor warns you three days before the first charge, and Paddle emails you seven days before.",
       antes4: "If you cancel, Mentor stops appearing in your chats when the trial or the paid period ends. Your folder is still yours, whole, on every device; the encrypted copy in Radamant's storage is deleted after 30 days.",
       antes5: "Paddle charges on behalf of Radamant and keeps your email and your card. Radamant never sees your card or your memory.",
       moneda: "Prices in euros include VAT, except Equipos. Outside the European Union, the same figures in dollars, with taxes depending on your country. The exact amount, before paying, in Paddle's window.",
       hechoTitulo: "Done: you're on the trial.",
-      hechoTexto: "Mentor's panel closes this tab and goes on with your code and your first conversation. If it doesn't, go back to its tab.",
+      hechoTexto: "Go back to Mentor: it goes on by itself with your code and your first conversation. You can close this tab now.",
       hechoPagoTitulo: "Done.",
       hechoPagoTexto: "You can close this tab: Paddle tells Mentor.",
       pie: "Mentor is made by Radamant.", privacidad: "Privacy",
