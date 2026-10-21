@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mentor · Empieza tu prueba</title>
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/fuentes/letras.css">
+  <link rel="stylesheet" href="mentor.css">
   <style>
-    :root { --paper: #F1F3F5; --card: #FFFFFF; --ink: #131A24; --ink-soft: #43505F; --rule: #D3DAE1; --accent: #8C6520; --ok: #2F6B3F; --bad: #9B2C2C; color-scheme: light dark; }
-    @media (prefers-color-scheme: dark) { :root { --paper: #0F141A; --card: #161D25; --ink: #E7EBEF; --ink-soft: #A9B4C0; --rule: #2B343E; --accent: #D8AF61; --ok: #7CC48F; --bad: #E58A8A; } }
+    /* Los colores, los de Mentor (mentor.css, de marca/aspecto.json), con los nombres de esta página. */
+    :root { --paper: var(--papel); --card: var(--superficie); --ink: var(--tinta); --ink-soft: var(--tinta-suave); --rule: var(--linea); --accent: var(--acento); --ok: var(--maquina); --bad: var(--mal); }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
     main { max-width: 52rem; margin: 0 auto; padding: 2.5rem 1rem 4rem; }
@@ -24,7 +26,7 @@
     .precio { font: 400 1.7rem/1.2 "Marcellus", Optima, Candara, Georgia, serif; }
     .precio small { font: 400 .9rem/1.4 "IBM Plex Sans", "Segoe UI", sans-serif; color: var(--ink-soft); }
     .plan p { margin: 0; color: var(--ink-soft); font-size: .95rem; }
-    .plan button.elegir { margin-top: auto; border: 0; border-radius: .5rem; background: var(--accent); color: #fff; padding: .6rem .9rem; font: 600 .95rem/1.2 "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; cursor: pointer; }
+    .plan button.elegir { margin-top: auto; border: 0; border-radius: .5rem; background: var(--boton); color: var(--sobre-boton); padding: .6rem .9rem; font: 600 .95rem/1.2 "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; cursor: pointer; }
     .plan label { font-size: .95rem; }
     .plan input { width: 5rem; font: inherit; padding: .2rem .4rem; }
     .antes { background: var(--card); border: 1px solid var(--rule); border-radius: .75rem; padding: 1rem 1.1rem; margin: 1.5rem 0 0; }
@@ -33,7 +35,7 @@
     .hecho { border-left: 4px solid var(--ok); padding: .75rem 1rem; background: var(--card); margin: 1.5rem 0 0; }
     .nota { color: var(--ink-soft); font-size: .9rem; }
     .aviso p { margin: 0 0 .5rem; }
-    button.boton { border: 0; border-radius: .5rem; background: var(--accent); color: #fff; padding: .6rem .9rem; font: 600 .95rem/1.2 "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; cursor: pointer; }
+    button.boton { border: 0; border-radius: .5rem; background: var(--boton); color: var(--sobre-boton); padding: .6rem .9rem; font: 600 .95rem/1.2 "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; cursor: pointer; }
     a { color: var(--accent); }
     footer { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 1rem; color: var(--ink-soft); font-size: .9rem; }
   </style>
