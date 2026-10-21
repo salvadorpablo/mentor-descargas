@@ -29,7 +29,7 @@
     /* La portada. */
     .portada { padding: 2.75rem 0 3.25rem; }
     .portada .contenedor { display: grid; gap: 2.5rem; align-items: center; }
-    @media (min-width: 58rem) { .portada { padding: 4.5rem 0 5rem; } .portada .contenedor { grid-template-columns: 1.1fr .9fr; gap: 3.5rem; } }
+    @media (min-width: 58rem) { .portada { padding: 4.5rem 0 5rem; } .portada .contenedor { max-width: 80rem; grid-template-columns: .95fr 1.05fr; gap: 3rem; } }
     .pildora { display: inline-flex; align-items: center; gap: .55rem; border: 1px solid var(--linea); border-radius: 999px; padding: .35rem .85rem;
       font: .78rem/1.4 var(--mono); color: var(--tinta-suave); background: var(--noche); margin: 0 0 1.25rem; }
     .pildora .punto { width: .45rem; height: .45rem; border-radius: 50%; background: var(--acento); flex: none; }
@@ -42,16 +42,14 @@
     .hechos { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: .4rem 0 0; padding: 0; list-style: none; font: .82rem/1.5 var(--mono); color: var(--tinta-suave); }
     .hechos li::before { content: "✓ "; color: var(--maquina); }
 
+    /* El vídeo de la portada (herramientas/video, con Remotion), con su pausa. */
     .demo { margin: 0; }
-    .demo-marco { background: var(--superficie); border: 1px solid var(--linea); border-radius: 1.1rem; padding: 1.4rem 1.2rem 1.25rem; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); }
-    .demo-titulo { font: 400 clamp(1.6rem, 3.2vw, 2rem)/1.15 var(--display); text-align: center; margin: 0 0 .3rem; }
-    .demo-sub { text-align: center; color: var(--tinta-suave); font-size: .9rem; margin: 0 0 1.1rem; }
-    .demo-chats { display: grid; gap: .8rem; }
-    @media (min-width: 30rem) { .demo-chats { grid-template-columns: 1fr 1fr; } }
-    .mini { background: var(--papel); border: 1px solid var(--linea); border-radius: .8rem; padding: .75rem .8rem; display: flex; flex-direction: column; gap: .45rem; }
-    .mini-web { font: .75rem/1.3 var(--mono); color: var(--tinta-tenue); margin: 0; }
-    .mini-texto { font-size: .9rem; line-height: 1.45; margin: 0; }
-    .mini-chip { align-self: flex-start; font: .72rem/1.3 var(--mono); color: var(--maquina); background: var(--maquina-fondo); border: 1px solid var(--linea); border-radius: 999px; padding: .25rem .55rem; margin: auto 0 0; }
+    .video { position: relative; border: 1px solid var(--linea); border-radius: 1.1rem; overflow: hidden; background: var(--papel); box-shadow: 0 18px 50px rgba(0, 0, 0, .35); aspect-ratio: 16 / 9; }
+    .video video { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .pausa { position: absolute; right: .6rem; bottom: .6rem; display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--borde); border-radius: 999px;
+      background: color-mix(in srgb, var(--noche) 85%, transparent); color: var(--tinta); font: 600 .75rem/1 var(--mono); padding: .45rem .7rem; cursor: pointer; }
+    .pausa svg { width: .8rem; height: .8rem; display: block; }
+    .solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     /* La franja de las IA. */
     .franja { border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); padding: 1.6rem 0 1.4rem; background: var(--noche); }
@@ -209,22 +207,13 @@
           </ul>
         </div>
         <figure class="demo">
-          <div class="demo-marco">
-            <p class="demo-titulo">Díselo una vez.</p>
-            <p class="demo-sub">Mentor lo apunta en tu carpeta, y lo saben todas.</p>
-            <div class="demo-chats">
-              <div class="mini">
-                <p class="mini-web">Claude</p>
-                <p class="mini-texto">«Los glosarios, siempre en dos columnas: término y fuente.»</p>
-                <p class="mini-chip">✓ Mentor ha apuntado</p>
-              </div>
-              <div class="mini">
-                <p class="mini-web">ChatGPT, al día siguiente</p>
-                <p class="mini-texto">Glosario del capítulo 9, en dos columnas: término y fuente.</p>
-                <p class="mini-chip">Lo apuntado, al empezar</p>
-              </div>
-            </div>
+          <div class="video">
+            <video id="video-portada" autoplay muted loop playsinline preload="auto" width="1920" height="1080" poster="imagenes/mentor-fija.jpg" aria-describedby="video-portada-texto">
+              <source src="imagenes/mentor.mp4" type="video/mp4">
+            </video>
+            <button type="button" class="pausa" id="video-pausa" aria-pressed="false" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg><span>Pausa</span></button>
           </div>
+          <p class="solo-lector" id="video-portada-texto">Mentor en 25 segundos: una carpeta tuya, unida a ChatGPT, Claude, Gemini, Grok y DeepSeek. En Claude dices que quieres los glosarios en dos columnas y Mentor lo apunta; en un chat nuevo de ChatGPT, Mentor pone lo apuntado y la respuesta llega en dos columnas. Una memoria por cliente; la revisión semanal, que junta lo repetido y pregunta lo viejo; y tu perfil, un archivo de texto que abres con cualquier editor.</p>
         </figure>
       </div>
     </section>
@@ -744,6 +733,42 @@
       for (var i = 0; i < botones.length; i++) botones[i].addEventListener("click", function () { poner(this.getAttribute("data-elegir")); });
       grupo.hidden = false;
       poner("año");
+    })();
+
+    // El vídeo de la portada: se para fuera de la vista, tiene su pausa, y
+    // si el sistema pide menos movimiento, se queda quieto en su imagen.
+    (function () {
+      var video = document.getElementById("video-portada");
+      var boton = document.getElementById("video-pausa");
+      if (!video || !boton) return;
+      var etiqueta = boton.querySelector("span");
+      var parado = false;
+      var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function pintar() {
+        boton.setAttribute("aria-pressed", parado ? "true" : "false");
+        etiqueta.textContent = parado ? "Ver" : "Pausa";
+        boton.querySelector("path").setAttribute("d", parado ? "M3 2l7 4-7 4z" : "M3 2h2v8H3zM7 2h2v8H7z");
+      }
+      if (quieto) {
+        parado = true;
+        video.removeAttribute("autoplay");
+        video.pause();
+      }
+      boton.addEventListener("click", function () {
+        parado = !parado;
+        if (parado) video.pause();
+        else video.play().catch(function () {});
+        pintar();
+      });
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (vistos) {
+          if (parado) return;
+          if (vistos[0].isIntersecting) video.play().catch(function () {});
+          else video.pause();
+        }).observe(video);
+      }
+      boton.hidden = false;
+      pintar();
     })();
   </script>
 </body>
