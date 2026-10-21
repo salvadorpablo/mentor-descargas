@@ -4,61 +4,78 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Privacidad de Mentor</title>
+  <meta name="description" content="Lo que Radamant recibe de ti, lo que lee la extensión, lo que hace la app y dónde está tu memoria cifrada. Borrador pendiente de la revisión de un abogado.">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/fuentes/letras.css">
-  <style>
-    :root { --paper: #F1F3F5; --ink: #131A24; --ink-soft: #43505F; --rule: #D3DAE1; --accent: #8C6520; color-scheme: light dark; }
-    @media (prefers-color-scheme: dark) { :root { --paper: #0F141A; --ink: #E7EBEF; --ink-soft: #A9B4C0; --rule: #2B343E; --accent: #D8AF61; } }
-    body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
-    main { max-width: 44rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
-    h1 { font: 400 2.3rem/1.15 "Marcellus", Optima, Candara, Georgia, serif; margin: 0 0 .5rem; }
-    h2 { font: 400 1.4rem/1.3 "Marcellus", Optima, Candara, Georgia, serif; margin: 2rem 0 .5rem; }
-    .fecha { color: var(--ink-soft); font: .9rem/1.6 "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace; }
-    a { color: var(--accent); }
-    footer { margin-top: 3rem; border-top: 1px solid var(--rule); padding-top: 1rem; color: var(--ink-soft); font-size: .9rem; }
-  </style>
+  <link rel="stylesheet" href="mentor.css">
 </head>
 <body>
-  <main>
-    <h1>Privacidad de Mentor</h1>
-    <p class="fecha">Versión de octubre de 2026. Es un borrador: lo revisará un abogado antes de que Mentor se publique para todo el mundo.</p>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="./"><span class="sello"><img src="marca.svg" alt="" width="21" height="16"></span><span class="nombre">Mentor</span></a>
+      <a class="boton pequeno" href="./">Qué es Mentor</a>
+    </div>
+  </header>
 
-    <p>Mentor es una extensión para Chrome, Edge, Brave, Opera y Vivaldi, una app para Windows y para Mac y una app para Android, de Radamant. Tu memoria es una carpeta de archivos de texto en tu ordenador. Mentor la pone delante de ChatGPT, Claude, Gemini, Grok o DeepSeek, y apunta en ella lo que la IA marca para recordar.</p>
+  <main class="documento">
+    <div class="contenedor estrecho">
+      <h1>Privacidad de Mentor</h1>
+      <p class="fecha">Versión de octubre de 2026.</p>
+      <p class="borrador">Es un borrador: lo revisará un abogado antes de que el cobro de Mentor sea de verdad.</p>
 
-    <h2>Lo que Radamant recibe de ti</h2>
-    <p>Nada de tu memoria ni de tus conversaciones. La extensión no tiene permiso para hablar con ningún servidor: solo entra en las páginas de ChatGPT, Claude, Gemini, Grok y DeepSeek, y solo habla con la app de Mentor de tu ordenador. No hay cuentas, ni cookies, ni analítica.</p>
+      <p>Mentor es una extensión para Chrome, Edge, Brave, Opera y Vivaldi, una app para Windows y para Mac y una app para Android, de Radamant. Tu memoria es una carpeta de archivos de texto en tu ordenador. Mentor la pone delante de ChatGPT, Claude, Gemini, Grok o DeepSeek, y apunta en ella lo que la IA marca para recordar.</p>
 
-    <h2>Lo que lee la extensión</h2>
-    <p>En las páginas de ChatGPT, Claude, Gemini, Grok y DeepSeek, la caja en la que escribes y las respuestas de la IA, para poner tu perfil al empezar cada chat y para leer las marcas que la IA escribe. Lo hace en tu navegador, y lo que lee no sale de él.</p>
+      <h2>Lo que Radamant recibe de ti</h2>
+      <p>Nada de tu memoria ni de tus conversaciones. La extensión no tiene permiso para hablar con ningún servidor: solo entra en las páginas de ChatGPT, Claude, Gemini, Grok y DeepSeek, y solo habla con la app de Mentor de tu ordenador. No hay cuentas, ni cookies, ni analítica.</p>
 
-    <h2>Lo que va a la IA que uses</h2>
-    <p>Tu perfil y lo último que has apuntado, al empezar cada chat, a la vista y solo si lo envías tú. En el chat de uno de tus clientes, también el perfil de ese cliente y lo último apuntado en sus chats, nunca lo de otro. Lo que una búsqueda encuentra en tu carpeta, en la caja de texto, también a la vista. Ese proveedor lo trata según su propia política de privacidad.</p>
+      <h2>Lo que lee la extensión</h2>
+      <p>En las páginas de ChatGPT, Claude, Gemini, Grok y DeepSeek, la caja en la que escribes y las respuestas de la IA, para poner tu perfil al empezar cada chat y para leer las marcas que la IA escribe. Lo hace en tu navegador, y lo que lee no sale de él.</p>
 
-    <h2>Lo que hace la app</h2>
-    <p>Lee y escribe tu carpeta cuando la extensión se lo pide. Una vez al día pregunta a descargas.radamant.eu si hay una versión nueva. Y, mientras usas Mentor, como mucho una vez cada hora, le pregunta si hay una configuración nueva de las webs: dónde está cada cosa en las páginas de ChatGPT, Claude, Gemini, Grok y DeepSeek, firmada por Radamant, para que Mentor siga funcionando cuando una web cambia su diseño. Si una web deja de funcionar, lo pregunta antes, como mucho una vez cada cinco minutos. Esas peticiones no llevan nada de tu carpeta ni de tus conversaciones. El sitio está en un servidor de Radamant en Alemania, que no apunta quién pide qué ni desde qué dirección.</p>
+      <h2>Lo que va a la IA que uses</h2>
+      <p>Tu perfil y lo último que has apuntado, al empezar cada chat, a la vista y solo si lo envías tú. En el chat de uno de tus clientes, también el perfil de ese cliente y lo último apuntado en sus chats, nunca lo de otro. Lo que una búsqueda encuentra en tu carpeta, en la caja de texto, también a la vista. Ese proveedor lo trata según su propia política de privacidad.</p>
 
-    <h2>Tu memoria en tus otros dispositivos</h2>
-    <p>Al instalarla, la app crea el código de tu memoria, un secreto al azar que guarda en el Administrador de credenciales de Windows o en el Llavero del Mac. Si tú lo activas en «Tus dispositivos», la app sincroniza tu carpeta entre tus dispositivos a través de un almacén: lo que sube va cifrado en tu ordenador con una llave que sale de ese código y que solo está en tus dispositivos. El almacén no puede leer nada, tampoco el nombre de tus archivos: ve cuánto ocupa, cuándo cambia, tu dirección IP y cuántos dispositivos tienes. Si pierdes todos tus dispositivos y las 12 palabras de tu código, nadie puede recuperar tu memoria, tampoco Radamant.</p>
-    <p>El almacén de serie es el de Radamant, en la Unión Europea: un servidor de Radamant y el almacenamiento de Hetzner Online GmbH en Falkenstein (Alemania), con una copia de cada noche en Helsinki (Finlandia). Radamant guarda de tu memoria solo esos bytes cifrados, con un identificador al azar que no dice quién eres; no apunta tu dirección IP, y el registro de lo que se pide, sin direcciones, se borra a los catorce días. La copia de cada noche no la puede borrar nadie durante 30 días, para que no se pierda por un error o un ataque: lo que quitas del almacén sigue en la copia hasta 31 días más. Con «Usar otro almacén» puedes llevarla a otro sitio, como el cloud que ya tengas, y el formato de lo que se guarda se publicará con la primera versión pública de Mentor.</p>
+      <h2>Lo que hace la app</h2>
+      <p>Lee y escribe tu carpeta cuando la extensión se lo pide. Una vez al día pregunta a descargas.radamant.eu si hay una versión nueva. Y, mientras usas Mentor, como mucho una vez cada hora, le pregunta si hay una configuración nueva de las webs: dónde está cada cosa en las páginas de ChatGPT, Claude, Gemini, Grok y DeepSeek, firmada por Radamant, para que Mentor siga funcionando cuando una web cambia su diseño. Si una web deja de funcionar, lo pregunta antes, como mucho una vez cada cinco minutos. Esas peticiones no llevan nada de tu carpeta ni de tus conversaciones. El sitio está en un servidor de Radamant en Alemania, que no apunta quién pide qué ni desde qué dirección.</p>
 
-    <h2>En el teléfono</h2>
-    <p>La app de Mentor para Android es la misma memoria en tu teléfono, y no tiene cuenta propia: se une a tu memoria con el QR o las 12 palabras de «Tus dispositivos» de tu ordenador, y guarda el código cifrado con una llave del almacén de claves de Android, que no sale del teléfono. Lo que manda fuera es lo mismo que la app del ordenador: tu carpeta, cifrada en el teléfono antes de salir, al almacén que uses, y el identificador al azar de tu memoria a Radamant, una vez al día, para saber cómo está tu suscripción. La cámara solo sirve para leer ese QR, y no se guarda ninguna imagen. No lleva anuncios, ni analítica, ni informes de errores. Tu perfil va a la app de la IA que elijas solo cuando tú lo envías, y lo que compartes con Mentor desde esa app se queda en tu carpeta.</p>
+      <h2>Tu memoria en tus otros dispositivos</h2>
+      <p>Al instalarla, la app crea el código de tu memoria, un secreto al azar que guarda en el Administrador de credenciales de Windows o en el Llavero del Mac. Si tú lo activas en «Tus dispositivos», la app sincroniza tu carpeta entre tus dispositivos a través de un almacén: lo que sube va cifrado en tu ordenador con una llave que sale de ese código y que solo está en tus dispositivos. El almacén no puede leer nada, tampoco el nombre de tus archivos: ve cuánto ocupa, cuándo cambia, tu dirección IP y cuántos dispositivos tienes. Si pierdes todos tus dispositivos y las 12 palabras de tu código, nadie puede recuperar tu memoria, tampoco Radamant.</p>
+      <p>El almacén de serie es el de Radamant, en la Unión Europea: un servidor de Radamant y el almacenamiento de Hetzner Online GmbH en Falkenstein (Alemania), con una copia de cada noche en Helsinki (Finlandia). Radamant guarda de tu memoria solo esos bytes cifrados, con un identificador al azar que no dice quién eres; no apunta tu dirección IP, y el registro de lo que se pide, sin direcciones, se borra a los catorce días. La copia de cada noche no la puede borrar nadie durante 30 días, para que no se pierda por un error o un ataque: lo que quitas del almacén sigue en la copia hasta 31 días más. Con «Usar otro almacén» puedes llevarla a otro sitio, como una carpeta del cloud que ya tengas, y <a href="formato.html">el formato de lo que se guarda está publicado</a>.</p>
 
-    <h2>Tu suscripción</h2>
-    <p>Mentor se paga, con 14 días de prueba. Cobra Paddle, que es quien te vende Mentor en nombre de Radamant: recoge tu nombre, tu correo, tu país y tu tarjeta en su propia página de pago, declara el IVA y trata esos datos según su política de privacidad. Radamant no ve nunca tu tarjeta. Tu correo sí puede verlo en el panel de Paddle, para atenderte, pero no lo guarda en su servidor.</p>
-    <p>Para que el pago vaya a tu memoria, la página de pago le pasa a Paddle el identificador al azar de tu memoria, el mismo del almacén, que no la abre. El servidor de Radamant guarda, de cada memoria, ese identificador, el de su suscripción en Paddle, el plan, su estado y hasta cuándo dura, y en un equipo, qué plazas están ocupadas, sin saber por quién. Una vez al día, la app le pregunta cómo está tu suscripción, solo con ese identificador, aunque tu memoria se sincronice por otro almacén. Lo que haces desde «Tu suscripción», como darte de baja, lo pide la app firmado con la credencial de tu memoria.</p>
-    <p>Si te das de baja o no se puede cobrar, Mentor deja de ponerse en tus chats al acabar la prueba o lo pagado, tu carpeta sigue entera en cada dispositivo, y el almacén de Radamant borra su copia cifrada a los 30 días. El identificador de tu memoria está en Mentor, en «Tu suscripción»: dalo si nos escribes por tus datos.</p>
-    <p>Si cambias el código de tu memoria, con «Cambiar el código» en «Tus dispositivos», por ejemplo porque has perdido un dispositivo, tu memoria pasa a una bóveda nueva, con otro identificador al azar, y tu suscripción con ella: la app copia tu memoria cifrada con la llave nueva, y el almacén de Radamant borra la de antes en ese momento. De la de antes guarda un año una nota con su identificador, el de la nueva y la hora, para decírselo a tus otros dispositivos; en la copia de cada noche, lo de antes sigue hasta 31 días más. A Paddle se le cambia el identificador de tu suscripción por el nuevo.</p>
+      <h2>En el teléfono</h2>
+      <p>La app de Mentor para Android es la misma memoria en tu teléfono, y no tiene cuenta propia: se une a tu memoria con el QR o las 12 palabras de «Tus dispositivos» de tu ordenador, y guarda el código cifrado con una llave del almacén de claves de Android, que no sale del teléfono. Lo que manda fuera es lo mismo que la app del ordenador: tu carpeta, cifrada en el teléfono antes de salir, al almacén que uses, y el identificador al azar de tu memoria a Radamant, una vez al día, para saber cómo está tu suscripción. La cámara solo sirve para leer ese QR, y no se guarda ninguna imagen. No lleva anuncios, ni analítica, ni informes de errores. Tu perfil va a la app de la IA que elijas solo cuando tú lo envías, y lo que compartes con Mentor desde esa app se queda en tu carpeta.</p>
 
-    <h2>Cuando una web deja de funcionar</h2>
-    <p>La extensión te lo dice en la página, y Mentor, en «Tus IAs». Ahí puedes copiar la forma de esa página, sus piezas y cómo se llaman, sin nada de lo que escribes ni de lo que te contesta la IA. Y con «Avisar a Radamant cuando una web deje de funcionar», en «Ajustes», que viene encendido mientras Mentor está en pruebas, hasta su primera versión pública, la app se la manda a Radamant una vez, con qué web es, qué no encuentra y las versiones de Mentor, para arreglarlo antes. Sin tu memoria, sin tu identificador y sin apuntar tu dirección IP. Radamant guarda esos avisos 90 días.</p>
+      <h2>Tu suscripción</h2>
+      <p>Mentor se paga, con 14 días de prueba. Cobra Paddle, que es quien te vende Mentor en nombre de Radamant: recoge tu nombre, tu correo, tu país y tu tarjeta en su propia página de pago, declara el IVA y trata esos datos según su política de privacidad. Radamant no ve nunca tu tarjeta. Tu correo sí puede verlo en el panel de Paddle, para atenderte, pero no lo guarda en su servidor.</p>
+      <p>Para que el pago vaya a tu memoria, la página de pago le pasa a Paddle el identificador al azar de tu memoria, el mismo del almacén, que no la abre. El servidor de Radamant guarda, de cada memoria, ese identificador, el de su suscripción en Paddle, el plan, su estado y hasta cuándo dura, y en un equipo, qué plazas están ocupadas, sin saber por quién. Una vez al día, la app le pregunta cómo está tu suscripción, solo con ese identificador, aunque tu memoria se sincronice por otro almacén. Lo que haces desde «Tu suscripción», como darte de baja, lo pide la app firmado con la credencial de tu memoria.</p>
+      <p>Si te das de baja o no se puede cobrar, Mentor deja de ponerse en tus chats al acabar la prueba o lo pagado, tu carpeta sigue entera en cada dispositivo, y el almacén de Radamant borra su copia cifrada a los 30 días. El identificador de tu memoria está en Mentor, en «Tu suscripción»: dalo si nos escribes por tus datos.</p>
+      <p>Si cambias el código de tu memoria, con «Cambiar el código» en «Tus dispositivos», por ejemplo porque has perdido un dispositivo, tu memoria pasa a una bóveda nueva, con otro identificador al azar, y tu suscripción con ella: la app copia tu memoria cifrada con la llave nueva, y el almacén de Radamant borra la de antes en ese momento. De la de antes guarda un año una nota con su identificador, el de la nueva y la hora, para decírselo a tus otros dispositivos; en la copia de cada noche, lo de antes sigue hasta 31 días más. A Paddle se le cambia el identificador de tu suscripción por el nuevo.</p>
 
-    <h2>Tu carpeta es tuya</h2>
-    <p>Puedes abrirla, cambiarla, copiarla o borrarla con cualquier programa. Si desinstalas Mentor, la carpeta se queda donde está.</p>
+      <h2>Cuando una web deja de funcionar</h2>
+      <p>La extensión te lo dice en la página, y Mentor, en «Tus IAs». Ahí puedes copiar la forma de esa página, sus piezas y cómo se llaman, sin nada de lo que escribes ni de lo que te contesta la IA. Y con «Avisar a Radamant cuando una web deje de funcionar», en «Ajustes», que viene encendido mientras Mentor está en pruebas, hasta su primera versión pública, la app se la manda a Radamant una vez, con qué web es, qué no encuentra y las versiones de Mentor, para arreglarlo antes. Sin tu memoria, sin tu identificador y sin apuntar tu dirección IP. Radamant guarda esos avisos 90 días.</p>
 
-    <h2>Contacto</h2>
-    <p><a href="mailto:contacto@radamant.es">contacto@radamant.es</a></p>
+      <h2>Tu carpeta es tuya</h2>
+      <p>Puedes abrirla, cambiarla, copiarla o borrarla con cualquier programa. Si desinstalas Mentor, la carpeta se queda donde está.</p>
 
-    <footer>Mentor es un producto de Radamant.</footer>
+      <h2>Esta web</h2>
+      <p>Las páginas de Mentor no usan cookies ni analítica, y no cargan nada de terceros: las letras se sirven desde aquí. El servidor no apunta quién las visita ni desde qué dirección. La página de pago carga la de Paddle, que trata tus datos según su política de privacidad.</p>
+
+      <h2>Contacto</h2>
+      <p><a href="mailto:contacto@radamant.es">contacto@radamant.es</a></p>
+    </div>
   </main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <nav aria-label="Lo legal y lo demás">
+      <a href="condiciones.html">Condiciones</a>
+      <a href="reembolsos.html">Reembolsos y desistimiento</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="formato.html">El formato de la carpeta y de los objetos cifrados</a>
+      <a href="descargar.html">Descargas</a>
+      <a href="mailto:contacto@radamant.es">Contacto</a>
+    </nav>
+    <p>Mentor es un producto de Radamant. Los pedidos los gestiona Paddle.com, el vendedor registrado.</p>
+  </div>
+</footer>
 </body>
 </html>
