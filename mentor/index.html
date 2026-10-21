@@ -14,72 +14,177 @@
   <link rel="stylesheet" href="/fuentes/letras.css">
   <link rel="stylesheet" href="mentor.css">
   <style>
-    .portada { padding: 3rem 0 3.5rem; }
-    .portada .contenedor { display: grid; gap: 2.5rem; align-items: center; }
-    @media (min-width: 56rem) { .portada { padding: 5rem 0; } .portada .contenedor { grid-template-columns: 1.15fr .85fr; gap: 3.5rem; } }
-    .lema { color: var(--tinta-suave); font-size: clamp(1.1rem, 2.2vw, 1.28rem); line-height: 1.55; margin: 0 0 1.75rem; max-width: 38rem; }
-    .prueba { margin: .25rem 0 .6rem; }
-    .enlaces { margin: 1.1rem 0 0; display: flex; flex-wrap: wrap; gap: .4rem 1.25rem; }
-    .en-el-telefono { border: 1px dashed var(--borde); border-radius: .7rem; padding: .7rem .9rem; color: var(--tinta-suave); font-size: .95rem; margin: .5rem 0 0; }
-    .leen { display: flex; flex-wrap: wrap; gap: .4rem; margin: .9rem 0 0; padding: 0; list-style: none; }
-    .leen li { font: .78rem/1 var(--mono); color: var(--tinta-suave); border: 1px solid var(--linea); border-radius: 999px; padding: .4rem .65rem; background: var(--noche); }
+    /* La página de venta (M12), con el orden y los bloques de la de
+       MemoryPlugin, decidido por Salva el 21/10/2026, y el aspecto de Mentor:
+       las bandas alternan el papel, la superficie y el fondo de la máquina. */
+    .cabecera.fija { position: sticky; top: 0; z-index: 20; }
+    section[id] { scroll-margin-top: 4.5rem; }
+    .centrado { text-align: center; margin-left: auto; margin-right: auto; }
+    .acento { color: var(--acento); }
     .pie-de-dibujo { color: var(--tinta-tenue); font: .8rem/1.5 var(--mono); margin: .7rem 0 0; }
+    .alterna { background: var(--superficie); }
+    .intensa { background: var(--maquina-fondo); }
+    .intensa .entradilla, .intensa p { color: var(--tinta-suave); }
 
-    .problema p { font-size: clamp(1.1rem, 2.1vw, 1.25rem); color: var(--tinta-suave); max-width: 46rem; }
-    .problema p strong { color: var(--tinta); font-weight: 400; }
+    /* La portada. */
+    .portada { padding: 2.75rem 0 3.25rem; }
+    .portada .contenedor { display: grid; gap: 2.5rem; align-items: center; }
+    @media (min-width: 58rem) { .portada { padding: 4.5rem 0 5rem; } .portada .contenedor { grid-template-columns: 1.1fr .9fr; gap: 3.5rem; } }
+    .pildora { display: inline-flex; align-items: center; gap: .55rem; border: 1px solid var(--linea); border-radius: 999px; padding: .35rem .85rem;
+      font: .78rem/1.4 var(--mono); color: var(--tinta-suave); background: var(--noche); margin: 0 0 1.25rem; }
+    .pildora .punto { width: .45rem; height: .45rem; border-radius: 50%; background: var(--acento); flex: none; }
+    .portada h1 { font-size: clamp(2.5rem, 6.8vw, 4.3rem); }
+    .subtitulo { font: 600 clamp(1.1rem, 2.2vw, 1.3rem)/1.4 var(--texto); margin: 0 0 .9rem; }
+    .lema { color: var(--tinta-suave); font-size: clamp(1.02rem, 1.9vw, 1.15rem); line-height: 1.6; margin: 0 0 1.6rem; max-width: 37rem; }
+    .tranquilo { color: var(--tinta-suave); font-size: .95rem; margin: 0 0 1rem; }
+    .tranquilo strong { color: var(--tinta); }
+    .en-el-telefono { border: 1px dashed var(--borde); border-radius: .7rem; padding: .7rem .9rem; color: var(--tinta-suave); font-size: .95rem; margin: 0 0 1rem; }
+    .hechos { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: .4rem 0 0; padding: 0; list-style: none; font: .82rem/1.5 var(--mono); color: var(--tinta-suave); }
+    .hechos li::before { content: "✓ "; color: var(--maquina); }
 
-    .pasos { display: grid; gap: 1.25rem; margin-top: 2rem; }
-    @media (min-width: 60rem) { .pasos { grid-template-columns: repeat(3, 1fr); } }
-    .paso { display: flex; flex-direction: column; gap: .2rem; }
-    .numero { font: 600 .85rem/1 var(--mono); color: var(--acento); margin: 0 0 .5rem; }
-    .paso .dibujo { margin-top: auto; padding-top: 1rem; display: grid; gap: .7rem; }
+    .demo { margin: 0; }
+    .demo-marco { background: var(--superficie); border: 1px solid var(--linea); border-radius: 1.1rem; padding: 1.4rem 1.2rem 1.25rem; box-shadow: 0 18px 50px rgba(0, 0, 0, .35); }
+    .demo-titulo { font: 400 clamp(1.6rem, 3.2vw, 2rem)/1.15 var(--display); text-align: center; margin: 0 0 .3rem; }
+    .demo-sub { text-align: center; color: var(--tinta-suave); font-size: .9rem; margin: 0 0 1.1rem; }
+    .demo-chats { display: grid; gap: .8rem; }
+    @media (min-width: 30rem) { .demo-chats { grid-template-columns: 1fr 1fr; } }
+    .mini { background: var(--papel); border: 1px solid var(--linea); border-radius: .8rem; padding: .75rem .8rem; display: flex; flex-direction: column; gap: .45rem; }
+    .mini-web { font: .75rem/1.3 var(--mono); color: var(--tinta-tenue); margin: 0; }
+    .mini-texto { font-size: .9rem; line-height: 1.45; margin: 0; }
+    .mini-chip { align-self: flex-start; font: .72rem/1.3 var(--mono); color: var(--maquina); background: var(--maquina-fondo); border: 1px solid var(--linea); border-radius: 999px; padding: .25rem .55rem; margin: auto 0 0; }
 
-    .propiedad .rejilla h3 { font-size: 1.2rem; }
-    .propiedad .rejilla p { color: var(--tinta-suave); }
+    /* La franja de las IA. */
+    .franja { border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); padding: 1.6rem 0 1.4rem; background: var(--noche); }
+    .franja .etiqueta { text-align: center; color: var(--tinta-tenue); }
+    .nombres { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.6rem; margin: .4rem 0 0; padding: 0; list-style: none; font: 600 1rem/1.5 var(--texto); color: var(--tinta-suave); }
 
-    .telefono-ficha { grid-column: 1 / -1; }
-    .telefono { display: grid; gap: 1.5rem; align-items: start; }
-    @media (min-width: 52rem) { .telefono { grid-template-columns: 1fr auto; } }
-    .capturas { display: flex; gap: .75rem; }
-    .capturas img { width: 9.5rem; border-radius: 1rem; border: 1px solid var(--linea); display: block; }
-    .local { color: var(--tinta-suave); font-size: .95rem; margin-top: 1rem; }
+    /* El problema. */
+    .tres-pasos { display: grid; gap: 1.25rem; list-style: none; padding: 0; margin: 2.25rem auto; max-width: 56rem; }
+    @media (min-width: 46rem) { .tres-pasos { grid-template-columns: repeat(3, 1fr); } }
+    .tres-pasos li { text-align: center; color: var(--tinta); font-weight: 600; }
+    .circulo { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; margin: 0 auto .7rem; border-radius: 50%; border: 1px solid var(--maquina); color: var(--maquina); font: 600 .9rem/1 var(--mono); }
+    .remate { font: 400 clamp(1.45rem, 3.2vw, 2.1rem)/1.25 var(--display); color: var(--tinta); max-width: 44rem; }
+    .intensa .remate { color: var(--tinta); }
 
-    .memoria { display: grid; gap: 1.5rem; margin-top: 1.5rem; }
-    @media (min-width: 60rem) { .memoria { grid-template-columns: 1.25fr .75fr; align-items: start; } }
-    .memoria ul { margin: 0; padding-left: 1.1rem; color: var(--tinta-suave); }
-    .memoria li { margin: 0 0 .8rem; }
+    /* Las dos ventanas. */
+    .dos-ventanas { display: grid; gap: 1rem; align-items: center; margin: 2rem 0 1rem; }
+    @media (min-width: 60rem) { .dos-ventanas { grid-template-columns: 1fr auto 1fr; gap: 1.25rem; } }
+    .ventana { background: var(--superficie); border: 1px solid var(--linea); border-radius: .9rem; overflow: hidden; }
+    .ventana-barra { display: flex; align-items: center; gap: .6rem; padding: .55rem .9rem; border-bottom: 1px solid var(--linea); background: var(--noche); font: .75rem/1.4 var(--mono); color: var(--tinta-tenue); }
+    .puntos { display: inline-flex; gap: .3rem; }
+    .puntos i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--linea); display: block; }
+    .ventana-cuerpo { padding: 1rem; display: flex; flex-direction: column; gap: .55rem; }
+    .quien { font: .7rem/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-tenue); margin: .2rem 0 0; }
+    .burbuja { background: var(--papel); border: 1px solid var(--linea); border-radius: .7rem; padding: .6rem .75rem; font-size: .9rem; line-height: 1.5; margin: 0; }
+    .burbuja.de-mentor { color: var(--tinta-suave); font-size: .82rem; border-style: dashed; }
+    .burbuja.de-mentor b { color: var(--maquina); font-weight: 600; }
+    .mini-tabla { border-collapse: collapse; width: 100%; font-size: .82rem; }
+    .mini-tabla th, .mini-tabla td { padding: .35rem .5rem; border-bottom: 1px solid var(--linea); text-align: left; }
+    .mini-tabla th { color: var(--tinta-suave); font-weight: 600; }
+    .entre { display: flex; flex-direction: column; align-items: center; gap: .4rem; font: .72rem/1.3 var(--mono); color: var(--tinta-tenue); text-align: center; }
+    .entre .sello { width: 2.6rem; height: 2.6rem; border-radius: .7rem; }
+    .entre .sello img { width: 1.6rem; }
 
-    .planes { display: grid; gap: 1rem; margin-top: 2rem; }
-    @media (min-width: 56rem) { .planes { grid-template-columns: repeat(3, 1fr); } }
-    .plan { display: flex; flex-direction: column; gap: .35rem; }
-    .plan.destacado { border-color: var(--acento); }
-    .importe { font: 400 2.3rem/1.15 var(--display); margin: .2rem 0 0; }
+    /* Los oficios. */
+    .pestanas { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.75rem 0 1rem; }
+    .pestanas button { font: 600 .9rem/1.2 var(--texto); padding: .55rem 1rem; border-radius: 999px; border: 1px solid var(--borde); background: transparent; color: var(--tinta-suave); cursor: pointer; }
+    .pestanas button[aria-selected="true"] { background: var(--boton); border-color: var(--boton); color: var(--sobre-boton); }
+    .oficio { background: var(--papel); border: 1px solid var(--linea); border-radius: 1rem; padding: 1.25rem; margin: 0 0 1rem; }
+    .oficio h3 { margin: 0 0 .3rem; }
+    .oficio > p { color: var(--tinta-suave); margin: 0 0 1rem; }
+    .antes-despues { display: grid; gap: 1rem; }
+    @media (min-width: 52rem) { .antes-despues { grid-template-columns: 1fr 1fr; } }
+    .sin, .con { border-radius: .8rem; padding: 1rem; border: 1px solid var(--linea); }
+    .sin { background: var(--superficie); }
+    .con { background: var(--maquina-fondo); border-color: color-mix(in srgb, var(--maquina) 35%, var(--linea)); }
+    .rotulo { font: .72rem/1.3 var(--mono); letter-spacing: .09em; text-transform: uppercase; margin: 0 0 .6rem; }
+    .sin .rotulo { color: var(--mal); }
+    .con .rotulo { color: var(--maquina); }
+    .sin blockquote { margin: 0; color: var(--tinta-suave); font-style: italic; font-size: .95rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 .75rem; padding: 0; list-style: none; }
+    .chips li { font: .74rem/1.3 var(--mono); border: 1px solid var(--linea); border-radius: 999px; padding: .28rem .6rem; background: var(--papel); color: var(--tinta); }
+    .con blockquote { margin: 0; font-size: .95rem; }
+
+    /* Cómo funciona. */
+    .funciona { display: grid; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 60rem) { .funciona { grid-template-columns: repeat(3, 1fr); } }
+    .funciona .ficha { display: flex; flex-direction: column; gap: .3rem; background: var(--papel); }
+    .funciona .dibujo { margin-top: auto; padding-top: 1rem; }
+    .numero { font: 600 .8rem/1 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--acento); margin: 0 0 .55rem; }
+
+    /* La comparación. */
+    .comparacion td:first-child { color: var(--tinta-tenue); font: .78rem/1.5 var(--mono); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
+    .comparacion td:nth-child(2) { color: var(--tinta-suave); }
+    .comparacion td:nth-child(2)::before { content: "· "; }
+    .comparacion td:nth-child(3)::before { content: "✓ "; color: var(--maquina); }
+    .comparacion th:nth-child(3) { color: var(--maquina); }
+
+    /* Todo lo que hace. */
+    .inventario { display: grid; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 46rem) { .inventario { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 64rem) { .inventario { grid-template-columns: repeat(3, 1fr); } }
+    .inventario ul { list-style: none; margin: .5rem 0 0; padding: 0; }
+    .inventario li { display: flex; justify-content: space-between; gap: .75rem; padding: .45rem 0; border-bottom: 1px solid var(--linea); font-size: .95rem; }
+    .inventario li:last-child { border-bottom: 0; }
+    .marca-plan { font: .68rem/1.6 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--acento); border: 1px solid var(--acento-tenue); border-radius: 999px; padding: 0 .45rem; white-space: nowrap; align-self: center; }
+    .pronto li { color: var(--tinta-suave); }
+
+    /* Precios. */
+    .cadencia { display: inline-flex; border: 1px solid var(--linea); border-radius: 999px; padding: .25rem; margin: 1.5rem 0 0; background: var(--noche); }
+    .cadencia button { border: 0; background: none; color: var(--tinta-suave); padding: .5rem 1.05rem; border-radius: 999px; font: 600 .88rem/1.25 var(--texto); cursor: pointer; }
+    .cadencia button small { display: block; font: .7rem/1.2 var(--mono); color: var(--maquina); }
+    .cadencia button[aria-pressed="true"] { background: var(--boton); color: var(--sobre-boton); }
+    .cadencia button[aria-pressed="true"] small { color: var(--sobre-boton); }
+    .planes { display: grid; gap: 1rem; margin-top: 1.75rem; }
+    @media (min-width: 58rem) { .planes { grid-template-columns: repeat(3, 1fr); align-items: stretch; } }
+    .plan { display: flex; flex-direction: column; gap: .35rem; background: var(--papel); }
+    .plan.destacado { border-color: var(--acento); box-shadow: 0 0 0 1px var(--acento) inset; }
+    .importe { font: 400 2.6rem/1.1 var(--display); margin: .35rem 0 0; }
     .importe small { font: .95rem/1.4 var(--texto); color: var(--tinta-suave); }
-    .plan ul { margin: .6rem 0 0; padding-left: 1.1rem; color: var(--tinta-suave); font-size: .95rem; }
+    .importe s { font: 400 .45em/1 var(--display); color: var(--tinta-tenue); margin-right: .35rem; }
+    .plan ul { margin: .7rem 0 1rem; padding-left: 1.1rem; color: var(--tinta-suave); font-size: .95rem; }
     .plan li { margin: .3rem 0; }
-    .condiciones-del-precio { margin-top: 1.5rem; }
+    .plan .boton { margin-top: auto; }
+    .diferencias td:not(:first-child), .diferencias th:not(:first-child) { text-align: center; }
+    @media (max-width: 30rem) { .diferencias th, .diferencias td { padding: .5rem .3rem; font-size: .85rem; } }
+    .diferencias td.si::before { content: "✓"; color: var(--maquina); }
+    .diferencias td.no::before { content: "—"; color: var(--tinta-tenue); }
 
+    /* Las vías. */
+    .vias { display: grid; gap: 1rem; margin-top: 2rem; }
+    @media (min-width: 46rem) { .vias { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 64rem) { .vias { grid-template-columns: repeat(3, 1fr); } }
+    .vias .ficha { background: var(--papel); }
+    .capturas { display: flex; gap: .6rem; margin-top: .9rem; }
+    .capturas img { width: 7.5rem; border-radius: .8rem; border: 1px solid var(--linea); display: block; }
+
+    /* Preguntas. */
+    .grupo-de-preguntas { margin: 2rem 0 0; }
+    .grupo-de-preguntas h3 { font: 500 .8rem/1.5 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--maquina); margin: 0 0 .5rem; }
     .preguntas details { border-bottom: 1px solid var(--linea); }
-    .preguntas details:first-of-type { border-top: 1px solid var(--linea); }
-    .preguntas summary { cursor: pointer; list-style: none; padding: 1rem 2rem 1rem 0; position: relative; font-weight: 600; }
+    .grupo-de-preguntas details:first-of-type { border-top: 1px solid var(--linea); }
+    .preguntas summary { cursor: pointer; list-style: none; padding: 1rem 2.2rem 1rem 0; position: relative; font-weight: 600; display: flex; gap: .9rem; }
     .preguntas summary::-webkit-details-marker { display: none; }
-    .preguntas summary::after { content: "+"; position: absolute; right: .25rem; top: .9rem; font: 400 1.3rem/1 var(--mono); color: var(--acento); }
+    .preguntas summary .n { font: .8rem/1.9 var(--mono); color: var(--tinta-tenue); flex: none; }
+    .preguntas summary::after { content: "+"; position: absolute; right: .3rem; top: .85rem; font: 400 1.35rem/1 var(--mono); color: var(--acento); }
     .preguntas details[open] summary::after { content: "−"; }
-    .preguntas details p { color: var(--tinta-suave); margin: 0 0 1.1rem; max-width: 46rem; }
+    .preguntas details p { color: var(--tinta-suave); margin: 0 0 1.1rem 2.15rem; max-width: 46rem; }
 
-    .final { text-align: left; }
+    .final { text-align: center; }
+    .final .botones { justify-content: center; }
   </style>
 </head>
 <body>
-  <header class="cabecera">
+  <header class="cabecera fija">
     <div class="contenedor">
       <a class="marca" href="./"><span class="sello"><img src="marca.svg" alt="" width="21" height="16"></span><span class="nombre">Mentor</span></a>
       <nav class="menu" aria-label="La página">
         <a href="#como">Cómo funciona</a>
+        <a href="#oficios">Para tu trabajo</a>
         <a href="#precios">Precios</a>
         <a href="#preguntas">Preguntas</a>
       </nav>
-      <a class="boton principal pequeno" href="descargar.html">Descargar</a>
+      <a class="boton principal pequeno" href="#empezar">Empezar la prueba</a>
     </div>
   </header>
 
@@ -87,225 +192,310 @@
     <section class="portada">
       <div class="contenedor">
         <div>
-          <h1>Tu memoria para la IA. Tuya, no de la IA.</h1>
+          <p class="pildora"><span class="punto"></span>Una memoria para ChatGPT, Claude, Gemini, Grok y DeepSeek</p>
+          <h1>Tu memoria para la IA. <span class="acento">Tuya, no de la IA.</span></h1>
+          <p class="subtitulo">Lo que una IA aprende de ti, lo saben todas.</p>
           <p class="lema">Una carpeta de archivos en tu ordenador que ChatGPT, Claude, Gemini, Grok y DeepSeek leen al empezar cada chat, y en la que apuntan lo que aprenden de ti. La misma memoria en todas, y en tus programas de IA.</p>
           <div class="botones descargas">
             <a class="boton descarga principal" data-sistema="windows" href="Mentor-instalador.exe" download>Descargar Mentor para Windows</a>
             <a class="boton descarga" data-sistema="mac" href="Mentor.zip" download>Descargar Mentor para Mac</a>
           </div>
-          <p class="prueba"><strong>Empieza tu prueba de 14 días.</strong> Hoy no se cobra nada, y te das de baja con un clic.</p>
-          <p class="letra-menuda">Windows 10 y 11 · Mac con macOS 13 o posterior, sin la firma de Apple todavía · Chrome, Edge, Brave, Opera y Vivaldi</p>
+          <p class="tranquilo"><strong>Empieza tu prueba de 14 días.</strong> Si te das de baja antes de que acabe, no se cobra nada.</p>
           <p class="en-el-telefono" hidden>Estás en un teléfono: Mentor se instala en tu ordenador, con Windows o Mac, y el teléfono se une después. Abre esta página en tu ordenador.</p>
-          <p class="enlaces"><a href="#como">Ver cómo funciona</a><a href="descargar.html">Cómo se instala</a></p>
-        </div>
-        <figure>
-          <div class="archivo">
-            <div class="ruta"><span>Tu carpeta</span><span>Documentos\Mentor</span></div>
-            <ul>
-              <li><span class="mono">perfil.md</span><span>Es lo que va a cada chat nuevo.</span></li>
-              <li><span class="mono">aprendizajes.md</span><span>Ahí apunta Mentor.</span></li>
-              <li><span class="mono">quien-soy.md</span><span>No sale de tu carpeta, salvo en la revisión semanal.</span></li>
-            </ul>
-          </div>
-          <ul class="leen" aria-label="La leen">
-            <li>ChatGPT</li><li>Claude</li><li>Gemini</li><li>Grok</li><li>DeepSeek</li><li>Claude Code</li><li>Codex</li><li>Cursor</li>
+          <ul class="hechos" aria-label="Lo que es Mentor">
+            <li>Cifrada en tu dispositivo</li>
+            <li>Archivos de texto tuyos</li>
+            <li>Todo en la Unión Europea</li>
           </ul>
-          <figcaption class="pie-de-dibujo">Archivos de texto en tu ordenador, que abres con cualquier editor.</figcaption>
+        </div>
+        <figure class="demo">
+          <div class="demo-marco">
+            <p class="demo-titulo">Díselo una vez.</p>
+            <p class="demo-sub">Mentor lo apunta en tu carpeta, y lo saben todas.</p>
+            <div class="demo-chats">
+              <div class="mini">
+                <p class="mini-web">Claude</p>
+                <p class="mini-texto">«Los glosarios, siempre en dos columnas: término y fuente.»</p>
+                <p class="mini-chip">✓ Mentor ha apuntado</p>
+              </div>
+              <div class="mini">
+                <p class="mini-web">ChatGPT, al día siguiente</p>
+                <p class="mini-texto">Glosario del capítulo 9, en dos columnas: término y fuente.</p>
+                <p class="mini-chip">Lo apuntado, al empezar</p>
+              </div>
+            </div>
+          </div>
         </figure>
       </div>
     </section>
 
-    <section class="seccion problema">
+    <section class="franja">
       <div class="contenedor">
-        <h2>Lo que le cuentas a una IA, la otra no lo sabe</h2>
-        <p>Cada IA tiene su propia memoria: vive en su servidor y solo sirve dentro de ella. Lo que le cuentas a una, la otra no lo sabe, y lo vuelves a explicar: a qué te dedicas, cómo quieres las respuestas, lo que ya le habías corregido.</p>
-        <p><strong>Mentor hace que lo sepan todas, desde una carpeta que es tuya.</strong></p>
+        <p class="etiqueta">Funciona dentro de las IA que ya usas</p>
+        <ul class="nombres">
+          <li>ChatGPT</li><li>Claude</li><li>Gemini</li><li>Grok</li><li>DeepSeek</li><li>Claude Code</li><li>Codex</li><li>Cursor</li><li>Claude Desktop</li><li>Cowork</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="seccion intensa">
+      <div class="contenedor centrado">
+        <p class="etiqueta">El problema</p>
+        <h2>Cada IA te conoce a medias.</h2>
+        <p class="entradilla centrado">Cada una tiene su propia memoria, que vive en su servidor y solo sirve dentro de ella. Lo que le cuentas a una, la otra no lo sabe.</p>
+        <ol class="tres-pasos">
+          <li><span class="circulo">1</span>Le explicas a una IA cómo trabajas</li>
+          <li><span class="circulo">2</span>Al día siguiente, en otra, se lo vuelves a explicar</li>
+          <li><span class="circulo">3</span>Lo que le corregiste a la primera se queda en ella</li>
+        </ol>
+        <p class="remate centrado">Mentor hace que lo sepan todas, <span class="acento">desde una carpeta que es tuya.</span></p>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="contenedor">
+        <p class="etiqueta" style="text-align:center">Una memoria, todas tus IAs</p>
+        <h2 class="centrado" style="max-width:40rem">Corriges a Claude. ChatGPT empieza sabiéndolo.</h2>
+        <div class="dos-ventanas">
+          <div class="ventana">
+            <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span>claude.ai · lunes, 10:12</div>
+            <div class="ventana-cuerpo">
+              <p class="quien">Tú</p>
+              <p class="burbuja">Los glosarios, siempre en una tabla de dos columnas: término y fuente. La definición ya la sé, lo que no recuerdo es dónde lo vi.</p>
+              <p class="quien">Claude</p>
+              <p class="burbuja">Entendido: desde ahora, en dos columnas, término y fuente, sin definiciones.</p>
+              <div class="tarjeta maquina"><span class="texto"><span class="que">Mentor ha apuntado:</span>Los glosarios, en una tabla de dos columnas, término y fuente, sin definiciones.<span class="firma">aprendizajes.md</span></span><span class="acciones"><span class="b">Deshacer</span><span class="b cerrar" aria-hidden="true">✕</span></span></div>
+            </div>
+          </div>
+          <div class="entre"><span class="sello"><img src="marca.svg" alt="" width="21" height="16"></span>tu carpeta</div>
+          <div class="ventana">
+            <div class="ventana-barra"><span class="puntos"><i></i><i></i><i></i></span>chatgpt.com · martes, 9:30</div>
+            <div class="ventana-cuerpo">
+              <p class="quien">Tú</p>
+              <p class="burbuja de-mentor">Esto lo añade Mentor, la memoria que llevo de un chat a otro. Debajo va mi perfil…<br><b>Lo que Mentor ha apuntado de mí:</b> Los glosarios, en una tabla de dos columnas, término y fuente, sin definiciones.</p>
+              <p class="burbuja">Hazme el glosario del capítulo 9.</p>
+              <p class="quien">ChatGPT</p>
+              <div class="burbuja">
+                <table class="mini-tabla">
+                  <tr><th>Término</th><th>Fuente</th></tr>
+                  <tr><td>parada de emergencia</td><td>Manual de la envasadora, cap. 9</td></tr>
+                  <tr><td>cubierta de protección</td><td>Ficha de seguridad, apartado 7</td></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="pie-de-dibujo" style="text-align:center">Ejemplo con la memoria de Inés, una traductora técnica inventada para el ejemplo. Las tarjetas y los textos de Mentor son los de verdad.</p>
+        <p style="text-align:center;margin-top:1.5rem"><a class="boton principal" href="#empezar">Empieza tu prueba de 14 días</a></p>
+      </div>
+    </section>
+
+    <section class="seccion alterna" id="oficios">
+      <div class="contenedor">
+        <p class="etiqueta">Para tu trabajo</p>
+        <h2>Tu trabajo, sin volver a explicarlo.</h2>
+        <p class="entradilla">Elige el tuyo. La IA es la misma, pero ya sabe cómo trabajas, para quién y cómo lo quieres.</p>
+        <div class="pestanas" role="tablist" aria-label="Oficios" hidden>
+          <button type="button" role="tab" id="pestana-traduccion" aria-controls="oficio-traduccion">Traducción</button>
+          <button type="button" role="tab" id="pestana-clientes" aria-controls="oficio-clientes">Clientes</button>
+          <button type="button" role="tab" id="pestana-codigo" aria-controls="oficio-codigo">Código</button>
+          <button type="button" role="tab" id="pestana-escritura" aria-controls="oficio-escritura">Escritura</button>
+        </div>
+        <div class="oficio" role="tabpanel" id="oficio-traduccion" aria-labelledby="pestana-traduccion">
+          <h3>Traducción técnica</h3>
+          <p>Tu idioma, tu tono y tus manías con los términos, en cada encargo.</p>
+          <div class="antes-despues">
+            <div class="sin"><p class="rotulo">✕ Sin memoria</p><blockquote>«Traduce este apartado del alemán. Es para un fabricante de envasadoras, en español de España y de tú. No me expliques la terminología, y si dudas de un término, dame las dos opciones y dónde has visto cada una…»</blockquote></div>
+            <div class="con"><p class="rotulo">✓ Con Mentor</p><ul class="chips"><li>Traductora técnica, del alemán y del inglés</li><li>Español de España, de tú</li><li>Dos opciones si duda</li><li>Glosarios en dos columnas</li></ul><blockquote>«Traduce este apartado.»</blockquote></div>
+          </div>
+        </div>
+        <div class="oficio" role="tabpanel" id="oficio-clientes" aria-labelledby="pestana-clientes">
+          <h3>Asesoría con clientes</h3>
+          <p>Una memoria por cliente: en el chat de uno no entra nada de otro.</p>
+          <div class="antes-despues">
+            <div class="sin"><p class="rotulo">✕ Sin memoria</p><blockquote>«Prepara el correo del trimestre para el taller. Recuerda que es una SL de doce personas, que el gerente lo quiere todo por escrito y que este trimestre cambian de banco…»</blockquote></div>
+            <div class="con"><p class="rotulo">✓ Con Mentor</p><ul class="chips"><li>Cliente: taller</li><li>SL de doce personas</li><li>Todo por escrito</li><li>Cambian de banco este trimestre</li></ul><blockquote>«Prepara el correo del trimestre.»</blockquote></div>
+          </div>
+        </div>
+        <div class="oficio" role="tabpanel" id="oficio-codigo" aria-labelledby="pestana-codigo">
+          <h3>Programar con IA</h3>
+          <p>Claude Code, Codex y Cursor leen la misma memoria que las webs.</p>
+          <div class="antes-despues">
+            <div class="sin"><p class="rotulo">✕ Sin memoria</p><blockquote>«Monta el proyecto en Go, sin dependencias de fuera. Las pruebas, al lado de cada archivo, y los mensajes de commit en castellano y en presente…»</blockquote></div>
+            <div class="con"><p class="rotulo">✓ Con Mentor</p><ul class="chips"><li>Go, sin dependencias de fuera</li><li>Pruebas junto a cada archivo</li><li>Commits en castellano</li></ul><blockquote>«Monta el proyecto.»</blockquote></div>
+          </div>
+        </div>
+        <div class="oficio" role="tabpanel" id="oficio-escritura" aria-labelledby="pestana-escritura">
+          <h3>Escribir para una marca</h3>
+          <p>Tu voz, la misma en cada IA que uses para escribir.</p>
+          <div class="antes-despues">
+            <div class="sin"><p class="rotulo">✕ Sin memoria</p><blockquote>«Escribe el boletín de noviembre. Tono cercano pero sin exclamaciones, frases cortas, nada de «sinergias», y firmo como Lucía, del equipo de la tienda…»</blockquote></div>
+            <div class="con"><p class="rotulo">✓ Con Mentor</p><ul class="chips"><li>Cercano, sin exclamaciones</li><li>Frases cortas</li><li>Nada de «sinergias»</li><li>Firma: Lucía</li></ul><blockquote>«Escribe el boletín de noviembre.»</blockquote></div>
+          </div>
+        </div>
+        <p class="pie-de-dibujo">Ejemplos inventados, para enseñar cómo funciona.</p>
       </div>
     </section>
 
     <section class="seccion" id="como">
       <div class="contenedor">
-        <h2>Cómo funciona</h2>
-        <p class="entradilla">El primer paso lo haces una vez. Los otros dos pasan solos, en cada chat.</p>
-        <div class="pasos">
-          <article class="ficha paso">
-            <p class="numero">1</p>
-            <h3>Instalas Mentor y escribes tu perfil</h3>
-            <p>La app te lleva paso a paso. Tu perfil sale de una entrevista corta con la IA que uses: quién eres cuando trabajas, en unas 300 palabras. Queda en tu carpeta, en un archivo de texto que abres y cambias cuando quieras.</p>
+        <p class="etiqueta">Cómo funciona</p>
+        <h2>Se escribe sola. La revisas tú.</h2>
+        <p class="entradilla">Instalas la app y escribes tu perfil con una entrevista corta, en la IA que uses: quién eres cuando trabajas, en unas 300 palabras. Desde ahí, Mentor trabaja en cada chat.</p>
+        <div class="funciona">
+          <div class="ficha">
+            <p class="numero">Apunta</p>
+            <h3>Guarda lo que importa, sin que lo copies tú</h3>
+            <p>Cuando corriges a la IA o le dices cómo lo quieres, lo marca en su respuesta y Mentor lo apunta en tu carpeta, con la fecha y tu frase. Si no te vale, «Deshacer».</p>
             <div class="dibujo">
-              <div class="archivo">
-                <div class="ruta"><span>perfil.md</span><span>Documentos\Mentor</span></div>
-                <pre><span class="titulo"># Perfil</span>
-
-<span class="titulo">## A qué me dedico</span>
-
-Soy traductora autónoma de inglés y alemán al español. Casi todo lo que traduzco es técnico: manuales de maquinaria industrial y fichas de seguridad.
-
-<span class="titulo">## Cómo quiero que me respondas</span>
-
-- En español de España, de tú y sin rodeos.
-- Respuestas cortas. Si hace falta más, pregúntame antes.</pre>
-              </div>
+              <div class="tarjeta maquina"><span class="texto"><span class="que">Mentor ha apuntado:</span>Los jueves por la tarde no hay hueco para nada que no sea el taller.<span class="firma">aprendizajes.md</span></span><span class="acciones"><span class="b">Deshacer</span></span></div>
             </div>
-          </article>
-          <article class="ficha paso">
-            <p class="numero">2</p>
-            <h3>Al abrir un chat, tu perfil entra solo</h3>
-            <p>En ChatGPT, Claude, Gemini, Grok y DeepSeek, Mentor lo pone al empezar cada chat nuevo, a la vista: en la caja de texto o como archivo adjunto. Solo llega a la IA si lo envías tú, y con «Ahora no» ese chat va sin él.</p>
+          </div>
+          <div class="ficha">
+            <p class="numero">Ordena</p>
+            <h3>Una revisión por semana, y decides tú</h3>
+            <p>Mentor repasa contigo lo apuntado y sube a tu perfil lo que ha aguantado. Lo que la IA deduce, y no le has dicho, lleva ⚠️ hasta que lo confirmas.</p>
             <div class="dibujo">
-              <div class="tarjeta"><span class="texto">Mentor pondrá tu perfil en 4 s.</span><span class="acciones"><span class="b principal">Ponerlo ya</span><span class="b">Ahora no</span></span></div>
-              <div class="chat">Esto lo añade Mentor, la memoria que llevo de un chat a otro. Debajo va mi perfil, quién soy cuando trabajo…<div class="enviar"><span>Enviar</span></div></div>
+              <div class="tarjeta"><span class="texto">Toca tu revisión semanal.<span class="firma">Mentor repasa contigo lo apuntado: junta lo repetido, sube lo que ha aguantado a quién eres y te pregunta lo que parezca viejo. Va en este chat, en lugar del perfil.</span></span><span class="acciones"><span class="b principal">Hacerla ahora</span><span class="b">Otro día</span></span></div>
             </div>
-          </article>
-          <article class="ficha paso">
-            <p class="numero">3</p>
-            <h3>La IA apunta lo que aprende, y Mentor lo guarda</h3>
-            <p>Cuando le corriges algo o le dices cómo prefieres las cosas, la IA lo marca en su respuesta y Mentor lo apunta en tu carpeta, con la fecha y tu frase. Si no te vale, «Deshacer». En el chat siguiente, en esa IA o en otra, ya lo sabe.</p>
+          </div>
+          <div class="ficha">
+            <p class="numero">Busca</p>
+            <h3>Contesta desde tu carpeta</h3>
+            <p>Si la IA necesita algo que no está en tu perfil, se lo pide a Mentor, que lo busca en tu carpeta y lo pone en la caja, a la vista, antes de que lo envíes.</p>
             <div class="dibujo">
-              <div class="tarjeta maquina"><span class="texto"><span class="que">Mentor ha apuntado:</span>Los glosarios, en una tabla de dos columnas, término y fuente, sin definiciones.<span class="firma">aprendizajes.md</span></span><span class="acciones"><span class="b">Deshacer</span><span class="b cerrar" aria-hidden="true">✕</span></span></div>
+              <div class="chat">Mentor ha buscado «nube» en mi memoria y ha encontrado esto:<br><br>aprendizajes.md:<br>- 2026-10-02 · Descarta las herramientas de traducción en la nube para los manuales…<div class="enviar"><span>Enviar</span></div></div>
             </div>
-          </article>
+          </div>
         </div>
-        <p class="pie-de-dibujo">Las tarjetas y los textos son los de Mentor; la memoria es la de Inés, una traductora técnica inventada para el ejemplo.</p>
       </div>
     </section>
 
-    <section class="seccion propiedad">
+    <section class="seccion intensa">
+      <div class="contenedor centrado">
+        <h2>Explícaselo una vez, y para todas.</h2>
+        <p class="entradilla centrado">La prueba dura 14 días, con todo. Hoy no se cobra nada.</p>
+        <p style="margin-top:1.5rem"><a class="boton principal" href="#empezar">Empieza tu prueba de 14 días</a></p>
+        <p class="nota">¿Programas con IA? Claude Code, Codex y Cursor usan la misma memoria.</p>
+      </div>
+    </section>
+
+    <section class="seccion alterna">
       <div class="contenedor">
-        <h2>Tu memoria es tuya</h2>
+        <p class="etiqueta">La pregunta de siempre</p>
+        <h2>¿Y la memoria que ya tienen ChatGPT o Claude?</h2>
+        <p class="entradilla">Sirve, dentro de cada una. Pero cada IA guarda su parte de ti en su servidor, y lo que sabe una no lo sabe la otra. Mentor va aparte, en una carpeta tuya, y la leen todas.</p>
+        <div class="tabla" style="margin-top:1.5rem">
+          <table class="comparacion">
+            <thead><tr><th></th><th>La memoria de cada IA</th><th>Mentor</th></tr></thead>
+            <tbody>
+              <tr><td>Dónde vive</td><td>En el servidor de esa IA</td><td>En tu ordenador, en archivos de texto</td></tr>
+              <tr><td>Dónde sirve</td><td>Dentro de esa IA</td><td>En ChatGPT, Claude, Gemini, Grok, DeepSeek y tus programas de IA</td></tr>
+              <tr><td>Cómo la ves</td><td>En los ajustes de cada una</td><td>Entera, con cualquier editor</td></tr>
+              <tr><td>Si cambias de IA</td><td>La copias a mano, y desde ahí son dos</td><td>Es la misma en todas, cada día</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion intensa">
+      <div class="contenedor">
+        <p class="etiqueta">Tuya de verdad</p>
+        <h2>Tu memoria es tuya.</h2>
         <p class="entradilla">No es una frase. Son cuatro cosas que Mentor cumple, y que puedes comprobar.</p>
-        <div class="rejilla cuatro">
-          <div class="ficha">
-            <p class="numero">1</p>
-            <h3>Nadie más tiene la llave, ni Radamant</h3>
-            <p>Lo que se sincroniza se cifra en tu dispositivo, con una llave que nace allí y no sale. El almacén guarda bytes que no puede leer.</p>
-          </div>
-          <div class="ficha">
-            <p class="numero">2</p>
-            <h3>Son archivos de texto</h3>
-            <p>Markdown, que abres con el Bloc de notas, con Obsidian o con cualquier editor, y que lee cualquier IA. Sin base de datos y sin formato propio.</p>
-          </div>
-          <div class="ficha">
-            <p class="numero">3</p>
-            <h3>La guardas donde quieras</h3>
-            <p>En el almacén de Radamant, en la Unión Europea; en una carpeta del cloud que ya usas; o en ningún sitio, solo en tu ordenador. <a href="formato.html">El formato está publicado</a>.</p>
-          </div>
-          <div class="ficha">
-            <p class="numero">4</p>
-            <h3>Si te vas, te la llevas entera</h3>
-            <p>Exportar es la carpeta misma. Si dejas Mentor, o si Radamant cerrara, cada uno de tus dispositivos tiene tu memoria completa.</p>
-          </div>
+        <div class="rejilla cuatro" style="margin-top:1.5rem">
+          <div class="ficha"><h3>Nadie más tiene la llave, ni Radamant</h3><p>Lo que se sincroniza se cifra en tu dispositivo, con una llave que nace allí y no sale. El almacén guarda bytes que no puede leer.</p></div>
+          <div class="ficha"><h3>Son archivos de texto</h3><p>Markdown, que abres con el Bloc de notas, con Obsidian o con cualquier editor, y que lee cualquier IA. Sin base de datos y sin formato propio.</p></div>
+          <div class="ficha"><h3>La guardas donde quieras</h3><p>En el almacén de Radamant, en la Unión Europea; en una carpeta del cloud que ya usas; o en ningún sitio, solo en tu ordenador. <a href="formato.html">El formato está publicado</a>.</p></div>
+          <div class="ficha"><h3>Si te vas, te la llevas entera</h3><p>Exportar es la carpeta misma. Si dejas Mentor, o si Radamant cerrara, cada uno de tus dispositivos tiene tu memoria completa.</p></div>
         </div>
-        <p class="condiciones-del-precio"><a href="comprobar.html">Lo que puedes comprobar sin fiarte de nosotros</a></p>
+        <p style="margin-top:1.25rem"><a href="comprobar.html">Lo que puedes comprobar sin fiarte de nosotros</a></p>
       </div>
     </section>
 
     <section class="seccion">
       <div class="contenedor">
-        <h2>Dónde funciona</h2>
-        <div class="rejilla tres" style="margin-top:1.5rem">
-          <div class="ficha">
-            <h3>En tu navegador</h3>
-            <p>ChatGPT, Claude, Gemini, Grok y DeepSeek, con Chrome, Edge, Brave, Opera o Vivaldi. La app te lleva a la extensión de Mentor en la tienda de Chrome, y es un clic.</p>
-          </div>
-          <div class="ficha">
-            <h3>En tus programas de IA</h3>
-            <p>Claude Code, Codex, Cursor, Claude Desktop y Cowork, conectados desde la app con un botón, por un servidor de Mentor que no sale de tu ordenador.</p>
-            <p class="nota">También con un modelo que corre en tu ordenador, sin red, a través de Claude Code: va más lento, y hay que pedirle que apunte.</p>
-          </div>
-          <div class="ficha">
-            <h3>En tu ordenador</h3>
-            <p>Windows 10 y 11. Mac con macOS 13 o posterior, con chip de Apple o Intel: todavía no lleva la firma de Apple, así que la primera vez se abre desde Ajustes del Sistema, con «Abrir igualmente». <a href="descargar.html">Cómo se instala</a>.</p>
-          </div>
-          <div class="ficha telefono-ficha">
-            <h3>En tu teléfono</h3>
-            <div class="telefono">
-              <div>
-                <p><strong>Android, en pruebas:</strong> <a href="mailto:contacto@radamant.es?subject=Plaza%20en%20la%20prueba%20de%20Android">pide tu plaza</a>. Se une a tu memoria con un QR, pone tu perfil en la app de la IA que uses y apunta lo que le compartes.</p>
-                <p><strong>iPhone:</strong> próximamente.</p>
-              </div>
-              <div class="capturas">
-                <img src="imagenes/android-inicio.webp" width="432" height="860" alt="La app de Mentor en Android: empieza un chat con tu memoria en ChatGPT, Claude, Gemini, Grok o DeepSeek." loading="lazy">
-                <img src="imagenes/android-perfil.webp" width="432" height="860" alt="El perfil de Inés abierto en la app de Android: un archivo de texto, perfil.md." loading="lazy">
-              </div>
-            </div>
-          </div>
+        <p class="etiqueta">Todo lo que hace</p>
+        <h2>Todo Mentor, de un vistazo.</h2>
+        <div class="inventario">
+          <div class="ficha"><h3>En tus chats</h3><ul>
+            <li>Tu perfil al empezar cada chat, a la vista</li>
+            <li>Lo que aprende, con su fecha y tu frase</li>
+            <li>«Deshacer» en cada apunte</li>
+            <li>La búsqueda en tu carpeta, cuando la IA la pide</li>
+            <li>La revisión semanal</li>
+            <li>Una memoria por cliente <span class="marca-plan">Profesional</span></li>
+          </ul></div>
+          <div class="ficha"><h3>Tu carpeta</h3><ul>
+            <li>Archivos markdown, con cualquier editor</li>
+            <li>Tu perfil, quién eres y lo apuntado, por separado</li>
+            <li>Nada se pierde si dos dispositivos chocan</li>
+            <li>Versiones guardadas 12 meses</li>
+            <li>Versiones sin límite <span class="marca-plan">Profesional</span></li>
+          </ul></div>
+          <div class="ficha"><h3>En todas partes</h3><ul>
+            <li>ChatGPT, Claude, Gemini, Grok y DeepSeek</li>
+            <li>Chrome, Edge, Brave, Opera y Vivaldi</li>
+            <li>Claude Code, Codex, Cursor, Claude Desktop y Cowork</li>
+            <li>Un modelo en tu ordenador, sin red</li>
+            <li>Android, en pruebas</li>
+          </ul></div>
+          <div class="ficha"><h3>Tus dispositivos</h3><ul>
+            <li>Sincronizada, cifrada en tu dispositivo</li>
+            <li>El almacén de Radamant, tu cloud o ninguno</li>
+            <li>Un código de 12 palabras que solo tienes tú</li>
+            <li>Cambiar el código si pierdes un dispositivo</li>
+          </ul></div>
+          <div class="ficha"><h3>Para tu trabajo</h3><ul>
+            <li>El contrato de encargo del tratamiento <span class="marca-plan">Profesional</span></li>
+            <li>La factura a tu nombre <span class="marca-plan">Profesional</span></li>
+            <li>Plazas para tu equipo, desde Mentor <span class="marca-plan">Equipos</span></li>
+          </ul></div>
+          <div class="ficha pronto"><h3>Próximamente</h3><ul>
+            <li>Lo que le pidas que te recuerde</li>
+            <li>La app del iPhone</li>
+            <li>El Mac, con la firma de Apple</li>
+            <li>Mentor en inglés</li>
+          </ul></div>
         </div>
       </div>
     </section>
 
-    <section class="seccion">
+    <section class="seccion alterna" id="precios">
       <div class="contenedor">
-        <h2>Lo que aprende de ti</h2>
-        <p class="entradilla">Así es por dentro lo que Mentor ha apuntado de Inés. Cada línea lleva su fecha y la frase de la que sale, para que veas si se entendió bien.</p>
-        <div class="memoria">
-          <div class="archivo">
-            <div class="ruta"><span>aprendizajes.md</span><span>Documentos\Mentor</span></div>
-            <pre>- <span class="fecha">2026-09-29</span> · ⚠️ Que el «sin rodeos» vale también para los correos a clientes, no solo para lo que me dices a mí.
-
-- <span class="fecha">2026-10-01</span> · Los glosarios, en una tabla de dos columnas, término y fuente, sin definiciones — <span class="frase">"La definición ya la sé, lo que no recuerdo es dónde lo vi."</span>
-
-- <span class="fecha">2026-10-02</span> · Descarta las herramientas de traducción en la nube para los manuales, porque los clientes alemanes prohíben subirlos — <span class="frase">"Eso no lo puedo subir a ningún sitio, lo pone el contrato."</span>
-
-- <span class="fecha">2026-10-05</span> · Los jueves por la tarde no hay hueco para nada que no sea el taller — <span class="frase">"El jueves ni me lo propongas."</span></pre>
-          </div>
-          <ul>
-            <li>Lo que la IA deduce, y no le has dicho, lleva ⚠️ hasta que lo confirmas.</li>
-            <li>Una vez por semana, Mentor te propone la revisión: la IA junta lo apuntado con tu perfil, tú lo miras, y se guarda solo si te vale.</li>
-            <li>Próximamente, también lo que le pidas que te recuerde: «Recuérdame los viernes mandar el parte».</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion">
-      <div class="contenedor">
-        <h2>Si trabajas con clientes</h2>
-        <p class="entradilla">Para quien usa la IA en el trabajo que hace para otros: traducción, despachos y asesorías, consultoría, diseño.</p>
-        <div class="rejilla dos" style="margin-top:1.5rem">
-          <div class="ficha">
-            <h3>Una memoria por cliente</h3>
-            <p>Cada cliente, con su perfil y lo que se apunta en sus chats. En el chat de uno no entra nada de otro, y eliges el cliente con un clic junto a la caja de texto.</p>
-          </div>
-          <div class="ficha">
-            <h3>El contrato de encargo del tratamiento</h3>
-            <p>Para lo que guarda de ti el almacén de Radamant, con los planes Profesional y Equipos.</p>
-          </div>
-          <div class="ficha">
-            <h3>Todo en la Unión Europea</h3>
-            <p>Tu memoria cifrada, en Alemania, con su copia de cada noche en Finlandia. No sale de la Unión Europea.</p>
-          </div>
-          <div class="ficha">
-            <h3>Equipos, cada uno con lo suyo</h3>
-            <p>Cada persona tiene su memoria, que nadie más ve, tampoco quien paga las plazas.</p>
+        <p class="etiqueta" style="text-align:center">Precios</p>
+        <h2 style="text-align:center">Una memoria para todas tus IAs.</h2>
+        <p class="entradilla centrado" style="text-align:center">14 días de prueba en todos los planes, con todo. La tarjeta se pide al empezar, y ese día no se cobra nada.</p>
+        <div style="text-align:center">
+          <div class="cadencia" role="group" aria-label="Cómo pagar" hidden>
+            <button type="button" data-elegir="mes" aria-pressed="false">Mes a mes</button>
+            <button type="button" data-elegir="año" aria-pressed="true">Pagando el año<small>dos meses gratis</small></button>
           </div>
         </div>
-        <p class="nota" style="margin-top:1.25rem">Lo que le cuentas a la IA sobre tu cliente se lo cuentas a esa IA, como sin Mentor: si puedes hacerlo depende de lo que hayas pactado con tu cliente y de la IA que uses.</p>
-      </div>
-    </section>
-
-    <section class="seccion" id="precios">
-      <div class="contenedor">
-        <h2>Precios</h2>
-        <p class="entradilla">14 días de prueba en todos los planes, con todo. La tarjeta se pide al empezar, y ese día no se cobra nada.</p>
         <div class="planes">
           <div class="ficha plan destacado">
             <p class="etiqueta">Precio de fundador</p>
             <h3>Personal</h3>
-            <p class="importe">72 € <small>al año</small></p>
-            <p class="nota">Para los 500 primeros, y para siempre mientras no te des de baja. Después, 9,90 € al mes o 99 € al año.</p>
+            <p class="importe" data-cadencia="año"><s>99 €</s>72 € <small>al año</small></p>
+            <p class="importe" data-cadencia="mes" hidden>9,90 € <small>al mes</small></p>
+            <p class="nota" data-cadencia="año">Para los 500 primeros, y para siempre mientras no te des de baja. Mes a mes, 9,90 €.</p>
+            <p class="nota" data-cadencia="mes" hidden>Pagando el año, 99 €, o 72 € para los 500 primeros.</p>
             <ul>
               <li>Mentor en las cinco webs y en tus programas de IA</li>
               <li>Tu memoria sincronizada entre tus dispositivos</li>
               <li>Versiones guardadas 12 meses, y 1 GB</li>
               <li>Sincronizar por tu propio cloud, incluido</li>
             </ul>
+            <a class="boton principal" href="#empezar">Empezar la prueba</a>
           </div>
           <div class="ficha plan">
             <p class="etiqueta">Para trabajar con clientes</p>
             <h3>Profesional</h3>
-            <p class="importe">18 € <small>al mes</small></p>
-            <p class="nota">O 180 € al año.</p>
+            <p class="importe" data-cadencia="año">180 € <small>al año</small></p>
+            <p class="importe" data-cadencia="mes" hidden>18 € <small>al mes</small></p>
+            <p class="nota" data-cadencia="año">Mes a mes, 18 €.</p>
+            <p class="nota" data-cadencia="mes" hidden>Pagando el año, 180 €.</p>
             <ul>
               <li>Todo lo de Personal</li>
               <li>Una memoria por cliente, sin límite</li>
@@ -313,84 +503,142 @@ Soy traductora autónoma de inglés y alemán al español. Casi todo lo que trad
               <li>La factura a tu nombre</li>
               <li>Versiones sin límite, y 10 GB</li>
             </ul>
+            <a class="boton" href="#empezar">Empezar la prueba</a>
           </div>
           <div class="ficha plan">
             <p class="etiqueta">De 3 a 100 plazas</p>
             <h3>Equipos</h3>
-            <p class="importe">15 € <small>por plaza y mes</small></p>
-            <p class="nota">Pagando el año, o 18 € mes a mes. Más IVA.</p>
+            <p class="importe" data-cadencia="año">15 € <small>por plaza y mes</small></p>
+            <p class="importe" data-cadencia="mes" hidden>18 € <small>por plaza y mes</small></p>
+            <p class="nota" data-cadencia="año">Pagando el año, más IVA. Mes a mes, 18 €.</p>
+            <p class="nota" data-cadencia="mes" hidden>Mes a mes, más IVA. Pagando el año, 15 €.</p>
             <ul>
               <li>Profesional para cada persona</li>
               <li>Cada una con su memoria, que nadie más ve</li>
               <li>Las plazas, desde Mentor</li>
               <li>Una factura y el contrato con la empresa</li>
             </ul>
+            <a class="boton" href="#empezar">Empezar la prueba</a>
           </div>
         </div>
-        <div class="condiciones-del-precio estrecho">
+        <h3 style="margin-top:2.5rem">En qué se diferencian</h3>
+        <div class="tabla">
+          <table class="diferencias">
+            <thead><tr><th></th><th>Personal</th><th>Profesional</th><th>Equipos</th></tr></thead>
+            <tbody>
+              <tr><td>Las cinco webs y tus programas de IA</td><td class="si"></td><td class="si"></td><td class="si"></td></tr>
+              <tr><td>Sincronizada entre tus dispositivos</td><td class="si"></td><td class="si"></td><td class="si"></td></tr>
+              <tr><td>Una memoria por cliente</td><td class="no"></td><td class="si"></td><td class="si"></td></tr>
+              <tr><td>El contrato de encargo del tratamiento</td><td class="no"></td><td class="si"></td><td class="si"></td></tr>
+              <tr><td>La factura a tu nombre</td><td class="no"></td><td class="si"></td><td class="si"></td></tr>
+              <tr><td>Versiones guardadas</td><td>12 meses</td><td>Sin límite</td><td>Sin límite</td></tr>
+              <tr><td>Espacio</td><td>1 GB</td><td>10 GB</td><td>10 GB</td></tr>
+              <tr><td>Plazas</td><td>1</td><td>1</td><td>De 3 a 100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="estrecho" style="margin-top:1rem">
           <p class="nota">Los precios llevan el IVA incluido, salvo Equipos. Fuera de la Unión Europea, las mismas cifras en dólares, con los impuestos de cada país. El plan se elige al empezar la prueba, desde la app.</p>
           <p class="nota">Mentor te avisa tres días antes del primer cobro, y Paddle te manda un correo siete días antes. Te das de baja con un clic, en Mentor, sin escribir a nadie. Cobra Paddle, en nombre de Radamant. <a href="reembolsos.html">Reembolsos y desistimiento</a>.</p>
         </div>
       </div>
     </section>
 
-    <section class="seccion preguntas" id="preguntas">
+    <section class="seccion">
+      <div class="contenedor">
+        <p class="etiqueta">Dónde funciona</p>
+        <h2>Donde ya usas la IA.</h2>
+        <div class="vias">
+          <div class="ficha"><p class="numero">01 · La extensión</p><h3>En tu navegador</h3><p>ChatGPT, Claude, Gemini, Grok y DeepSeek, con Chrome, Edge, Brave, Opera o Vivaldi. La app te lleva a la extensión en la tienda de Chrome, y es un clic.</p></div>
+          <div class="ficha"><p class="numero">02 · La app</p><h3>En tu ordenador</h3><p>Windows 10 y 11. Mac con macOS 13 o posterior, con chip de Apple o Intel: todavía sin la firma de Apple, así que la primera vez se abre desde Ajustes del Sistema. <a href="descargar.html">Cómo se instala</a>.</p></div>
+          <div class="ficha"><p class="numero">03 · El servidor local</p><h3>En tus programas de IA</h3><p>Claude Code, Codex, Cursor y Claude Desktop, conectados desde la app con un botón, por un servidor de Mentor que no sale de tu ordenador.</p></div>
+          <div class="ficha"><p class="numero">04 · Cowork</p><h3>En Claude, con su plugin</h3><p>La app instala el plugin de Mentor en Cowork, y Claude empieza sabiendo quién eres.</p></div>
+          <div class="ficha"><p class="numero">05 · Android</p><h3>En tu teléfono</h3><p>En pruebas: <a href="mailto:contacto@radamant.es?subject=Plaza%20en%20la%20prueba%20de%20Android">pide tu plaza</a>. Se une a tu memoria con un QR, pone tu perfil en la app de la IA y apunta lo que le compartes. El iPhone, próximamente.</p>
+            <div class="capturas">
+              <img src="imagenes/android-inicio.webp" width="432" height="860" alt="La app de Mentor en Android: empieza un chat con tu memoria en ChatGPT, Claude, Gemini, Grok o DeepSeek." loading="lazy">
+              <img src="imagenes/android-perfil.webp" width="432" height="860" alt="El perfil de Inés abierto en la app de Android: un archivo de texto, perfil.md." loading="lazy">
+            </div>
+          </div>
+          <div class="ficha"><p class="numero">06 · Un modelo local</p><h3>Sin red</h3><p>Con un modelo que corre en tu ordenador, a través de Claude Code: va más lento, y hay que pedirle que apunte.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion alterna preguntas" id="preguntas">
       <div class="contenedor"><div class="estrecho">
-        <h2>Preguntas</h2>
-        <details>
-          <summary>¿Qué me da esto que no me dé la memoria de ChatGPT?</summary>
-          <p>La memoria de ChatGPT es de ChatGPT: vive en su servidor y solo sirve en ChatGPT. La de Mentor es una carpeta de archivos de texto en tu ordenador: la lees, la cambias y la borras con cualquier editor, y es la misma en ChatGPT, Claude, Gemini, Grok, DeepSeek, Claude Code, Codex y Cursor. Lo que le cuentas a una, la siguiente ya lo sabe.</p>
-        </details>
-        <details>
-          <summary>Puedo tener un archivo de texto con quién soy y pegarlo al empezar. ¿Por qué pagar?</summary>
-          <p>Puedes, y es lo que hace Mentor por dentro. Lo que pagas es que lo haga solo en cada chat de cinco webs y de tus programas de IA, que apunte lo que vas diciendo sin que lo copies tú, que lo lleve cifrado a tus otros dispositivos y que, cuando una web cambie, se arregle sin que tengas que tocar nada. Si un día lo dejas, el archivo sigue siendo tuyo.</p>
-        </details>
-        <details>
-          <summary>¿Por qué una suscripción, si todo está en mi ordenador?</summary>
-          <p>Porque lo que se mantiene sí cuesta: cinco webs que cambian cada pocas semanas y hay que seguir, un almacén en la UE con copias y versiones, y una app para Windows y Mac. Si te das de baja, Mentor deja de ponerse en tus chats y tu carpeta sigue entera, en cada dispositivo.</p>
-        </details>
-        <details>
-          <summary>¿Radamant puede leer mi memoria?</summary>
-          <p>No. Se cifra en tu dispositivo con una llave que nace allí y no sale nunca; al almacén llegan bytes cifrados con nombres que no dicen nada. Lo que sí vemos: cuánto ocupa, cuándo cambia, cuántos dispositivos tienes y desde qué dirección se conectan. Paddle, que cobra, ve tu correo y tu tarjeta; nosotros vemos tu correo en su panel, y la tarjeta nunca.</p>
-        </details>
-        <details>
-          <summary>El código es cerrado. ¿Cómo sé que la app no manda la llave?</summary>
-          <p>No lo puedes leer, y es verdad que eso pide confianza. Lo que sí puedes comprobar sin nosotros: el manifiesto de la extensión, que solo le deja hablar con la app de tu ordenador y entrar en las cinco webs, y no deja a sus propias páginas conectarse a nada; que la app solo habla con descargas.radamant.eu, almacen.radamant.eu o el almacén que elijas tú, lo que se ve con cualquier programa que mire las conexiones; y el formato de los objetos cifrados, que está publicado. <a href="comprobar.html">Cómo se comprueba</a>.</p>
-        </details>
-        <details>
-          <summary>Mi perfil va en el primer mensaje de cada chat. Eso se lo estáis dando a OpenAI y a Google.</summary>
-          <p>A la IA que tú usas, sí, y lo ves antes de enviarlo: en la caja o como archivo adjunto, que puedes quitar. Es lo mismo que le contarías tú. Lo que pase con tus chats en cada proveedor depende de sus ajustes, como sin Mentor.</p>
-        </details>
-        <details>
-          <summary>Sois una persona sola y una empresa en constitución. ¿Qué pasa con mi memoria si Radamant cierra?</summary>
-          <p>Que la tienes entera, en cada uno de tus dispositivos: exportar es la carpeta misma. El almacén es intercambiable: vale una carpeta del cloud que ya tengas o ninguno, y <a href="formato.html">el formato está publicado</a>. Lo que dejaría de funcionar es ponerla sola en los chats.</p>
-        </details>
-        <details>
-          <summary>¿Esto cumple el RGPD?</summary>
-          <p>Radamant es encargado del tratamiento de lo que guarda, aunque solo vea cifrado, y hay un contrato de encargo para quien contrata Profesional o Equipos. Tu memoria cifrada está en la UE, en Hetzner, en Alemania y Finlandia, sin nadie fuera. Los textos los revisará un abogado antes de que el cobro de Mentor sea de verdad.</p>
-        </details>
-        <details>
-          <summary>Si pierdo el portátil, ¿pierdo la memoria?</summary>
-          <p>No, si tienes otro dispositivo o tus 12 palabras: con ellas, en un ordenador nuevo, vuelve entera. Si pierdes todos los dispositivos y las palabras, se pierde: es el precio de que nadie más pueda leerla, y se dice en el alta, antes de empezar.</p>
-        </details>
-        <details>
-          <summary>¿Qué pasa cuando ChatGPT cambia su web y Mentor deja de encontrar la caja?</summary>
-          <p>Mentor lo dice en la página, «memoria apagada», y no hace nada a ciegas. Nosotros lo vemos esa misma noche y publicamos el arreglo firmado; tu app lo baja y Mentor vuelve solo, sin actualizar la extensión ni tocar nada.</p>
-        </details>
-        <details>
-          <summary>¿Me podéis cobrar sin avisar cuando acaba la prueba?</summary>
-          <p>No se cobra nada en los 14 días. Antes de pedir la tarjeta se dice qué día se cobra y cuánto; Mentor avisa tres días antes, y Paddle te manda un correo siete días antes. La baja es un clic en Mentor, sin escribir a nadie.</p>
-        </details>
-        <details>
-          <summary>Somos un despacho. Si compro Equipos, ¿puedo leer la memoria de mi gente?</summary>
-          <p>No. Cada persona tiene su propia memoria, con su llave; quien compra las plazas ve identificadores, invita y quita plazas, y nada más. Si alguien se va, se lleva su memoria.</p>
-        </details>
+        <p class="etiqueta">Preguntas</p>
+        <h2>Lo que se pregunta antes de empezar.</h2>
+
+        <div class="grupo-de-preguntas">
+          <h3>Qué es y por qué pagarlo</h3>
+          <details>
+            <summary><span class="n">01</span>¿Qué me da esto que no me dé la memoria de ChatGPT?</summary>
+            <p>La memoria de ChatGPT es de ChatGPT: vive en su servidor y solo sirve en ChatGPT. La de Mentor es una carpeta de archivos de texto en tu ordenador: la lees, la cambias y la borras con cualquier editor, y es la misma en ChatGPT, Claude, Gemini, Grok, DeepSeek, Claude Code, Codex y Cursor. Lo que le cuentas a una, la siguiente ya lo sabe.</p>
+          </details>
+          <details>
+            <summary><span class="n">02</span>Puedo tener un archivo de texto con quién soy y pegarlo al empezar. ¿Por qué pagar?</summary>
+            <p>Puedes, y es lo que hace Mentor por dentro. Lo que pagas es que lo haga solo en cada chat de cinco webs y de tus programas de IA, que apunte lo que vas diciendo sin que lo copies tú, que lo lleve cifrado a tus otros dispositivos y que, cuando una web cambie, se arregle sin que tengas que tocar nada. Si un día lo dejas, el archivo sigue siendo tuyo.</p>
+          </details>
+          <details>
+            <summary><span class="n">03</span>¿Por qué una suscripción, si todo está en mi ordenador?</summary>
+            <p>Porque lo que se mantiene sí cuesta: cinco webs que cambian cada pocas semanas y hay que seguir, un almacén en la UE con copias y versiones, y una app para Windows y Mac. Si te das de baja, Mentor deja de ponerse en tus chats y tu carpeta sigue entera, en cada dispositivo.</p>
+          </details>
+        </div>
+
+        <div class="grupo-de-preguntas">
+          <h3>Privacidad y confianza</h3>
+          <details>
+            <summary><span class="n">04</span>¿Radamant puede leer mi memoria?</summary>
+            <p>No. Se cifra en tu dispositivo con una llave que nace allí y no sale nunca; al almacén llegan bytes cifrados con nombres que no dicen nada. Lo que sí vemos: cuánto ocupa, cuándo cambia, cuántos dispositivos tienes y desde qué dirección se conectan. Paddle, que cobra, ve tu correo y tu tarjeta; nosotros vemos tu correo en su panel, y la tarjeta nunca.</p>
+          </details>
+          <details>
+            <summary><span class="n">05</span>El código es cerrado. ¿Cómo sé que la app no manda la llave?</summary>
+            <p>No lo puedes leer, y es verdad que eso pide confianza. Lo que sí puedes comprobar sin nosotros: el manifiesto de la extensión, que solo le deja hablar con la app de tu ordenador y entrar en las cinco webs, y no deja a sus propias páginas conectarse a nada; que la app solo habla con descargas.radamant.eu, almacen.radamant.eu o el almacén que elijas tú, lo que se ve con cualquier programa que mire las conexiones; y el formato de los objetos cifrados, que está publicado. <a href="comprobar.html">Cómo se comprueba</a>.</p>
+          </details>
+          <details>
+            <summary><span class="n">06</span>Mi perfil va en el primer mensaje de cada chat. Eso se lo estáis dando a OpenAI y a Google.</summary>
+            <p>A la IA que tú usas, sí, y lo ves antes de enviarlo: en la caja o como archivo adjunto, que puedes quitar. Es lo mismo que le contarías tú. Lo que pase con tus chats en cada proveedor depende de sus ajustes, como sin Mentor.</p>
+          </details>
+          <details>
+            <summary><span class="n">07</span>¿Esto cumple el RGPD?</summary>
+            <p>Radamant es encargado del tratamiento de lo que guarda, aunque solo vea cifrado, y hay un contrato de encargo para quien contrata Profesional o Equipos. Tu memoria cifrada está en la UE, en Hetzner, en Alemania y Finlandia, sin nadie fuera. Los textos los revisará un abogado antes de que el cobro de Mentor sea de verdad.</p>
+          </details>
+        </div>
+
+        <div class="grupo-de-preguntas">
+          <h3>Cuando algo sale mal</h3>
+          <details>
+            <summary><span class="n">08</span>Si pierdo el portátil, ¿pierdo la memoria?</summary>
+            <p>No, si tienes otro dispositivo o tus 12 palabras: con ellas, en un ordenador nuevo, vuelve entera. Si pierdes todos los dispositivos y las palabras, se pierde: es el precio de que nadie más pueda leerla, y se dice en el alta, antes de empezar.</p>
+          </details>
+          <details>
+            <summary><span class="n">09</span>¿Qué pasa cuando ChatGPT cambia su web y Mentor deja de encontrar la caja?</summary>
+            <p>Mentor lo dice en la página, «memoria apagada», y no hace nada a ciegas. Nosotros lo vemos esa misma noche y publicamos el arreglo firmado; tu app lo baja y Mentor vuelve solo, sin actualizar la extensión ni tocar nada.</p>
+          </details>
+          <details>
+            <summary><span class="n">10</span>Sois una persona sola y una empresa en constitución. ¿Qué pasa con mi memoria si Radamant cierra?</summary>
+            <p>Que la tienes entera, en cada uno de tus dispositivos: exportar es la carpeta misma. El almacén es intercambiable: vale una carpeta del cloud que ya tengas o ninguno, y <a href="formato.html">el formato está publicado</a>. Lo que dejaría de funcionar es ponerla sola en los chats.</p>
+          </details>
+        </div>
+
+        <div class="grupo-de-preguntas">
+          <h3>El cobro y los equipos</h3>
+          <details>
+            <summary><span class="n">11</span>¿Me podéis cobrar sin avisar cuando acaba la prueba?</summary>
+            <p>No se cobra nada en los 14 días. Antes de pedir la tarjeta se dice qué día se cobra y cuánto; Mentor avisa tres días antes, y Paddle te manda un correo siete días antes. La baja es un clic en Mentor, sin escribir a nadie.</p>
+          </details>
+          <details>
+            <summary><span class="n">12</span>Somos un despacho. Si compro Equipos, ¿puedo leer la memoria de mi gente?</summary>
+            <p>No. Cada persona tiene su propia memoria, con su llave; quien compra las plazas ve identificadores, invita y quita plazas, y nada más. Si alguien se va, se lleva su memoria.</p>
+          </details>
+        </div>
       </div></div>
     </section>
 
     <section class="seccion">
       <div class="contenedor"><div class="estrecho">
-        <h2>Quién está detrás</h2>
+        <p class="etiqueta">Quién está detrás</p>
+        <h2>Radamant, desde España.</h2>
         <p>Mentor es el primer producto de Radamant, una empresa española en constitución que aplica y audita soluciones de inteligencia artificial éticas y conformes con la normativa europea. Lo ha hecho quien se dedica a mirar si la IA se usa bien.</p>
         <p>Detrás está Salva, que fundó Radamant.</p>
         <p class="nota">Radamant no certifica nada, y nada de lo que hay en esta página es asesoramiento jurídico.</p>
@@ -398,11 +646,12 @@ Soy traductora autónoma de inglés y alemán al español. Casi todo lo que trad
       </div></div>
     </section>
 
-    <section class="seccion final">
+    <section class="seccion intensa final" id="empezar">
       <div class="contenedor">
-        <h2>Empieza tu prueba de 14 días</h2>
-        <p class="entradilla">Hoy no se cobra nada. Si en 14 días no te convence, te das de baja con un clic, y tu carpeta sigue siendo tuya.</p>
-        <div class="botones descargas">
+        <p class="etiqueta">Mentor</p>
+        <h2>Una memoria tuya. Todas tus IAs.</h2>
+        <p class="entradilla centrado">Empieza tu prueba de 14 días. Hoy no se cobra nada, y si no te convence, te das de baja con un clic y tu carpeta sigue siendo tuya.</p>
+        <div class="botones descargas" style="margin-top:1.5rem">
           <a class="boton descarga principal" data-sistema="windows" href="Mentor-instalador.exe" download>Descargar Mentor para Windows</a>
           <a class="boton descarga" data-sistema="mac" href="Mentor.zip" download>Descargar Mentor para Mac</a>
         </div>
@@ -450,6 +699,51 @@ Soy traductora autónoma de inglés y alemán al español. Casi todo lo que trad
         var notas = document.querySelectorAll(".en-el-telefono");
         for (var n = 0; n < notas.length; n++) notas[n].hidden = false;
       }
+    })();
+
+    // Las pestañas de los oficios. Sin JavaScript se ven los cuatro, uno
+    // detrás de otro, y las pestañas no salen.
+    (function () {
+      var lista = document.querySelector('[role="tablist"]');
+      var pestanas = lista ? lista.querySelectorAll('[role="tab"]') : [];
+      if (!pestanas.length) return;
+      function elegir(p, foco) {
+        for (var i = 0; i < pestanas.length; i++) {
+          var esta = pestanas[i] === p;
+          pestanas[i].setAttribute("aria-selected", esta ? "true" : "false");
+          pestanas[i].tabIndex = esta ? 0 : -1;
+          document.getElementById(pestanas[i].getAttribute("aria-controls")).hidden = !esta;
+        }
+        if (foco) p.focus();
+      }
+      for (var i = 0; i < pestanas.length; i++) {
+        pestanas[i].addEventListener("click", function () { elegir(this, false); });
+        pestanas[i].addEventListener("keydown", function (e) {
+          var j = Array.prototype.indexOf.call(pestanas, this);
+          if (e.key === "ArrowRight") elegir(pestanas[(j + 1) % pestanas.length], true);
+          else if (e.key === "ArrowLeft") elegir(pestanas[(j + pestanas.length - 1) % pestanas.length], true);
+          else return;
+          e.preventDefault();
+        });
+      }
+      lista.hidden = false;
+      elegir(pestanas[0], false);
+    })();
+
+    // Mes a mes o pagando el año. Sin JavaScript se ve el año, y cada plan
+    // dice también lo que vale mes a mes.
+    (function () {
+      var grupo = document.querySelector(".cadencia");
+      if (!grupo) return;
+      var botones = grupo.querySelectorAll("button");
+      var precios = document.querySelectorAll("[data-cadencia]");
+      function poner(c) {
+        for (var i = 0; i < botones.length; i++) botones[i].setAttribute("aria-pressed", botones[i].getAttribute("data-elegir") === c ? "true" : "false");
+        for (var j = 0; j < precios.length; j++) precios[j].hidden = precios[j].getAttribute("data-cadencia") !== c;
+      }
+      for (var i = 0; i < botones.length; i++) botones[i].addEventListener("click", function () { poner(this.getAttribute("data-elegir")); });
+      grupo.hidden = false;
+      poner("año");
     })();
   </script>
 </body>
