@@ -42,13 +42,17 @@
     .hechos { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; margin: .4rem 0 0; padding: 0; list-style: none; font: .82rem/1.5 var(--mono); color: var(--tinta-suave); }
     .hechos li::before { content: "✓ "; color: var(--maquina); }
 
-    /* El vídeo de la portada (herramientas/video, con Remotion), con su pausa. */
+    /* El vídeo de la portada (herramientas/video, con Remotion y three.js), con
+       su pausa y su sonido, que empieza apagado: el navegador no deja otra cosa. */
     .demo { margin: 0; }
     .video { position: relative; border: 1px solid var(--linea); border-radius: 1.1rem; overflow: hidden; background: var(--papel); box-shadow: 0 18px 50px rgba(0, 0, 0, .35); aspect-ratio: 16 / 9; }
     .video video { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .pausa { position: absolute; right: .6rem; bottom: .6rem; display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--borde); border-radius: 999px;
+    .mandos { position: absolute; right: .6rem; bottom: .6rem; display: flex; gap: .4rem; }
+    .mando { display: inline-flex; align-items: center; gap: .4rem; border: 1px solid var(--borde); border-radius: 999px;
       background: color-mix(in srgb, var(--noche) 85%, transparent); color: var(--tinta); font: 600 .75rem/1 var(--mono); padding: .45rem .7rem; cursor: pointer; }
-    .pausa svg { width: .8rem; height: .8rem; display: block; }
+    .mando[hidden] { display: none; }
+    .mando[aria-pressed="true"]#video-sonido { border-color: var(--acento); color: var(--acento); }
+    .mando svg { width: .8rem; height: .8rem; display: block; }
     .solo-lector { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
     /* La franja de las IA. */
@@ -211,9 +215,12 @@
             <video id="video-portada" autoplay muted loop playsinline preload="auto" width="1920" height="1080" poster="imagenes/mentor-fija.jpg" aria-describedby="video-portada-texto">
               <source src="imagenes/mentor.mp4" type="video/mp4">
             </video>
-            <button type="button" class="pausa" id="video-pausa" aria-pressed="false" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg><span>Pausa</span></button>
+            <div class="mandos">
+              <button type="button" class="mando" id="video-sonido" aria-pressed="false" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 4.5h2l3-2.5v8l-3-2.5h-2z" fill="currentColor"/><path d="M8.2 4.2l2.6 3.6M10.8 4.2L8.2 7.8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"/></svg><span>Sonido</span></button>
+              <button type="button" class="mando" id="video-pausa" aria-pressed="false" hidden><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z" fill="currentColor"/></svg><span>Pausa</span></button>
+            </div>
           </div>
-          <p class="solo-lector" id="video-portada-texto">Mentor en 25 segundos: una carpeta tuya, unida a ChatGPT, Claude, Gemini, Grok y DeepSeek. En Claude dices que quieres los glosarios en dos columnas y Mentor lo apunta; en un chat nuevo de ChatGPT, Mentor pone lo apuntado y la respuesta llega en dos columnas. Una memoria por cliente; la revisión semanal, que junta lo repetido y pregunta lo viejo; y tu perfil, un archivo de texto que abres con cualquier editor.</p>
+          <p class="solo-lector" id="video-portada-texto">Mentor en 32 segundos, con música y sin voz. Una memoria, unida a ChatGPT, Claude, Gemini, Grok, DeepSeek y a un modelo local. En Claude pides las respuestas en tres puntos y Mentor lo apunta; en un chat nuevo de ChatGPT, Mentor pone tu perfil y la respuesta llega en tres puntos. Una memoria por cliente, y en el chat de uno no entra nada de otro. La revisión semanal junta lo repetido y retira lo viejo si le dices que ya no vale. Y tu perfil es un archivo de texto, en tu carpeta, en tu ordenador.</p>
         </figure>
       </div>
     </section>
@@ -663,6 +670,7 @@
       <a href="mailto:contacto@radamant.es">Contacto</a>
     </nav>
     <p>Mentor es un producto de Radamant. Los pedidos los gestiona Paddle.com, el vendedor registrado.</p>
+    <p>ChatGPT, Claude, Gemini, Grok y DeepSeek son marcas de sus dueños. Mentor no está afiliado a ninguno.</p>
   </div>
 </footer>
   <script>
@@ -737,8 +745,9 @@
       poner("año");
     })();
 
-    // El vídeo de la portada: se para fuera de la vista, tiene su pausa, y
-    // si el sistema pide menos movimiento, se queda quieto en su imagen.
+    // El vídeo de la portada: se para fuera de la vista, tiene su pausa y su
+    // sonido, que empieza apagado, y si el sistema pide menos movimiento, se
+    // queda quieto en su imagen.
     (function () {
       var video = document.getElementById("video-portada");
       var boton = document.getElementById("video-pausa");
@@ -768,6 +777,20 @@
           if (vistos[0].isIntersecting) video.play().catch(function () {});
           else video.pause();
         }).observe(video);
+      }
+      var sonido = document.getElementById("video-sonido");
+      if (sonido) {
+        var altavoz = sonido.querySelectorAll("path")[1];
+        var pintarSonido = function () {
+          sonido.setAttribute("aria-pressed", video.muted ? "false" : "true");
+          altavoz.setAttribute("d", video.muted ? "M8.2 4.2l2.6 3.6M10.8 4.2L8.2 7.8" : "M8 4.3a2.4 2.4 0 0 1 0 3.4M9.6 2.9a4.4 4.4 0 0 1 0 6.2");
+        };
+        sonido.addEventListener("click", function () {
+          video.muted = !video.muted;
+          pintarSonido();
+        });
+        sonido.hidden = false;
+        pintarSonido();
       }
       boton.hidden = false;
       pintar();
