@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El formato de la carpeta y de los objetos cifrados · Mentor</title>
+  <meta name="description" content="Cómo es por dentro la memoria de Mentor: los archivos de la carpeta y los objetos cifrados que guarda el almacén, para que cualquiera pueda leerla, escribirla o llevársela con otro programa.">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/fuentes/letras.css">
+  <link rel="stylesheet" href="mentor.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="./"><span class="sello"><img src="marca.svg" alt="" width="21" height="16"></span><span class="nombre">Mentor</span></a>
+      <a class="boton pequeno" href="./">Qué es Mentor</a>
+    </div>
+  </header>
+
+  <main class="documento">
+    <div class="contenedor estrecho">
+      <h1>El formato de la carpeta y de los objetos cifrados</h1>
+      <p class="fecha">Mentor 0.20.0 · 21 de octubre de 2026</p>
+      <p class="entradilla">Tu memoria es tuya también por esto: con lo que hay en esta página, cualquiera puede escribir un programa que la lea, la escriba o la lleve a otro sitio, sin Mentor y sin pedir permiso. La licencia de Mentor lo deja: el formato de la carpeta y el de los objetos cifrados se pueden usar libremente para leer, escribir o trasladar la memoria de cualquier persona.</p>
+      <p>Son dos cosas. <a href="#carpeta">La carpeta</a> es tu memoria en claro, en cada uno de tus dispositivos. <a href="#objetos">Los objetos cifrados</a> son lo que va al almacén cuando sincronizas, y nadie puede leerlos sin tu código.</p>
+
+      <h2 id="carpeta">La carpeta</h2>
+      <p>Una carpeta de archivos markdown, en UTF-8. Si no eliges otra, en <code>Documentos\Mentor</code> en Windows, y en el Mac en <code>Mentor</code>, dentro de tu carpeta de inicio.</p>
+      <div class="tabla">
+        <table>
+          <thead><tr><th>Archivo</th><th></th><th>Para qué</th></tr></thead>
+          <tbody>
+            <tr><td><code>perfil.md</code></td><td>Obligatorio</td><td>Lo que Mentor pone al empezar cada chat: quién eres cuando trabajas. Es lo único que va a los chats sin que lo pidas.</td></tr>
+            <tr><td><code>quien-soy.md</code></td><td>Obligatorio</td><td>Quién eres, lo de dentro. No va al empezar los chats: lo lee la revisión semanal, y lo puede encontrar una búsqueda que pida la IA, que ves en la caja antes de enviarla.</td></tr>
+            <tr><td><code>aprendizajes.md</code></td><td>Obligatorio</td><td>El buzón: lo que la IA aprende de ti entre revisiones. Lo último apuntado va detrás del perfil, salvo que lo quites.</td></tr>
+            <tr><td><code>perfil-&lt;cliente&gt;.md</code></td><td>Opcional</td><td>El perfil de un cliente, que va detrás de <code>perfil.md</code> en los chats que son para él.</td></tr>
+            <tr><td><code>aprendizajes-&lt;cliente&gt;.md</code></td><td>Opcional</td><td>El buzón de un cliente: lo que se apunta en sus chats, que solo va a sus chats.</td></tr>
+            <tr><td><code>bitacora/AAAA-MM.md</code></td><td>Opcional</td><td>Qué pasó cada día, un archivo por mes.</td></tr>
+            <tr><td><code>instrucciones.md</code>, <code>rutinas/</code></td><td>Opcional</td><td>Para una IA que trabaja con la carpeta entera, como Claude Code o Cowork.</td></tr>
+            <tr><td><code>conflictos/</code></td><td>La crea Mentor</td><td>La copia de un archivo que dos dispositivos cambiaron a la vez: no se pierde nada.</td></tr>
+            <tr><td>Cualquier otra cosa</td><td>Libre</td><td>Mentor no la toca. Si es markdown, la puede encontrar una búsqueda.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Dónde va cada archivo</h3>
+      <ul>
+        <li>Mentor busca cada archivo por su nombre. Lo normal es que esté en la raíz de la carpeta.</li>
+        <li>Fuera de la raíz vale si hay uno solo, para que una carpeta que ya existía no tenga que mover nada. Si hay uno en la raíz y otro dentro, manda el de la raíz.</li>
+        <li>Si no hay ninguno en la raíz y hay dos o más dentro, Mentor no sabe cuál es el bueno, y no usa ninguno.</li>
+        <li>Lo que empieza por un punto no cuenta, sea carpeta o archivo, como <code>.obsidian</code> o <code>.git</code>: son ajustes de otros programas, y no se sincronizan.</li>
+        <li>Los nombres van en minúsculas. Los archivos que no son markdown pueden estar, pero Mentor no los lee.</li>
+      </ul>
+
+      <h3>El perfil</h3>
+      <p>Va entero a cada chat nuevo, menos lo que esté entre <code>&lt;!--</code> y <code>--&gt;</code>: los comentarios son para quien lo escribe. Unas 300 palabras, porque va en el primer mensaje de cada chat y lo largo estorba. Nada que identifique a otras personas, porque llega a un proveedor de IA. La plantilla con la que empieza:</p>
+<pre class="bloque"># Perfil
+
+&lt;!--
+Esto es lo que Mentor pone al principio de cada chat nuevo con una IA: quién eres cuando trabajas. Lo verás en la caja de texto antes de enviarlo, y ahí puedes cambiarlo para ese chat.
+--&gt;
+
+## A qué me dedico
+
+## En qué estoy ahora
+
+## Lo que domino y lo que no
+
+## Cómo quiero que me respondas</pre>
+
+      <h3>Los clientes</h3>
+      <p>Un cliente es un archivo <code>perfil-&lt;nombre&gt;.md</code>, y su nombre es el del archivo: <code>perfil-envasadora.md</code> es «envasadora». El nombre va en minúsculas, sin tildes ni espacios, con letras, números y guiones. Lo suyo se suma a lo general: en el chat de un cliente van <code>perfil.md</code>, lo apuntado en <code>aprendizajes.md</code> y, detrás, su perfil y lo apuntado en sus chats, en <code>aprendizajes-&lt;nombre&gt;.md</code>. Ningún chat ve el buzón de otro cliente.</p>
+
+      <h3>El buzón</h3>
+      <p>Cada entrada es una línea de lista, con la fecha en negrita, un punto medio entre espacios y lo aprendido en una frase. Detrás, si la hay, la frase de la persona entre comillas. Lo que es deducción de la IA, y no algo que la persona haya dicho, lleva ⚠️.</p>
+<pre class="bloque">- **2026-10-05** · Los jueves por la tarde no hay hueco para nada que no sea el taller — *"El jueves ni me lo propongas."*
+- **2026-10-06** · ⚠️ Puede valer también para los correos a clientes</pre>
+      <p>Lo demás del archivo es libre: títulos, secciones y notas no cuentan. Las entradas nuevas van al final.</p>
+
+      <h2 id="objetos">Los objetos cifrados</h2>
+      <p>Cuando activas la sincronización en «Tus dispositivos», cada cambio de tu carpeta va al almacén dentro de un sobre cifrado en tu dispositivo. Todo usa algoritmos estándar: HKDF-SHA256 (RFC 5869), AES-256-GCM, gzip y JSON.</p>
+
+      <h3>El código de tu memoria</h3>
+      <p>Un secreto al azar de 128 bits, que nace al instalar la app. Se guarda en el Administrador de credenciales de Windows o en el Llavero del Mac, como <code>Mentor/boveda</code>, y en ningún archivo. Quien tiene el código tiene la memoria.</p>
+      <p>Se enseña como 12 palabras, con las listas de BIP39, en castellano: los 128 bits y 4 de comprobación, que son los primeros del SHA-256 del código, en 12 grupos de 11 bits. De BIP39 solo se usa esa forma de escribirlo, no su frase de paso ni su semilla. Al leerlas valen en castellano o en inglés, con o sin tildes, y bastan las cuatro primeras letras de cada una.</p>
+      <p>El QR de «Tus dispositivos», para el teléfono, lleva el código en base32, sin relleno, y la dirección del almacén si no es el de Radamant:</p>
+<pre class="bloque">mentor://boveda?c=&lt;el código en base32&gt;&amp;a=&lt;la dirección del almacén&gt;</pre>
+
+      <h3>Lo que sale del código</h3>
+      <p>Con HKDF-SHA256, el código como secreto, sin sal, y un nombre distinto para cada cosa. De las dos primeras no se puede volver al código ni llegar a la llave.</p>
+      <div class="tabla">
+        <table>
+          <thead><tr><th>Qué</th><th><code>info</code></th><th>Largo</th><th>Cómo se escribe</th></tr></thead>
+          <tbody>
+            <tr><td>El identificador de la bóveda</td><td><code>mentor/boveda</code></td><td>10 bytes</td><td>base32 en minúsculas, sin relleno: 16 letras y números</td></tr>
+            <tr><td>La credencial del almacén</td><td><code>mentor/credencial</code></td><td>32 bytes</td><td>hexadecimal, 64 caracteres</td></tr>
+            <tr><td>La llave</td><td><code>mentor/llave</code></td><td>32 bytes</td><td>no sale nunca de tus dispositivos</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>El sobre de cada objeto</h3>
+<pre class="bloque">"MNT1"                 4 bytes: la marca y la versión del formato
+sal                    16 bytes al azar
+cifrado y etiqueta     AES-256-GCM, con la etiqueta de 16 bytes al final</pre>
+      <ul>
+        <li><strong>La llave del objeto</strong> es HKDF-SHA256 con la llave de la bóveda como secreto, la sal del sobre como sal y <code>mentor/objeto</code> como <code>info</code>: 32 bytes. Cada objeto tiene la suya, así que el nonce de GCM es siempre de doce bytes a cero.</li>
+        <li><strong>Los datos asociados</strong> atan el sobre a su sitio: <code>mentor/1</code>, un salto de línea, el identificador de la bóveda, un salto de línea y el nombre del objeto dentro de la bóveda, como <code>cambios/&lt;dispositivo&gt;/&lt;número&gt;</code>. Un sobre cambiado de sitio, de otra bóveda o tocado no se abre.</li>
+        <li><strong>Lo de dentro</strong> es JSON, comprimido con gzip.</li>
+      </ul>
+
+      <h3>Los objetos</h3>
+      <p>Sus nombres no dicen nada de tu memoria: solo qué dispositivo los escribió, que es un número al azar de 8 bytes en base32 en minúsculas, y en qué orden.</p>
+      <div class="tabla">
+        <table>
+          <thead><tr><th>Nombre</th><th>Qué lleva</th></tr></thead>
+          <tbody>
+            <tr><td><code>dispositivos/&lt;dispositivo&gt;</code></td><td><code>{"nombre", "desde"}</code>: cómo se llama el dispositivo y desde cuándo está.</td></tr>
+            <tr><td><code>cambios/&lt;dispositivo&gt;/&lt;número&gt;</code></td><td>Un archivo que ha cambiado: <code>{"ruta", "bases", "hora", "dispositivo", "nombre", "borrado", "datos"}</code>. <code>ruta</code>, relativa a la carpeta, con «/»; <code>datos</code>, el archivo entero, en base64; <code>bases</code>, los nombres de los cambios de los que sale; <code>hora</code>, cuándo se escribió el archivo.</td></tr>
+            <tr><td><code>fotos/&lt;dispositivo&gt;/&lt;número&gt;_&lt;cubre&gt;</code></td><td>La carpeta entera: <code>{"hora", "dispositivo", "nombre", "cubre", "archivos": [{"ruta", "version", "hora", "datos"}]}</code>. <code>version</code> es el nombre del cambio del que sale cada archivo.</td></tr>
+            <tr><td><code>mudanza</code></td><td>Solo en la bóveda de un código cambiado: <code>{"de", "hora", "dispositivo", "nombre"}</code>, con las bóvedas de antes, la más reciente primero.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul>
+        <li>Los números van con doce cifras, para que el orden de los nombres sea el de los números. Los cambios de cada dispositivo van seguidos.</li>
+        <li><code>cubre</code> dice hasta qué cambio de cada dispositivo lleva la foto, como <code>d1-12.d2-3</code>. Va sin cifrar para que el almacén pueda quitar cambios viejos sin leer nada.</li>
+        <li>Las horas van como en JSON de siempre, en RFC 3339.</li>
+        <li>No se sincroniza lo que empieza por un punto ni un archivo de más de 32 MB.</li>
+      </ul>
+
+      <h3>Cómo se juntan los cambios</h3>
+      <ul>
+        <li>Los archivos que crecen, <code>aprendizajes.md</code>, los buzones de cada cliente y lo de <code>bitacora/</code>, se funden sumando líneas: lo que añade cada dispositivo se queda, y lo que uno borró de la versión de la que salen los dos se queda borrado.</li>
+        <li>En los demás, si dos dispositivos cambian el mismo archivo a la vez, se queda el más reciente, y el otro se guarda en <code>conflictos/</code>, con la fecha, el dispositivo y el nombre.</li>
+        <li>Si un archivo se borra en un dispositivo y cambia en otro, se queda el cambiado.</li>
+      </ul>
+
+      <h3>El almacén</h3>
+      <p>A un almacén Mentor le pide tres cosas: poner un objeto nuevo, traerlo y listar por prefijo desde un nombre. En el día a día, los dispositivos no cambian ni borran nunca un objeto que ya está; solo al cambiar el código, abajo. Hay dos formas, con los mismos objetos:</p>
+      <ul>
+        <li><strong>Un almacén de bóvedas</strong>, como el de Radamant, <code>https://almacen.radamant.eu</code>, que es el de serie. Habla S3: <code>PUT</code>, <code>GET</code> y <code>ListObjectsV2</code>, con las direcciones en la ruta y la firma de AWS versión 4, en la región <code>us-east-1</code>. El cubo es <code>mentor</code>; cada bóveda firma con su identificador como clave de acceso y su credencial como secreto, y sus objetos van debajo de <code>&lt;identificador&gt;/</code>. Una bóveda nueva se da de alta con <code>POST /_bovedas</code> y <code>{"id", "credencial"}</code>. Vale otro servidor que hable igual, en su dirección.</li>
+        <li><strong>Una carpeta</strong>, como la que sincroniza el programa de tu cloud: cada objeto es un archivo con su nombre, debajo de una carpeta con el identificador de la bóveda. En la app, con «Usar otro almacén», la dirección es <code>carpeta:</code> seguido de la ruta.</li>
+      </ul>
+      <p>Lo que ve el almacén: cuánto ocupa cada objeto, cuándo llega, tu dirección IP, cuántos dispositivos tienes y cuántos cambios hace cada uno. No ve el nombre de tus archivos, ni lo que dicen, ni cuántos hay.</p>
+
+      <h3>Cambiar el código</h3>
+      <p>Con «Cambiar el código», en «Tus dispositivos», la memoria pasa a una bóveda nueva, porque el identificador, la credencial y la llave salen los tres del código. Cada objeto se abre con la llave de antes y se cierra con la nueva, con el mismo nombre, y al final se escribe el objeto <code>mudanza</code>. La bóveda de antes se borra.</p>
+
+      <p class="nota">¿Falta algo para escribir tu propio programa? Escríbenos a <a href="mailto:contacto@radamant.es">contacto@radamant.es</a>.</p>
+    </div>
+  </main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <nav aria-label="Lo legal y lo demás">
+      <a href="condiciones.html">Condiciones</a>
+      <a href="reembolsos.html">Reembolsos y desistimiento</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="formato.html">El formato de la carpeta y de los objetos cifrados</a>
+      <a href="descargar.html">Descargas</a>
+      <a href="mailto:contacto@radamant.es">Contacto</a>
+    </nav>
+    <p>Mentor es un producto de Radamant. Los pedidos los gestiona Paddle.com, el vendedor registrado.</p>
+  </div>
+</footer>
+</body>
+</html>
