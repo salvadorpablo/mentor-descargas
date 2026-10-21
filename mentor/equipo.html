@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mentor · Una invitación a un equipo</title>
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/fuentes/letras.css">
+  <link rel="stylesheet" href="mentor.css">
   <style>
-    :root { --paper: #F1F3F5; --card: #FFFFFF; --ink: #131A24; --ink-soft: #43505F; --rule: #D3DAE1; --accent: #8C6520; color-scheme: light dark; }
-    @media (prefers-color-scheme: dark) { :root { --paper: #0F141A; --card: #161D25; --ink: #E7EBEF; --ink-soft: #A9B4C0; --rule: #2B343E; --accent: #D8AF61; } }
+    /* Los colores, los de Mentor (mentor.css, de marca/aspecto.json), con los nombres de esta página. */
+    :root { --paper: var(--papel); --card: var(--superficie); --ink: var(--tinta); --ink-soft: var(--tinta-suave); --rule: var(--linea); --accent: var(--acento); }
     body { margin: 0; background: var(--paper); color: var(--ink); font: 1.0625rem/1.6 "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; }
     main { max-width: 44rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
     h1 { font: 400 2.3rem/1.15 "Marcellus", Optima, Candara, Georgia, serif; margin: 0 0 .75rem; }
