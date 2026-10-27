@@ -124,6 +124,15 @@
     .comparacion td:nth-child(2)::before { content: "· "; }
     .comparacion td:nth-child(3)::before { content: "✓ "; color: var(--maquina); }
     .comparacion th:nth-child(3) { color: var(--maquina); }
+    /* En el móvil, la etiqueta en su línea y las dos respuestas debajo, a medias: si no, la etiqueta, que no se parte, deja dos columnas de una palabra. */
+    @media (max-width: 40rem) {
+      .comparacion, .comparacion thead, .comparacion tbody { display: block; }
+      .comparacion tr { display: grid; grid-template-columns: 1fr 1fr; column-gap: 1rem; border-bottom: 1px solid var(--linea); }
+      .comparacion th, .comparacion td { border-bottom: 0; padding: .35rem 0; }
+      .comparacion th:first-child { display: none; }
+      .comparacion td:first-child { grid-column: 1 / -1; white-space: normal; padding: .9rem 0 .1rem; }
+      .comparacion tbody tr { padding-bottom: .6rem; }
+    }
 
     /* Todo lo que hace. */
     .inventario { display: grid; gap: 1rem; margin-top: 2rem; }
