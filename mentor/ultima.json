@@ -1,13 +1,13 @@
 {
-  "version": "0.23.10",
+  "version": "0.23.11",
   "windows-amd64": {
-    "archivo": "mentor-0.23.10-windows-amd64.exe",
-    "sha256": "0c7365b7e7f113ff499ca3f09b3023316e39c3dcad9831be992820530f8c5bd2",
+    "archivo": "mentor-0.23.11-windows-amd64.exe",
+    "sha256": "e66f04116f79b3737050173413d7d1a10256b94049bcc0ff936b78b46bbd7375",
     "tamano": 10718720
   },
   "darwin-universal": {
-    "archivo": "mentor-0.23.10-darwin-universal",
-    "sha256": "dccc40e92c3c1094ea8614f963cb9a37eedc08f984ffcd4934209ff0ffd9bef3",
+    "archivo": "mentor-0.23.11-darwin-universal",
+    "sha256": "4ef0f085e6e356153cb04fa1eb65a7a93af7480d8cb89c9a612a40a67bfa8ac9",
     "tamano": 20321090
   }
 }
