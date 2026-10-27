@@ -115,13 +115,14 @@
           <li><a href="#buscar"><span class="numero">06</span>Buscar sin índice</a></li>
           <li><a href="#revision"><span class="numero">07</span>La revisión semanal</a></li>
           <li><a href="#contradice"><span class="numero">08</span>Lo que se contradice</a></li>
-          <li><a href="#clientes"><span class="numero">09</span>Una memoria por cliente</a></li>
-          <li><a href="#webs"><span class="numero">10</span>Cuando una web cambia</a></li>
-          <li><a href="#sincronizar"><span class="numero">11</span>Sincronizar sin que nadie lea</a></li>
-          <li><a href="#programas"><span class="numero">12</span>Los programas de IA</a></li>
-          <li><a href="#encaja"><span class="numero">13</span>Dónde encaja y dónde no</a></li>
-          <li><a href="#comprobar"><span class="numero">14</span>Lo que puedes comprobar</a></li>
-          <li><a href="#referencias"><span class="numero">15</span>Referencias</a></li>
+          <li><a href="#clientes"><span class="numero">09</span>Una memoria por contexto</a></li>
+          <li><a href="#hilos"><span class="numero">10</span>Los hilos</a></li>
+          <li><a href="#webs"><span class="numero">11</span>Cuando una web cambia</a></li>
+          <li><a href="#sincronizar"><span class="numero">12</span>Sincronizar sin que nadie lea</a></li>
+          <li><a href="#programas"><span class="numero">13</span>Los programas de IA</a></li>
+          <li><a href="#encaja"><span class="numero">14</span>Dónde encaja y dónde no</a></li>
+          <li><a href="#comprobar"><span class="numero">15</span>Lo que puedes comprobar</a></li>
+          <li><a href="#referencias"><span class="numero">16</span>Referencias</a></li>
         </ol>
         </details>
       </nav>
@@ -165,7 +166,7 @@
             <li><span class="mono">perfil.md</span><span>Lo que va a cada chat nuevo: quién eres cuando trabajas, en unas 300 palabras</span></li>
             <li><span class="mono">quien-soy.md</span><span>Quién eres, lo de dentro. No sale de la carpeta salvo que lo elijas tú</span></li>
             <li><span class="mono">aprendizajes.md</span><span>El buzón: lo que la IA aprende de ti entre revisión y revisión</span></li>
-            <li><span class="mono">perfil-envasadora.md</span><span>Un cliente: lo de tu trabajo para él, solo en sus chats</span></li>
+            <li><span class="mono">perfil-envasadora.md</span><span>Un contexto, aquí un cliente: lo de tu trabajo para él, solo en sus chats</span></li>
             <li><span class="mono">aprendizajes-envasadora.md</span><span>Su buzón, que no se mezcla con el general</span></li>
           </ul>
         </div>
@@ -199,19 +200,22 @@
         </div>
 
         <h2 id="marcas"><span class="n">05</span>Las marcas: la IA toma la nota, tú la ves</h2>
-        <p>Mentor no entiende la conversación ni intenta adivinar qué merece guardarse. Eso lo decide la IA, que es la que la ha leído, y lo dice con una línea al final de su respuesta, con una forma fija. Mentor solo lee esas líneas. Son cuatro:</p>
+        <p>Mentor no entiende la conversación ni intenta adivinar qué merece guardarse. Eso lo decide la IA, que es la que la ha leído, y lo dice con una línea al final de su respuesta, con una forma fija. Mentor solo lee esas líneas. Son seis:</p>
         <div class="tabla">
           <table>
             <thead><tr><th>La marca</th><th>Qué hace Mentor</th><th>Lo que ves</th></tr></thead>
             <tbody>
               <tr><td><code>mentor: recordar | lo aprendido | "tu frase"</code></td><td>Añade una línea al final del buzón, con la fecha de tu ordenador</td><td>«Mentor ha apuntado», con «Deshacer»</td></tr>
               <tr><td><code>mentor: buscar | dos o tres palabras</code></td><td>Busca en tu carpeta y pone lo que encuentra en la caja</td><td>Las líneas encontradas, para quitar las que no quieras enviar</td></tr>
+              <tr><td><code>mentor: avisar | cuándo | lo que tienes que hacer | "tu frase"</code></td><td>Añade un aviso a <code>avisos.md</code>, para el día que toca</td><td>«Mentor te lo recordará», con «Deshacer»</td></tr>
+              <tr><td><code>mentor: hilo | el tema | lo que habéis sacado | "tu frase"</code></td><td>Lo añade a la nota de ese tema, en la entrada de esta conversación</td><td>«Mentor ha apuntado en el hilo», con «Ver» y «Deshacer»</td></tr>
               <tr><td><code>mentor: nada</code></td><td>Nada</td><td>Nada</td></tr>
               <tr><td><code>mentor: archivo | nombre.md</code></td><td>Guarda un archivo entero. Solo en la entrevista y en la revisión semanal</td><td>«Mentor ha guardado», con «Deshacer»</td></tr>
             </tbody>
           </table>
         </div>
         <p>Las instrucciones dicen cuándo apuntar: si le corriges algo, si descartas una opción, si dices cómo prefieres las cosas, si fijas una regla tuya, si cuentas algo que te interesa, o si algo de tu trabajo ha cambiado. En todo lo demás, <code>mentor: nada</code>. La marca de nada existe porque sin ella la IA se olvidaba de la de recordar: terminar siempre con una línea es más fácil de cumplir que terminar a veces.</p>
+        <p>Cuando le pides que te recuerde algo, la IA escribe <code>mentor: avisar</code>, y el aviso queda en <code>avisos.md</code>, donde también los añades tú desde la ventana de Mentor. El día que toca sale en el primer chat de ese día, en una tarjeta «Hoy toca» con «Hecho» y «Mañana»; en «Inicio», en la ventana; al empezar en tus programas de IA; y en Windows, también como una notificación a su hora. Sin servidor: lo mira tu ordenador.</p>
         <p>El lector de marcas es tolerante con la forma, porque cada IA escribe a su manera: la lee en negrita, en cursiva, entre comillas invertidas, dentro de una viñeta o de un bloque de código, en castellano o en inglés. Pero una marca mal formada no se guarda: se deja a la vista con un aviso que dice qué le pasa. Una misma marca dos veces se guarda una, y una entrada que ya está en el buzón, aunque sea de otro día, no se repite.</p>
         <div class="tarjeta maquina"><span class="texto"><span class="que">Mentor ha apuntado:</span>Los glosarios, en una tabla de dos columnas, término y fuente, sin definiciones.<span class="firma">aprendizajes.md</span></span><span class="acciones"><span class="b">Deshacer</span><span class="b cerrar" aria-hidden="true">✕</span></span></div>
         <p>Las líneas de las marcas no se ven en la página: Mentor las oculta, sin tocar la web. Con dos excepciones para que nunca desaparezca lo que no debe: si la marca va en el mismo párrafo que la respuesta, no se oculta nada; y si la respuesta no es más que una marca, en su lugar se ve una nota de Mentor en gris, para que no te quedes mirando una respuesta vacía.</p>
@@ -242,6 +246,7 @@
           <li><strong>Señala lo caducado.</strong> Una fecha que pasó, un proyecto que otra entrada da por terminado, algo que otra contradice. No lo borra ni lo cambia: te lo pregunta.</li>
         </ol>
         <p>La respuesta devuelve los archivos enteros, y Mentor los guarda, con una copia de cómo estaban y con «Deshacer». La regla para la IA es copiar letra por letra todo lo que no cambia y no añadir nada que no esté en los tres archivos: es una editora, no una autora. Las preguntas quedan al final, para contestar con un sí o un no, o no contestar: mientras tanto, nada se toca. Eso es un envío a la semana, y es el único trabajo que Mentor te pide.</p>
+        <p>Ordenar no es borrar. Lo que deja de ir a los chats baja de nivel, a <code>retirado.md</code>: lo más viejo de quién eres cuando pasa de 150 líneas, las deducciones que llevan cuatro semanas sin que las contestes y lo que dices en la revisión que ya no vale. Ahí no estorba, porque no va a ningún chat ni a la revisión, y no se pierde, porque la búsqueda lo encuentra si la IA da con sus palabras. Olvidar es dejar de tener algo a mano, no perderlo.</p>
         <div class="tarjeta"><span class="texto">Toca tu revisión semanal.<span class="firma">Mentor repasa contigo lo apuntado: junta lo repetido, sube lo que ha aguantado a quién eres y te pregunta lo que parezca viejo. Va en este chat, en lugar del perfil.</span></span><span class="acciones"><span class="b principal">Hacerla ahora</span><span class="b">Otro día</span></span></div>
         <div class="recuadro taller">
           <p class="rotulo">Desde el taller</p>
@@ -253,12 +258,19 @@
         <p>Cada línea del buzón lleva su fecha, y lo que entra en el chat las lleva de la más antigua a la más reciente, con una frase delante que dice que si algo se contradice, vale lo último. La IA, que sabe leer una fecha, decide. Y en la revisión semanal la contradicción es una de las cosas que el guion le pide señalar, y que se te pregunta: tú dices cuál se queda. No hay un grafo que sepa desde cuándo es verdad cada cosa; hay una fecha por línea y una pregunta a la semana.</p>
         <p class="regla">Mentor no elige entre dos verdades. Te las enseña con su fecha, y te pregunta.</p>
 
-        <h2 id="clientes"><span class="n">09</span>Una memoria por cliente</h2>
-        <p>Si trabajas para varios clientes, lo que aprendes con uno no debería entrar en los chats de otro. En Mentor un cliente es un archivo más, <code>perfil-envasadora.md</code>, con lo de tu trabajo para él: quién es, qué haces para él y cómo lo quiere. Con el botón «M» junto a la caja eliges para quién es el chat, y cada pestaña recuerda el suyo.</p>
-        <p>En el chat de un cliente entra lo general y, detrás, lo suyo. Lo que la IA apunte ahí va a su buzón, <code>aprendizajes-envasadora.md</code>, y solo vuelve a sus chats. La búsqueda mira lo general y lo de ese cliente, nunca lo de otro; en un chat general, nada de ningún cliente. La revisión semanal de un cliente es la suya. Y la web no ve los nombres de tus clientes: a la IA solo le llega el del chat.</p>
+        <h2 id="clientes"><span class="n">09</span>Una memoria por contexto</h2>
+        <p>Un contexto es aquello para lo que abres chats aparte: un cliente, una asignatura, una consulta, un proyecto. Si trabajas para varios clientes, o estudias dos asignaturas, lo que aprendes en uno no debería entrar en los chats de otro. En Mentor un contexto es un archivo más, <code>perfil-envasadora.md</code>, con lo suyo: qué es, qué haces en él y cómo lo quieres. Con el botón «M» junto a la caja eliges para qué es el chat, y cada pestaña recuerda el suyo. Personal lleva hasta cinco; Profesional y Equipos, sin límite.</p>
+        <p>En el chat de un contexto entra lo general y, detrás, lo suyo. Lo que la IA apunte ahí va a su buzón, <code>aprendizajes-envasadora.md</code>, y solo vuelve a sus chats. La búsqueda mira lo general y lo de ese contexto, nunca lo de otro; en un chat general, nada de ningún contexto. La revisión semanal de un contexto es la suya. Y la web no ve los nombres de tus contextos: a la IA solo le llega el del chat.</p>
         <p>Lo que Mentor no cambia: lo que le cuentes a la IA de tu cliente se lo cuentas a la IA, como sin Mentor. Si puedes o no depende de lo que hayas pactado con él y de la IA que uses. Para los datos de tus clientes que Radamant guarda cifrados, está el contrato de encargo del tratamiento.</p>
 
-        <h2 id="webs"><span class="n">10</span>Cuando una web cambia</h2>
+        <h2 id="hilos"><span class="n">10</span>Los hilos: lo que has pensado, por tema</h2>
+        <p>Lo de arriba recuerda quién eres. Los hilos recuerdan qué has pensado: una conversación sobre Mary Shelley deja, sin ellos, como mucho una línea que dice que te gusta Mary Shelley. Con ellos, cada tema del que sacas algo tiene su nota, <code>temas/mary-shelley.md</code>, con una entrada por cada conversación que lo tocó: el día, la IA y el enlace al chat; por qué salió el tema, con tu primera frase; lo que dijo la IA; tus otras frases; y de qué tema venía o a cuál siguió. No es la transcripción: es lo que sacasteis.</p>
+        <p>Se escribe de dos formas. Por el camino, la IA termina la respuesta con <code>mentor: hilo | Mary Shelley | lo que hemos sacado | "tu frase"</code>, y Mentor lo junta en la entrada de esa conversación, sin que hagas nada; la deriva de un tema a otro la ponen las notas, enlazadas entre sí. Y con un botón, «Resumir y guardar esta conversación», que pide a la misma IA la entrada de cada tema, con la conversación adjunta, leída de la página, donde tu perfil va como archivo; ves las entradas antes de guardarlas y las cambias si quieres. Nunca con un modelo de Radamant: resume la IA de la conversación.</p>
+        <div class="tarjeta maquina"><span class="texto"><span class="que">Mentor ha apuntado en el hilo «Mary Shelley»:</span>Su madre fue Mary Wollstonecraft.<span class="firma">temas/mary-shelley.md</span></span><span class="acciones"><span class="b">Ver</span><span class="b">Deshacer</span></span></div>
+        <p>Vuelve de tres formas. Detrás del perfil, en cada chat nuevo, van los nombres de los temas de los que has hablado el último mes, quince como mucho, para que la IA sepa que existen y apunte con el mismo nombre; el resto no viaja. Si nombras uno, la IA pide su hilo con la búsqueda, que devuelve sus entradas enteras con su fecha, y te puede decir cuándo y por qué se habló de eso; si no lo pide, en las webs Mentor te lo ofrece en una tarjeta, «Tienes un hilo de «Mary Shelley»», con «Traerlo». Y «Continuar un hilo», en el botón «M» o en la ventana de Mentor, pone la nota en el chat, también en otra IA. Lo de la nota llega como lo que es: lo que se dijo entonces, no algo comprobado.</p>
+        <p>Las notas son markdown, como todo lo demás: Obsidian las abre con sus propiedades, y <code>[[Mary Shelley]]</code>, escrito en cualquier nota, lleva a la suya. Si ya tienes una bóveda de Obsidian, «Dejarlo todo listo» te ofrece usarla en su sitio como tu carpeta de Mentor, sin copiar nada, y entonces la búsqueda de tus IAs llega a todas tus notas. Lo que no hace todavía: encontrar «aquella autora del monstruo» sin el nombre. Eso es buscar por significado, y va aparte, con un modelo en tu ordenador.</p>
+
+        <h2 id="webs"><span class="n">11</span>Cuando una web cambia</h2>
         <p>Una extensión que escribe en la caja de ChatGPT tiene que saber dónde está la caja, y las cinco webs cambian su página cada pocas semanas. Es la factura permanente de este diseño, y no se puede evitar; lo que se puede es pagarla sin que la pagues tú.</p>
         <p>Lo que cada web tiene de particular no va dentro de la extensión: va en una configuración firmada por Radamant que la app baja y le da a la extensión. Cada noche, una rutina abre las cinco webs y comprueba que todo sigue en su sitio. Cuando una web cambia, el arreglo se publica firmado, tu app lo baja y Mentor vuelve a funcionar sin actualizar la extensión y sin que toques nada. Mientras tanto, Mentor lo dice en la página, «memoria apagada», y no hace nada a ciegas: no escribe en una caja que no reconoce.</p>
         <div class="recuadro taller">
@@ -266,7 +278,7 @@
           <p>La prueba de este mecanismo fue romper ChatGPT a propósito: una configuración con la caja mal señalada, publicada de verdad. La extensión lo dijo en la página, y con el arreglo publicado, Chrome y Edge se curaron solos, sin tocar la extensión. Es lo mismo que pasa cuando la rompe ChatGPT.</p>
         </div>
 
-        <h2 id="sincronizar"><span class="n">11</span>Sincronizar sin que nadie lea</h2>
+        <h2 id="sincronizar"><span class="n">12</span>Sincronizar sin que nadie lea</h2>
         <p>Tener la memoria en un solo ordenador es tenerla a medias. Llevarla a otro, y al teléfono, pide un sitio en medio, y un sitio en medio que pueda leerla es la razón por la que casi ninguna memoria para la IA está cifrada de extremo a extremo: para buscar, resumir y limpiar en el servidor hace falta leer. Como Mentor no hace nada de eso en el servidor, puede hacer lo contrario.</p>
         <p><strong>El código.</strong> Al instalar la app nace un secreto al azar de 128 bits, que se te enseña como 12 palabras en castellano. Quien tiene las palabras tiene la memoria; Radamant no las tiene. De ese código salen, por caminos de un solo sentido, tres cosas: el identificador de tu bóveda, una credencial para escribir en ella, y la llave. Las dos primeras las conoce el almacén; con ellas no se llega ni al código ni a la llave. La llave no sale nunca del dispositivo.</p>
         <p><strong>El sobre.</strong> Cada vez que cambia un archivo, la app mete la versión nueva en un sobre cerrado con la llave y lo deja en el almacén con un número. Tus otros dispositivos preguntan qué sobres hay nuevos, los abren con su copia de la llave y ponen el archivo en su carpeta.</p>
@@ -279,7 +291,7 @@
           <figcaption>Figura 2. Lo que viaja y lo que se ve. El almacén guarda sobres con un número; lo único legible desde fuera es cuántos hay y cuánto pesan.</figcaption>
         </figure>
         <p><strong>El almacén.</strong> Como solo guarda sobres, vale cualquiera: el de Radamant, en la Unión Europea, que es el de serie; una carpeta de un cloud que ya uses; o un servidor que hable como el de Radamant. Cambiar de uno a otro no toca tu memoria. Y como cada dispositivo tiene la carpeta entera, si el almacén desapareciera no se pierde nada que ya esté en alguno.</p>
-        <p><strong>Cuando dos dispositivos cambian lo mismo.</strong> Los archivos que crecen, el buzón y los de cada cliente, se funden sumando líneas: lo que añade cada lado se queda, y los dos dispositivos llegan al mismo texto. En los demás se queda el más reciente, y el otro va a una carpeta <code>conflictos/</code> de tu carpeta, con su fecha y el nombre del dispositivo: se mira y se borra a mano. Nada se pierde, y todas las versiones siguen en el almacén el tiempo que diga tu plan.</p>
+        <p><strong>Cuando dos dispositivos cambian lo mismo.</strong> Los archivos que crecen, el buzón y los de cada contexto, lo retirado, los avisos y las notas de los temas, se funden sumando líneas: lo que añade cada lado se queda, y los dos dispositivos llegan al mismo texto. En los demás se queda el más reciente, y el otro va a una carpeta <code>conflictos/</code> de tu carpeta, con su fecha y el nombre del dispositivo: se mira y se borra a mano. Nada se pierde, y todas las versiones siguen en el almacén el tiempo que diga tu plan.</p>
         <p><strong>Si pierdes un dispositivo.</strong> Desde otro, el móvil también, cambias el código en «Tus dispositivos»: tu memoria pasa a una bóveda nueva con 12 palabras nuevas, la de antes se borra del almacén, y el dispositivo perdido deja de recibir nada. Lo que ya tenía lo sigue teniendo, como el resto de sus documentos: eso lo protege la contraseña del sistema y el cifrado del disco, no Mentor.</p>
         <div class="recuadro ojo">
           <p class="rotulo">Ojo</p>
@@ -291,11 +303,11 @@
           <p>Y si movías la carpeta de sitio, el primer cambio que llegaba de otro dispositivo la volvía a crear vacía donde estaba, y la pasada siguiente subía todo lo demás como borrado. Ahora, sin su carpeta, la sincronización se para y lo dice.</p>
         </div>
 
-        <h2 id="programas"><span class="n">12</span>Los programas de IA y el modelo local</h2>
-        <p>Las webs son la mitad. La otra son los programas de IA del ordenador: Claude Code, Codex, Cursor, Claude Desktop y Cowork. Con ellos no hace falta extensión: la app conecta cada uno con un botón, y les da un servidor local de Mentor, por el protocolo MCP, con cuatro herramientas que son las mismas marcas con otro nombre: perfil, recordar, buscar y deshacer. El servidor no sale del ordenador. Lo que apunta Claude Code lo lee ChatGPT a la mañana siguiente, y al revés.</p>
+        <h2 id="programas"><span class="n">13</span>Los programas de IA y el modelo local</h2>
+        <p>Las webs son la mitad. La otra son los programas de IA del ordenador: Claude Code, Codex, Cursor, Claude Desktop y Cowork. Con ellos no hace falta extensión: la app conecta cada uno con un botón, y les da un servidor local de Mentor, por el protocolo MCP, con siete herramientas que son las mismas marcas con otro nombre: perfil, recordar, avisar, hilo, buscar, rellenar y deshacer. El servidor no sale del ordenador. Lo que apunta Claude Code lo lee ChatGPT a la mañana siguiente, y al revés.</p>
         <p>Y con un modelo que corre en tu ordenador, a través de Claude Code, la misma memoria funciona sin red: nada sale. Con sus límites, que están medidos: de uno a dos minutos por respuesta en una tarjeta gráfica normal, y hay que pedirle que apunte, porque los modelos pequeños no siguen el protocolo solos. No se vende como rasgo principal; se dice como posibilidad.</p>
 
-        <h2 id="encaja"><span class="n">13</span>Dónde encaja y dónde no</h2>
+        <h2 id="encaja"><span class="n">14</span>Dónde encaja y dónde no</h2>
         <p>Mentor encaja si usas más de una IA para trabajar y estás harto de explicarte en cada una; si prefieres ver y corregir lo que se guarda a confiar en una memoria que no puedes abrir; si trabajas con clientes y necesitas que no se mezclen; y si la pregunta «¿quién puede leer esto?» te importa lo bastante como para renunciar a cosas por ella.</p>
         <p>Encaja mal en cuatro casos, y conviene saberlos antes de pagar:</p>
         <ul>
@@ -306,10 +318,10 @@
         </ul>
         <p>Y una cosa que no es un caso sino un límite: Mentor depende de que la IA siga el protocolo. Casi siempre lo hace; a veces apunta de más, sobre todo los modelos más pequeños. Para eso están «Deshacer» y la revisión.</p>
 
-        <h2 id="comprobar"><span class="n">14</span>Lo que puedes comprobar sin fiarte de nosotros</h2>
+        <h2 id="comprobar"><span class="n">15</span>Lo que puedes comprobar sin fiarte de nosotros</h2>
         <p>El código de Mentor es cerrado, y es verdad que eso pide confianza. Lo que puedes mirar por tu cuenta: el manifiesto de la extensión, que solo le deja hablar con la app de tu ordenador y entrar en cinco sitios; las dos únicas direcciones a las que se conecta la app, que se ven con cualquier programa que enseñe las conexiones; lo que hay en el almacén, que puedes abrir si eliges una carpeta como almacén; y el formato de la carpeta y de los sobres, que está publicado y con el que cualquiera puede escribir un programa que abra tu memoria sin Mentor. <a href="comprobar.html">Cómo se comprueba cada cosa</a>.</p>
 
-        <h2 id="referencias"><span class="n">15</span>Referencias</h2>
+        <h2 id="referencias"><span class="n">16</span>Referencias</h2>
         <ul class="referencias">
           <li><a href="formato.html">El formato de la carpeta y de los objetos cifrados</a>, publicado por Radamant. Es lo que hace que el almacén sea intercambiable y que puedas abrir tu memoria sin Mentor.</li>
           <li><a href="comprobar.html">Lo que puedes comprobar sin fiarte de nosotros</a>: el manifiesto, las conexiones de la app y el almacén.</li>
