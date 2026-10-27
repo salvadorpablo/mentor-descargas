@@ -20,7 +20,7 @@
   <main class="documento">
     <div class="contenedor estrecho">
       <h1>El formato de la carpeta y de los objetos cifrados</h1>
-      <p class="fecha">Mentor 0.21.1 · 21 de octubre de 2026</p>
+      <p class="fecha">Mentor 0.23.7 · 27 de octubre de 2026</p>
       <p class="entradilla">Tu memoria es tuya también por esto: con lo que hay en esta página, cualquiera puede escribir un programa que la lea, la escriba o la lleve a otro sitio, sin Mentor y sin pedir permiso. La licencia de Mentor lo deja: el formato de la carpeta y el de los objetos cifrados se pueden usar libremente para leer, escribir o trasladar la memoria de cualquier persona.</p>
       <p>Son dos cosas. <a href="#carpeta">La carpeta</a> es tu memoria en claro, en cada uno de tus dispositivos. <a href="#objetos">Los objetos cifrados</a> son lo que va al almacén cuando sincronizas, y nadie puede leerlos sin tu código.</p>
 
@@ -33,8 +33,12 @@
             <tr><td><code>perfil.md</code></td><td>Obligatorio</td><td>Lo que Mentor pone al empezar cada chat: quién eres cuando trabajas. Es lo único que va a los chats sin que lo pidas.</td></tr>
             <tr><td><code>quien-soy.md</code></td><td>Obligatorio</td><td>Quién eres, lo de dentro. No va al empezar los chats: lo lee la revisión semanal, y lo puede encontrar una búsqueda que pida la IA, que ves en la caja antes de enviarla.</td></tr>
             <tr><td><code>aprendizajes.md</code></td><td>Obligatorio</td><td>El buzón: lo que la IA aprende de ti entre revisiones. Lo último apuntado va detrás del perfil, salvo que lo quites.</td></tr>
-            <tr><td><code>perfil-&lt;cliente&gt;.md</code></td><td>Opcional</td><td>El perfil de un cliente, que va detrás de <code>perfil.md</code> en los chats que son para él.</td></tr>
-            <tr><td><code>aprendizajes-&lt;cliente&gt;.md</code></td><td>Opcional</td><td>El buzón de un cliente: lo que se apunta en sus chats, que solo va a sus chats.</td></tr>
+            <tr><td><code>perfil-&lt;contexto&gt;.md</code></td><td>Opcional</td><td>El perfil de un contexto, como un cliente, una asignatura o un proyecto, que va detrás de <code>perfil.md</code> en los chats que son para él.</td></tr>
+            <tr><td><code>aprendizajes-&lt;contexto&gt;.md</code></td><td>Opcional</td><td>El buzón de un contexto: lo que se apunta en sus chats, que solo va a sus chats.</td></tr>
+            <tr><td><code>retirado.md</code></td><td>Opcional</td><td>Lo que ha dejado de ir a los chats sin borrarse: lo más viejo de <code>quien-soy.md</code>, las deducciones que nadie contestó en cuatro semanas y lo que dijiste que ya no vale. Lo escribe la revisión semanal, y lo encuentra una búsqueda.</td></tr>
+            <tr><td><code>retirado-&lt;contexto&gt;.md</code></td><td>Opcional</td><td>Lo mismo para un contexto: lo más viejo de su perfil y sus deducciones sin contestar. Solo lo encuentra la búsqueda en sus chats.</td></tr>
+            <tr><td><code>avisos.md</code></td><td>Opcional</td><td>Lo que quieres que Mentor te recuerde, y cuándo. Lo escribes tú, en la ventana de Mentor o a mano, o la IA cuando le pides que te recuerde algo.</td></tr>
+            <tr><td><code>temas/&lt;tema&gt;.md</code></td><td>Opcional</td><td>Un hilo: la nota de un tema del que has sacado algo con una IA, con una entrada por conversación, que lleva su día, la IA, por qué salió, lo que dijo la IA y tus frases. Las de un contexto, en <code>temas-&lt;contexto&gt;/</code>. Lleva <code>aliases</code> y <code>tags: [hilo]</code> en su cabecera, que Obsidian entiende.</td></tr>
             <tr><td><code>bitacora/AAAA-MM.md</code></td><td>Opcional</td><td>Qué pasó cada día, un archivo por mes.</td></tr>
             <tr><td><code>instrucciones.md</code>, <code>rutinas/</code></td><td>Opcional</td><td>Para una IA que trabaja con la carpeta entera, como Claude Code o Cowork.</td></tr>
             <tr><td><code>conflictos/</code></td><td>La crea Mentor</td><td>La copia de un archivo que dos dispositivos cambiaron a la vez: no se pierde nada.</td></tr>
@@ -68,14 +72,55 @@ Esto es lo que Mentor pone al principio de cada chat nuevo con una IA: quién er
 
 ## Cómo quiero que me respondas</pre>
 
-      <h3>Los clientes</h3>
-      <p>Un cliente es un archivo <code>perfil-&lt;nombre&gt;.md</code>, y su nombre es el del archivo: <code>perfil-envasadora.md</code> es «envasadora». El nombre va en minúsculas, sin tildes ni espacios, con letras, números y guiones. Lo suyo se suma a lo general: en el chat de un cliente van <code>perfil.md</code>, lo apuntado en <code>aprendizajes.md</code> y, detrás, su perfil y lo apuntado en sus chats, en <code>aprendizajes-&lt;nombre&gt;.md</code>. Ningún chat ve el buzón de otro cliente.</p>
+      <h3>Los contextos</h3>
+      <p>Un contexto, como un cliente, una asignatura o un proyecto, es un archivo <code>perfil-&lt;nombre&gt;.md</code>, y su nombre es el del archivo: <code>perfil-envasadora.md</code> es «envasadora». El nombre va en minúsculas, sin tildes ni espacios, con letras, números y guiones. Lo suyo se suma a lo general: en el chat de un contexto van <code>perfil.md</code>, lo apuntado en <code>aprendizajes.md</code> y, detrás, su perfil y lo apuntado en sus chats, en <code>aprendizajes-&lt;nombre&gt;.md</code>. Ningún chat ve el buzón de otro contexto. La carpeta admite los que haya; cuántos usa Mentor depende del plan, y en Personal, con más de cinco, son los cinco primeros por su nombre.</p>
 
       <h3>El buzón</h3>
       <p>Cada entrada es una línea de lista, con la fecha en negrita, un punto medio entre espacios y lo aprendido en una frase. Detrás, si la hay, la frase de la persona entre comillas. Lo que es deducción de la IA, y no algo que la persona haya dicho, lleva ⚠️.</p>
 <pre class="bloque">- **2026-10-05** · Los jueves por la tarde no hay hueco para nada que no sea el taller — *"El jueves ni me lo propongas."*
 - **2026-10-06** · ⚠️ Puede valer también para los correos a clientes</pre>
       <p>Lo demás del archivo es libre: títulos, secciones y notas no cuentan. Las entradas nuevas van al final.</p>
+
+      <h3>Lo retirado</h3>
+      <p>Lo que baja de nivel en lugar de borrarse. La revisión semanal baja a <code>retirado.md</code> lo de fecha más vieja de <code>quien-soy.md</code> cuando pasa de 150 líneas, las deducciones con ⚠️ que llevan cuatro semanas en el buzón sin contestar y lo que dices en la revisión que ya no vale. En un contexto baja a <code>retirado-&lt;nombre&gt;.md</code> lo más viejo de su perfil, cuando pasa de 400 palabras, y sus deducciones sin contestar. Cada línea va tal como estaba, con su fecha y su frase, debajo de un título con el día en que bajó:</p>
+<pre class="bloque">## 2026-10-19
+
+- **2026-03-02** · Los glosarios, en dos columnas — *"con dos columnas me basta"*</pre>
+      <p>Solo crece, y lo que ya está no se repite. No va a ningún chat ni a la revisión: lo encuentra una búsqueda, y la fecha de una línea es la suya o, si no lleva, la del título de encima.</p>
+
+      <h3>Los avisos</h3>
+      <p>En <code>avisos.md</code>, una línea por aviso, como en el buzón, con el cuándo en negrita en lugar de la fecha:</p>
+<pre class="bloque"># Avisos
+
+- **lunes** · Revisar las facturas sin cobrar
+- **2026-11-27** · Entregar el capítulo 9 del manual
+- **día 1** · Mandar las facturas del mes — *"recuérdame el día 1 mandar las facturas"*</pre>
+      <ul>
+        <li>El cuándo es una fecha, <code>AAAA-MM-DD</code>, que es una vez; un día de la semana, de <code>lunes</code> a <code>domingo</code>, con tilde o sin ella, que es cada semana; o <code>día N</code>, del 1 al 31, que es cada mes, y un <code>día 31</code> en un mes de 30 toca el último día. Puede llevar una hora, <code>lunes 9:00</code>, que es la de la notificación del sistema; sin hora, las 9:00.</li>
+        <li>Entre el cuándo y el texto va un punto medio entre espacios, y se lee también con <code>:</code>, <code>-</code> o <code>—</code>. Detrás, si la hay, la frase de la persona entre comillas, como en el buzón.</li>
+        <li>«Hecho» y «Mañana» se apuntan en la línea del aviso. «Hecho» quita uno de una vez y, en uno que se repite, añade <code>(hecho el 2026-10-19)</code> al final; «Mañana», <code>(aplazado al 2026-10-20)</code>. Cada uno sustituye al que hubiera, y uno aplazado no sale antes de ese día.</li>
+        <li>Lo demás es libre: títulos, notas, comentarios y bloques de código no cuentan.</li>
+      </ul>
+
+      <h3>Los hilos</h3>
+      <p>Una nota por tema, en <code>temas/</code> y, las de un contexto, en <code>temas-&lt;contexto&gt;/</code>. Su nombre es el del tema escrito como el de un contexto: en minúsculas, sin tildes ni espacios, con letras, números y guiones. Así queda la de Mary Shelley después de una conversación en ChatGPT:</p>
+<pre class="bloque">---
+aliases: ["Mary Shelley"]
+tags: [hilo]
+---
+# Mary Shelley
+
+## 2026-10-23 · ChatGPT · [el chat](https://chatgpt.com/c/…)
+
+- Origen: *"Me estoy leyendo Frankenstein al fin"*
+- Lo que dijo la IA: Su madre fue Mary Wollstonecraft.
+- Con mis palabras: *"vaya vida habrá tenido"*
+- Siguió en [[literatura-feminista|literatura feminista]].</pre>
+      <ul>
+        <li>La cabecera es la que Obsidian entiende como propiedades: <code>aliases</code> hace que <code>[[Mary Shelley]]</code>, escrito en cualquier nota, lleve a esta, y <code>tags: [hilo]</code> junta todas las notas de tema. Mentor la escribe al crear la nota y no la vuelve a tocar.</li>
+        <li>Una entrada por conversación, con su fecha, la IA y el enlace al chat; un chat sin dirección, como uno temporal, deja la entrada del día sin enlace. Dentro, por orden de llegada: <code>Venía de</code>, si la conversación ya tocaba otro tema; <code>Origen</code>, tu primera frase; <code>Lo que dijo la IA</code>, una línea por cada cosa que se sacó; <code>Con mis palabras</code>, tus demás frases; y <code>Siguió en</code>, si pasó a otro tema.</li>
+        <li>Solo crece: Mentor añade al final de la entrada de su conversación, y lo que borres o cambies se queda así. «Resumir y guardar» sustituye la entrada de esa conversación por la que dejas en la vista previa.</li>
+      </ul>
 
       <h2 id="objetos">Los objetos cifrados</h2>
       <p>Cuando activas la sincronización en «Tus dispositivos», cada cambio de tu carpeta va al almacén dentro de un sobre cifrado en tu dispositivo. Todo usa algoritmos estándar: HKDF-SHA256 (RFC 5869), AES-256-GCM, gzip y JSON.</p>
@@ -131,7 +176,7 @@ cifrado y etiqueta     AES-256-GCM, con la etiqueta de 16 bytes al final</pre>
 
       <h3>Cómo se juntan los cambios</h3>
       <ul>
-        <li>Los archivos que crecen, <code>aprendizajes.md</code>, los buzones de cada cliente y lo de <code>bitacora/</code>, se funden sumando líneas: lo que añade cada dispositivo se queda, y lo que uno borró de la versión de la que salen los dos se queda borrado.</li>
+        <li>Los archivos que crecen, <code>aprendizajes.md</code> y los buzones de cada contexto, lo retirado, <code>avisos.md</code>, lo de <code>bitacora/</code> y las notas de los temas, se funden sumando líneas: lo que añade cada dispositivo se queda, y lo que uno borró de la versión de la que salen los dos se queda borrado.</li>
         <li>En los demás, si dos dispositivos cambian el mismo archivo a la vez, se queda el más reciente, y el otro se guarda en <code>conflictos/</code>, con la fecha, el dispositivo y el nombre.</li>
         <li>Si un archivo se borra en un dispositivo y cambia en otro, se queda el cambiado.</li>
       </ul>
