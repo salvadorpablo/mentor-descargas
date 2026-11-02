@@ -31,6 +31,8 @@
     .plan input { width: 5rem; font: inherit; padding: .2rem .4rem; }
     .antes { background: var(--card); border: 1px solid var(--rule); border-radius: .75rem; padding: 1rem 1.1rem; margin: 1.5rem 0 0; }
     .antes ul { margin: .25rem 0 0; padding-left: 1.2rem; }
+    .acepto { margin: .75rem 0 0; }
+    .acepto input { width: auto; margin-right: .4rem; }
     .aviso { border-left: 4px solid var(--bad); padding: .5rem .75rem; background: var(--card); margin: 0 0 1.5rem; }
     .hecho { border-left: 4px solid var(--ok); padding: .75rem 1rem; background: var(--card); margin: 1.5rem 0 0; }
     .nota { color: var(--ink-soft); font-size: .9rem; }
@@ -69,7 +71,6 @@
           <h2 data-t="fundador">Personal, precio de fundador</h2>
           <div class="precio"><span data-importe="fundador-año"></span> <small data-t="alAño">al año</small></div>
           <p data-t="fundadorTexto">Todo lo de Personal, para los 500 primeros, y para siempre mientras no te des de baja.</p>
-          <p id="quedan"></p>
           <button class="elegir" data-plan="fundador-año" data-t="elegir" disabled>Empezar la prueba</button>
         </section>
         <section class="plan">
@@ -98,7 +99,7 @@
         <ul>
           <li data-t="antes1">Hoy no se cobra nada. La prueba dura 14 días, hasta el <span data-fin></span>.</li>
           <li data-t="antes2">El <span data-cobro></span> se cobra el plan que elijas, y después cada mes o cada año, salvo que te des de baja antes.</li>
-          <li data-t="antes3">Te das de baja con un clic, en Mentor, en «Tu suscripción», sin escribir a nadie. Mentor te avisa tres días antes del primer cobro, y Paddle te manda un correo siete días antes.</li>
+          <li data-t="antes3">Te das de baja con un clic, en Mentor, en «Tu suscripción», sin escribir a nadie. Mentor te avisa tres días antes del primer cobro, y Paddle te manda un correo antes de que acabe la prueba.</li>
           <li data-t="antes4">Si te das de baja, Mentor deja de ponerse en tus chats al acabar la prueba o lo pagado. Tu carpeta sigue siendo tuya, entera, en cada dispositivo; la copia cifrada del almacén de Radamant se borra a los 30 días.</li>
           <li data-t="antes5">Cobra Paddle, en nombre de Radamant, y guarda tu correo y tu tarjeta. Radamant no ve nunca tu tarjeta ni tu memoria.</li>
         </ul>
@@ -116,7 +117,7 @@
     </div>
 
     <footer>
-      <span data-t="pie">Mentor es de Radamant.</span> <a href="privacidad.html" data-t="privacidad">Privacidad</a>
+      <span data-t="pie">Mentor es de Radamant.</span> <a href="condiciones.html" data-t="condiciones">Condiciones</a> · <a href="reembolsos.html" data-t="reembolsos">Reembolsos y desistimiento</a> · <a href="privacidad.html" data-t="privacidad">Privacidad</a>
     </footer>
   </main>
 
@@ -156,7 +157,7 @@
       antesTitulo: "Before you enter your card",
       antes1: "Nothing is charged today. The trial lasts 14 days, until <span data-fin></span>.",
       antes2: "On <span data-cobro></span> the plan you choose is charged, and then every month or every year, unless you cancel before.",
-      antes3: "You cancel with one click, in Mentor, in «Tu suscripción», without writing to anyone. Mentor warns you three days before the first charge, and Paddle emails you seven days before.",
+      antes3: "You cancel with one click, in Mentor, in «Tu suscripción», without writing to anyone. Mentor warns you three days before the first charge, and Paddle emails you before the trial ends.",
       antes4: "If you cancel, Mentor stops appearing in your chats when the trial or the paid period ends. Your folder is still yours, whole, on every device; the encrypted copy in Radamant's storage is deleted after 30 days.",
       antes5: "Paddle charges on behalf of Radamant and keeps your email and your card. Radamant never sees your card or your memory.",
       moneda: "Prices in euros include VAT, except Equipos. Outside the European Union, the same figures in dollars, with taxes depending on your country. The exact amount, before paying, in Paddle's window.",
@@ -164,10 +165,12 @@
       hechoTexto: "Go back to the Mentor window, in the taskbar: it goes on by itself with your code and your first conversation. If you closed it, open «Mentor» from the Start menu. You can close this tab now.",
       hechoPagoTitulo: "Done.",
       hechoPagoTexto: "You can close this tab: Paddle tells Mentor.",
-      pie: "Mentor is made by Radamant.", privacidad: "Privacy",
-      mes: "a month", año: "a year", quedan: (n) => `${n} of 500 left.`,
+      acepto: 'I have read and accept <a href="condiciones.html" target="_blank">Mentor\'s terms</a>, with <a href="reembolsos.html" target="_blank">refunds and withdrawal</a>, and, if I take Profesional or Equipos, the <a href="encargo.html" target="_blank">data processing agreement</a>.',
+      faltaAceptar: "To start the trial, first tick that you accept the terms.",
+      pie: "Mentor is made by Radamant.", condiciones: "Terms", reembolsos: "Refunds and withdrawal", privacidad: "Privacy",
+      mes: "a month", año: "a year",
     };
-    const ES = { mes: "al mes", año: "al año", quedan: (n) => `Quedan ${n} de 500.` };
+    const ES = { mes: "al mes", año: "al año" };
     const T = ingles ? EN : ES;
     if (ingles) {
       document.documentElement.lang = "en";
@@ -178,6 +181,9 @@
     const boveda = parametros.get("boveda") ?? "";
     const valida = /^[a-z2-7]{16}$/.test(boveda);
     const transaccion = parametros.get("_ptxn") ?? "";
+    // El código de un descuento, para la prueba del cobro de verdad (M12): la
+    // página esconde la casilla de los códigos, y este llega en la dirección.
+    const codigo = parametros.get("codigo") ?? "";
     const dePaddle = /^txn_[a-z0-9]+$/.test(transaccion);
     document.getElementById("sinBoveda").hidden = valida || dePaddle;
     document.getElementById("modoPrueba").hidden = dePaddle;
@@ -186,6 +192,11 @@
     if (dePaddle) document.title = ingles ? "Mentor · Your payment" : "Mentor · Tu pago";
 
     const ajustes = { displayMode: "overlay", locale: ingles ? "en" : "es", showAddDiscounts: false };
+    // Desde la versión 1 de los textos, la casilla de las condiciones: sin
+    // marcarla no se abre el pago, y la fecha de la versión aceptada va a
+    // Paddle con la bóveda, que la guarda con el pago.
+    const acepto = document.getElementById("acepto");
+    acepto?.addEventListener("change", () => { document.getElementById("faltaAceptar").hidden = acepto.checked; });
     const botones = [...document.querySelectorAll("button.elegir"), document.getElementById("abrirPago")];
     const euros = (c) => new Intl.NumberFormat(ingles ? "en-IE" : "es-ES", { style: "currency", currency: "EUR" }).format(c / 100);
     const fecha = (d) => d.toLocaleDateString(ingles ? "en-GB" : "es-ES", { day: "numeric", month: "long", year: "numeric" });
@@ -213,12 +224,22 @@
       let opciones = { transactionId: transaccion, settings: ajustes };
       if (!dePaddle) {
         if (!valida) return;
+        if (acepto && !acepto.checked) {
+          const falta = document.getElementById("faltaAceptar");
+          falta.hidden = false;
+          falta.scrollIntoView?.({ block: "center" });
+          acepto.focus();
+          return;
+        }
         const id = plan.includes("-") ? plan : `${plan}-${cadencia}`;
         const p = pago.precios[id];
         if (!p) return;
         let cantidad = 1;
         if (plan === "equipos") cantidad = Math.min(100, Math.max(3, parseInt(document.getElementById("plazas").value, 10) || 3));
-        opciones = { items: [{ priceId: p.precio, quantity: cantidad }], customData: { boveda }, settings: ajustes };
+        const datos = { boveda };
+        if (acepto) datos.condiciones = acepto.dataset.condiciones;
+        opciones = { items: [{ priceId: p.precio, quantity: cantidad }], customData: datos, settings: ajustes };
+        if (/^[A-Za-z0-9_-]{1,32}$/.test(codigo)) opciones.discountCode = codigo;
       }
       try {
         Paddle.Checkout.open(opciones);
@@ -252,6 +273,10 @@
           checkout: { settings: ajustes },
           eventCallback: (e) => {
             if (e.name === "checkout.completed") document.getElementById(dePaddle ? "hechoPago" : "hecho").hidden = false;
+            // Si Paddle no puede abrir el pago, como en un dominio que no
+            // ha aprobado o con un token que no vale, se dice, en vez de
+            // dejar la página muda (M12).
+            if (e.name === "checkout.error") sinPago();
           },
         });
         if (dePaddle) {
@@ -271,12 +296,10 @@
       }
       // El precio de fundador, mientras quede alguna de las 500 plazas: las
       // cuenta el programa de bóvedas, con quien está en la prueba o pagando.
+      // Sin decir cuántas quedan: no se vende con prisa (02/11/2026).
       try {
         const r = await (await fetch("https://almacen.radamant.eu/_cobro/fundadores", { cache: "no-cache" })).json();
-        if (r.quedan > 0) {
-          document.getElementById("planFundador").hidden = false;
-          document.getElementById("quedan").textContent = T.quedan(r.quedan);
-        }
+        if (r.quedan > 0) document.getElementById("planFundador").hidden = false;
       } catch {}
     }
 
