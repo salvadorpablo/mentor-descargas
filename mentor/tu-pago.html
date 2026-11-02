@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tu pago de Mentor</title>
+  <meta name="description" content="Si un cobro de Mentor no ha podido pasar: cómo cambiar la tarjeta, qué pasa mientras tanto y a quién escribir.">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/fuentes/letras.css">
+  <link rel="stylesheet" href="mentor.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="./"><span class="sello"><img src="marca.svg" alt="" width="21" height="16"></span><span class="nombre">Mentor</span></a>
+      <a class="boton pequeno" href="./">Qué es Mentor</a>
+    </div>
+  </header>
+
+  <main class="documento">
+    <div class="contenedor estrecho">
+      <h1>Tu pago de Mentor</h1>
+      <p>Si un cobro de Mentor no ha podido pasar, Paddle, que es quien cobra, te escribe para que cambies la tarjeta. Lo arreglas desde el enlace de ese correo, o desde Mentor, en «Tu suscripción», con «Tu tarjeta y tus facturas».</p>
+
+      <h2>Mientras tanto</h2>
+      <p>Paddle vuelve a intentar el cobro durante 30 días, y Mentor sigue funcionando. Si en ese tiempo no se puede cobrar, la suscripción se cancela: Mentor deja de ponerse en tus chats, y tu carpeta sigue siendo tuya, entera, en cada dispositivo.</p>
+
+      <h2>A quién escribir</h2>
+      <p>Del pago, de la tarjeta y de las facturas se ocupa Paddle, en <a href="https://paddle.net">paddle.net</a>. De Mentor, Radamant, en <a href="mailto:contacto@radamant.es">contacto@radamant.es</a>.</p>
+    </div>
+  </main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <nav aria-label="Lo legal y lo demás">
+      <a href="condiciones.html">Condiciones</a>
+      <a href="reembolsos.html">Reembolsos y desistimiento</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="formato.html">El formato de la carpeta y de los objetos cifrados</a>
+      <a href="como-funciona.html">Cómo funciona, por dentro</a>
+      <a href="descargar.html">Descargas</a>
+      <a href="mailto:contacto@radamant.es">Contacto</a>
+    </nav>
+    <p>Mentor es un producto de Radamant. Los pedidos los gestiona Paddle.com, el vendedor registrado.</p>
+    <p>Radamant no certifica nada, y nada de lo que hay en esta página es asesoramiento jurídico.</p>
+    <p>ChatGPT, Claude, Gemini, Grok y DeepSeek son marcas de sus dueños. Mentor no está afiliado a ninguno.</p>
+  </div>
+</footer>
+
+  <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+  <script>
+    // Tu pago de Mentor (M12, sesión 6): la página de la web en la que Paddle
+    // Retain pide Paddle.js para arreglar un cobro que ha fallado en un clic,
+    // desde sus correos. Por su decisión del 02/11/2026, aparte, y no en la
+    // portada: la página de venta no carga nada de fuera. Retain solo existe
+    // en la cuenta real, así que Paddle.js arranca siempre con su token, el de
+    // retain.json, también antes de que la página de pago pase a la real.
+    (async () => {
+      try {
+        if (typeof Paddle === "undefined") return;
+        const r = await fetch("retain.json", { cache: "no-cache" });
+        if (!r.ok) return;
+        const retain = await r.json();
+        if (!retain.token) return;
+        Paddle.Initialize({ token: retain.token });
+      } catch (e) {
+        console.error(e);
+      }
+    })();
+  </script>
+</body>
+</html>
