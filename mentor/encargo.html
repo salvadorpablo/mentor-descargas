@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contrato de encargo del tratamiento de Mentor</title>
+  <meta name="description" content="Lo que Radamant hace, como encargado del tratamiento, con la memoria cifrada de quien contrata Mentor Profesional o Equipos. Borrador.">
+  <link rel="icon" href="icono.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/fuentes/letras.css">
+  <link rel="stylesheet" href="mentor.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="./"><span class="sello"><img src="marca.svg" alt="" width="21" height="16"></span><span class="nombre">Mentor</span></a>
+      <a class="boton pequeno" href="./">Qué es Mentor</a>
+    </div>
+  </header>
+
+  <main class="documento">
+    <div class="contenedor estrecho">
+      <h1>Contrato de encargo del tratamiento</h1>
+      <p class="fecha">Versión del 2 de noviembre de 2026.</p>
+      <p class="borrador">Es un borrador, como las <a href="condiciones.html">condiciones</a>: hasta su versión 1 nadie lo acepta al pagar.</p>
+      <p>Es el contrato que acepta quien contrata Mentor <strong>Profesional</strong> o <strong>Equipos</strong> y guarda en su memoria datos de otras personas: sus clientes, sus contactos, sus pacientes. Regula el almacén de Radamant: guardar, conservar y llevar entre sus dispositivos los objetos cifrados de su memoria. No regula lo que pasa en sus dispositivos (la carpeta, la extensión, la app), que Radamant no trata, ni lo que manda a su proveedor de IA, que es cosa suya y de ese proveedor.</p>
+
+      <h2>Partes</h2>
+      <p><strong>El Responsable del tratamiento</strong>: quien contrata Mentor Profesional o Equipos y acepta este contrato al hacerlo, con los datos que da a Paddle al pagar (en adelante, «el Responsable»).</p>
+      <p><strong>El Encargado del tratamiento</strong>: Radamant, el nombre comercial con el que trabaja su fundador, Salva, persona física, mientras la sociedad se constituye; su nombre completo, su NIF y su domicilio se publicarán aquí con la versión 1. Contacto: <a href="mailto:contacto@radamant.es">contacto@radamant.es</a> (en adelante, «Radamant»). Cuando la sociedad exista, ocupará el lugar de Radamant en este contrato, como dice la cláusula 1.2 de las <a href="condiciones.html">condiciones de Mentor</a>.</p>
+
+      <h2>1. Objeto</h2>
+      <p>1.1. Radamant presta al Responsable el <strong>almacén alojado de Mentor</strong>: guarda los objetos cifrados de su memoria, conserva sus versiones y los entrega a los dispositivos del Responsable para que su carpeta esté igual en todos ellos.</p>
+      <p>1.2. Para prestarlo, Radamant trata por cuenta del Responsable los datos personales que este haya puesto en su memoria, en la medida en que lo almacenado sea dato personal para Radamant, en los términos de este contrato, que cumple el artículo 28 del Reglamento (UE) 2016/679 (RGPD).</p>
+
+      <h2>2. Lo que Radamant puede y no puede ver</h2>
+      <p>2.1. La memoria del Responsable se <strong>cifra en su dispositivo</strong> antes de salir de él, archivo por archivo y con el nombre de cada archivo, con AES-256-GCM. La llave sale de un código al azar de 128 bits que nace en el dispositivo y que el Responsable ve como 12 palabras. <strong>La llave no llega nunca a Radamant</strong>, ni en claro ni derivada de nada que Radamant conozca. Radamant no tiene medios técnicos para descifrar lo que guarda, y no los tendrá con ninguna versión del servicio sin que el Responsable lo vea, porque el formato está publicado en <a href="formato.html">El formato de la carpeta y de los objetos cifrados</a>.</p>
+      <p>2.2. Lo que Radamant <strong>sí ve</strong>, porque lo necesita para prestar el servicio: un identificador al azar de la bóveda, que no dice quién es el Responsable; una credencial que solo sirve para escribir en ella, que Radamant guarda cifrada con su propia llave; el tamaño y la fecha de cada objeto; cuántos dispositivos escriben, con identificadores al azar; y, en el momento de cada conexión, la dirección IP desde la que llega, que <strong>no registra</strong>.</p>
+
+      <h2>3. Menciones del artículo 28.3 del RGPD</h2>
+      <table>
+        <tr><th>Objeto</th><td>Almacenamiento, conservación de versiones y entrega entre los dispositivos del Responsable de los objetos cifrados de su memoria de Mentor</td></tr>
+        <tr><th>Duración</th><td>La del contrato de Mentor Profesional o Equipos, más los plazos de supresión de la cláusula 9</td></tr>
+        <tr><th>Naturaleza</th><td>Conservación, transmisión y supresión de datos cifrados, sin acceso a su contenido. Sin decisiones automatizadas, sin elaboración de perfiles y sin revisión humana</td></tr>
+        <tr><th>Finalidad</th><td>Que la memoria del Responsable esté igual en todos sus dispositivos y que se puedan recuperar sus versiones anteriores</td></tr>
+        <tr><th>Tipo de datos personales</th><td>Los que el Responsable decida escribir en su memoria, que Radamant no conoce. En Profesional, de forma típica: datos identificativos, de contacto y profesionales de sus clientes y de sus contactos, y lo que el Responsable apunte de su trabajo con ellos. El Responsable se compromete a no guardar categorías especiales de datos (art. 9 RGPD) si no tiene base para tratarlas</td></tr>
+        <tr><th>Categorías de interesados</th><td>El propio Responsable y su personal; sus clientes, contactos y demás personas de las que escriba</td></tr>
+        <tr><th>Subencargados</th><td>Los del Anexo II</td></tr>
+        <tr><th>Ubicación</th><td>Unión Europea: Falkenstein (Alemania) y Helsinki (Finlandia). Sin transferencias internacionales</td></tr>
+      </table>
+
+      <h2>4. Obligaciones de Radamant como encargado</h2>
+      <p>Radamant se obliga a:</p>
+      <ol type="a">
+        <li>Tratar los datos <strong>solo para prestar el almacén</strong> y siguiendo las instrucciones del Responsable, que son este contrato y lo que el Responsable hace en la app de Mentor: activar la sincronización, añadir o dejar un dispositivo, darse de baja. Si el Derecho de la Unión o de un Estado miembro le obligara a otra cosa, se lo dirá antes al Responsable, salvo que la ley lo prohíba.</li>
+        <li>Avisar al Responsable <strong>de inmediato</strong> si cree que una instrucción infringe el RGPD u otra norma de protección de datos.</li>
+        <li>Garantizar que las personas autorizadas a acceder al almacén <strong>se han comprometido a la confidencialidad</strong> o están sujetas a un deber legal de confidencialidad. Hoy es una sola persona.</li>
+        <li>Aplicar las <strong>medidas técnicas y organizativas</strong> del Anexo I, que cumplen el artículo 32 del RGPD.</li>
+        <li>No recurrir a otro encargado sin la autorización del Responsable. Con este contrato, el Responsable autoriza a los subencargados del Anexo II. Radamant le avisará, por correo o en la app, de cualquier alta o cambio <strong>con al menos 30 días de antelación</strong>, o, si depende de un subencargado que avisa con menos, con la antelación con la que avise y en cuanto Radamant lo sepa; y el Responsable podrá oponerse de forma motivada. Si la oposición impide prestar el servicio, podrá darse de baja sin coste. Cada subencargado queda sujeto por contrato a las mismas obligaciones, y Radamant responde de su cumplimiento.</li>
+        <li><strong>Ayudar al Responsable a atender los derechos de los interesados.</strong> Como Radamant no puede leer la memoria, el acceso, la rectificación, la limitación y la oposición los atiende el Responsable sobre su propia carpeta, que tiene entera en cada dispositivo. Radamant suprime la bóveda entera cuando el Responsable se lo pida, y le entrega sus objetos cifrados si los quiere. Si un interesado se dirige a Radamant, esta le remitirá al Responsable y se lo comunicará sin dilación, sin poder decirle si esa persona aparece en la memoria, porque no lo sabe.</li>
+        <li><strong>Ayudar al Responsable</strong> con sus obligaciones de los artículos 32 a 36 del RGPD (seguridad, notificación de violaciones, evaluaciones de impacto y consulta previa), con la información de que disponga.</li>
+        <li><strong>Notificar al Responsable sin dilación indebida y, en todo caso, dentro de las veinticuatro (24) horas</strong> siguientes a tener conocimiento de ella, cualquier violación de la seguridad que afecte a su bóveda, con la información necesaria para que pueda cumplir el artículo 33 del RGPD. La notificación dirá si la llave pudo verse comprometida, que en el diseño de Mentor solo puede pasar en los dispositivos del Responsable.</li>
+        <li>Poner a disposición del Responsable la <strong>información necesaria para demostrar el cumplimiento</strong>: este contrato, el Anexo I, el formato publicado de los objetos y el registro de actividades del apartado k; y permitir auditorías, por el Responsable o por un auditor que este designe, con un preaviso razonable y sin perturbar el servicio, sobre la configuración del almacén y las medidas del Anexo I.</li>
+        <li><strong>No usar los datos del Responsable para entrenar, afinar, evaluar ni mejorar ningún modelo de inteligencia artificial</strong>, propio o de terceros. Tampoco podría: no los puede leer. No hay revisión humana de su contenido.</li>
+        <li>Llevar el <strong>registro de las actividades de tratamiento</strong> que efectúa por cuenta del Responsable (art. 30.2 RGPD).</li>
+      </ol>
+
+      <h2>5. Ubicación y transferencias</h2>
+      <p>5.1. El almacén está en la Unión Europea: el servidor de Radamant y el almacenamiento de siempre en <strong>Falkenstein (Alemania)</strong>, y su copia de cada noche en <strong>Helsinki (Finlandia)</strong>, los dos de Hetzner Online GmbH.</p>
+      <p>5.2. <strong>No hay transferencias internacionales</strong> de los datos que trata Radamant. Radamant avisará con <strong>30 días</strong> de antelación de cualquier cambio de ubicación.</p>
+      <p>5.3. Lo que el Responsable manda a su proveedor de IA al usar Mentor (su perfil al empezar un chat, lo que la IA encuentra al buscar) sale de su dispositivo hacia ese proveedor y <strong>no pasa por Radamant</strong>. Ese tratamiento y sus transferencias, si las hay, son cosa del Responsable y de su proveedor.</p>
+
+      <h2>6. Obligaciones del Responsable</h2>
+      <p>6.1. El Responsable garantiza que tiene <strong>base jurídica</strong> para tratar los datos que pone en su memoria y que ha informado a los interesados conforme a los artículos 13 y 14 del RGPD.</p>
+      <p>6.2. El Responsable guarda sus <strong>12 palabras</strong> en un lugar seguro. Si pierde todos sus dispositivos y las palabras, nadie puede recuperar la memoria, tampoco Radamant: es la consecuencia de que Radamant no pueda leerla, y el Responsable lo acepta.</p>
+      <p>6.3. El Responsable decide qué escribe en su memoria y qué manda a su proveedor de IA.</p>
+
+      <h2>7. Violaciones de seguridad</h2>
+      <p>7.1. Las del apartado h de la cláusula 4. Radamant mantiene vigilancia diaria del almacén (Anexo I) y conserva el registro de peticiones del servidor catorce días para poder investigar un incidente.</p>
+
+      <h2>8. Responsabilidad</h2>
+      <p>8.1. Cada parte responde de sus incumplimientos de este contrato y del RGPD. El límite de responsabilidad es el de la cláusula 15 de las <a href="condiciones.html">condiciones de Mentor</a>.</p>
+
+      <h2>9. Fin del encargo: supresión y devolución</h2>
+      <p>9.1. <strong>Devolución.</strong> No hace falta devolver nada: el Responsable tiene su memoria entera, descifrada, en cada uno de sus dispositivos, y es una carpeta de archivos de texto que se abre con cualquier programa. Si quiere también los objetos cifrados del almacén, Radamant se los entrega en un archivo, con el formato publicado.</p>
+      <p>9.2. <strong>Supresión.</strong> Al terminar el contrato, Radamant suprime la bóveda del Responsable del almacén a los <strong>30 días</strong>, plazo que deja volver sin perder nada a quien se ha dado de baja por error. La copia de cada noche la suprime a su vez en <strong>hasta 31 días más</strong>, por el bloqueo que la protege y que nadie puede acortar. El Responsable puede pedir la supresión inmediata del almacén; la de la copia sigue ese plazo.</p>
+      <p>9.3. Radamant <strong>acreditará la supresión</strong> por escrito, si el Responsable lo pide, dentro de los 30 días siguientes.</p>
+
+      <h2>10. Duración, ley y jurisdicción</h2>
+      <p>10.1. Este contrato dura lo que el de Mentor Profesional o Equipos, y sus obligaciones de confidencialidad y supresión siguen después.</p>
+      <p>10.2. Se rige por la ley española. Los tribunales competentes son los de la cláusula 19 de las <a href="condiciones.html">condiciones de Mentor</a>.</p>
+
+      <h2>Anexo I · Medidas técnicas y organizativas</h2>
+      <table>
+        <tr><th>Cifrado en el dispositivo</th><td>AES-256-GCM, una llave por objeto, atado a su bóveda y a su nombre; nombres de archivo cifrados. La llave sale del código de 12 palabras y no sale nunca de los dispositivos</td></tr>
+        <tr><th>Seudonimización</th><td>La bóveda y los dispositivos tienen identificadores al azar; el almacén no sabe de quién son</td></tr>
+        <tr><th>Cifrado en tránsito</th><td>HTTPS con certificados de Let's Encrypt, renovados solos</td></tr>
+        <tr><th>Credenciales</th><td>Cada bóveda tiene una credencial que solo escribe en ella y no puede borrar nada. Radamant la guarda cifrada con su propia llave, que está en el servidor y en una copia fuera de él: quien se lleve el almacenamiento no puede escribir en ninguna bóveda</td></tr>
+        <tr><th>Separación</th><td>Cada bóveda solo ve lo suyo: el programa comprueba la firma de cada petición y no deja salir a nadie de su bóveda</td></tr>
+        <tr><th>Integridad</th><td>Lo que se escribe no se cambia nunca, y los dispositivos no pueden borrar: un dispositivo robado no puede vaciar la bóveda. Quien tiene el código puede mudar la bóveda a otra al cambiarlo, y la de antes se borra del almacén; lo suyo sigue en la copia de seguridad, con su bloqueo de 30 días, y entero en cada dispositivo de la persona</td></tr>
+        <tr><th>Copias</th><td>Cada noche, a otro almacenamiento en otra ciudad (Helsinki), con versiones y un bloqueo de 30 días que nadie puede acortar, ni con las claves del almacén. Restaurar desde la copia a una hora dada está ensayado</td></tr>
+        <tr><th>Acceso al servidor</th><td>Solo por SSH, solo con llave, sin contraseñas. Un cortafuegos deja pasar solo HTTPS, HTTP (para redirigir y para los certificados) y SSH</td></tr>
+        <tr><th>Mínimo privilegio</th><td>Cada programa corre con su propio usuario de sistema, sin poder entrar ni escribir fuera de lo suyo</td></tr>
+        <tr><th>Actualizaciones</th><td>Las de seguridad del sistema se instalan solas cada día</td></tr>
+        <tr><th>Registros</th><td>El servidor apunta de cada petición el método, la ruta, que lleva el identificador de la bóveda, y el resultado, sin la dirección IP; se borra a los 14 días. El HTTPS no registra peticiones</td></tr>
+        <tr><th>Vigilancia</th><td>La salud del almacén se revisa cada hora en el propio servidor, y cada noche desde fuera, con un aviso si algo no va bien</td></tr>
+        <tr><th>Alta</th><td>El almacén solo guarda lo de las bóvedas con un plan vivo</td></tr>
+        <tr><th>Personal</th><td>Una sola persona con acceso, el fundador, con deber de confidencialidad</td></tr>
+      </table>
+
+      <h2>Anexo II · Subencargados</h2>
+      <table>
+        <tr><th>Subencargado</th><th>Qué hace</th><th>Dónde</th><th>Garantías</th></tr>
+        <tr><td>Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen (Alemania)</td><td>Aloja el servidor de Radamant y el almacenamiento: el de siempre y el de las copias</td><td>Falkenstein (Alemania) y Helsinki (Finlandia)</td><td>Su contrato de encargo del tratamiento, aceptado por Radamant el 12/10/2026. Solo trata en la UE. Certificados ISO/IEC 27001 y BSI C5 Tipo 2</td></tr>
+        <tr><td>Hetzner Finland Oy, Huurrekuja 10, 04360 Tuusula (Finlandia), subencargado de Hetzner</td><td>El edificio y el soporte técnico del centro de datos de Helsinki, donde está la copia</td><td>Helsinki (Finlandia)</td><td>El contrato de encargo de Hetzner, que lo nombra</td></tr>
+      </table>
+
+      <h2>Anexo III · Lo que guarda Radamant y cuánto tiempo</h2>
+      <table>
+        <tr><th>Qué</th><th>Para qué</th><th>Cuánto tiempo</th></tr>
+        <tr><td>Los objetos cifrados de la bóveda</td><td>Prestar el almacén</td><td>Mientras dure el contrato, y 30 días después; en la copia, hasta 31 días más</td></tr>
+        <tr><td>El registro de la bóveda: la credencial cifrada, los límites del plan y lo que ocupa</td><td>Comprobar quién escribe y poner los límites</td><td>Lo mismo</td></tr>
+        <tr><td>Las cuentas de cada mes de la bóveda: cuántas peticiones y cuántos bytes</td><td>Saber lo que cuesta el servicio y vigilar abusos</td><td>13 meses</td></tr>
+        <tr><td>El registro de peticiones del servidor, sin direcciones IP</td><td>Seguridad e incidentes</td><td>14 días</td></tr>
+      </table>
+    </div>
+  </main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <nav aria-label="Lo legal y lo demás">
+      <a href="condiciones.html">Condiciones</a>
+      <a href="reembolsos.html">Reembolsos y desistimiento</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="formato.html">El formato de la carpeta y de los objetos cifrados</a>
+      <a href="como-funciona.html">Cómo funciona, por dentro</a>
+      <a href="descargar.html">Descargas</a>
+      <a href="mailto:contacto@radamant.es">Contacto</a>
+    </nav>
+    <p>Mentor es un producto de Radamant. Los pedidos los gestiona Paddle.com, el vendedor registrado.</p>
+    <p>Radamant no certifica nada, y nada de lo que hay en esta página es asesoramiento jurídico.</p>
+    <p>ChatGPT, Claude, Gemini, Grok y DeepSeek son marcas de sus dueños. Mentor no está afiliado a ninguno.</p>
+  </div>
+</footer>
+</body>
+</html>
