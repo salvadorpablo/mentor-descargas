@@ -20,7 +20,7 @@
   <main class="documento">
     <div class="contenedor estrecho">
       <h1>El formato de la carpeta y de los objetos cifrados</h1>
-      <p class="fecha">Mentor 0.23.33 · 27 de octubre de 2026</p>
+      <p class="fecha">Mentor 0.23.34 · 18 de noviembre de 2026</p>
       <p class="entradilla">Tu memoria es tuya también por esto: con lo que hay en esta página, cualquiera puede escribir un programa que la lea, la escriba o la lleve a otro sitio, sin Mentor y sin pedir permiso. La licencia de Mentor lo deja: el formato de la carpeta y el de los objetos cifrados se pueden usar libremente para leer, escribir o trasladar la memoria de cualquier persona.</p>
       <p>Son dos cosas. <a href="#carpeta">La carpeta</a> es tu memoria en claro, en cada uno de tus dispositivos. <a href="#objetos">Los objetos cifrados</a> son lo que va al almacén cuando sincronizas, y nadie puede leerlos sin tu código.</p>
 
@@ -163,6 +163,8 @@ cifrado y etiqueta     AES-256-GCM, con la etiqueta de 16 bytes al final</pre>
             <tr><td><code>dispositivos/&lt;dispositivo&gt;</code></td><td><code>{"nombre", "desde"}</code>: cómo se llama el dispositivo y desde cuándo está.</td></tr>
             <tr><td><code>cambios/&lt;dispositivo&gt;/&lt;número&gt;</code></td><td>Un archivo que ha cambiado: <code>{"ruta", "bases", "hora", "dispositivo", "nombre", "borrado", "datos"}</code>. <code>ruta</code>, relativa a la carpeta, con «/»; <code>datos</code>, el archivo entero, en base64; <code>bases</code>, los nombres de los cambios de los que sale; <code>hora</code>, cuándo se escribió el archivo.</td></tr>
             <tr><td><code>fotos/&lt;dispositivo&gt;/&lt;número&gt;_&lt;cubre&gt;</code></td><td>La carpeta entera: <code>{"hora", "dispositivo", "nombre", "cubre", "archivos": [{"ruta", "version", "hora", "datos"}]}</code>. <code>version</code> es el nombre del cambio del que sale cada archivo.</td></tr>
+            <tr><td><code>vectores/&lt;dispositivo&gt;/&lt;número&gt;</code></td><td>Los vectores de la búsqueda por significado que ha calculado ese dispositivo, para que los otros no tengan que calcularlos: <code>{"modelo", "dimensiones", "registros"}</code>. <code>modelo</code> es la huella del modelo con que se calcularon; <code>registros</code>, en base64, los vectores uno detrás de otro: la clave del trozo, 16 bytes, que son los 16 primeros del SHA-256 de su texto, y sus <code>dimensiones</code> números en float32, de menor a mayor byte. No son tu memoria: cada dispositivo puede rehacerlos desde la carpeta.</td></tr>
+            <tr><td><code>vectores/&lt;dispositivo&gt;/&lt;número&gt;_copia_&lt;desde&gt;</code></td><td>Los lotes de vectores de ese dispositivo de <code>desde</code> a <code>número</code> llevan todos los suyos: <code>{"desde", "hasta", "hora"}</code>. Los de antes sobran, y el almacén los puede quitar.</td></tr>
             <tr><td><code>mudanza</code></td><td>Solo en la bóveda de un código cambiado: <code>{"de", "hora", "dispositivo", "nombre"}</code>, con las bóvedas de antes, la más reciente primero.</td></tr>
           </tbody>
         </table>
@@ -170,6 +172,7 @@ cifrado y etiqueta     AES-256-GCM, con la etiqueta de 16 bytes al final</pre>
       <ul>
         <li>Los números van con doce cifras, para que el orden de los nombres sea el de los números. Los cambios de cada dispositivo van seguidos.</li>
         <li><code>cubre</code> dice hasta qué cambio de cada dispositivo lleva la foto, como <code>d1-12.d2-3</code>. Va sin cifrar para que el almacén pueda quitar cambios viejos sin leer nada.</li>
+        <li>Los números de una copia de vectores también van sin cifrar, por lo mismo: el almacén quita los lotes de antes de la última copia de cada dispositivo sin leer nada.</li>
         <li>Las horas van como en JSON de siempre, en RFC 3339.</li>
         <li>No se sincroniza lo que empieza por un punto ni un archivo de más de 32 MB.</li>
       </ul>
@@ -187,7 +190,7 @@ cifrado y etiqueta     AES-256-GCM, con la etiqueta de 16 bytes al final</pre>
         <li><strong>Un almacén de bóvedas</strong>, como el de Radamant, <code>https://almacen.radamant.eu</code>, que es el de serie. Habla S3: <code>PUT</code>, <code>GET</code> y <code>ListObjectsV2</code>, con las direcciones en la ruta y la firma de AWS versión 4, en la región <code>us-east-1</code>. El cubo es <code>mentor</code>; cada bóveda firma con su identificador como clave de acceso y su credencial como secreto, y sus objetos van debajo de <code>&lt;identificador&gt;/</code>. Una bóveda nueva se da de alta con <code>POST /_bovedas</code> y <code>{"id", "credencial"}</code>. Vale otro servidor que hable igual, en su dirección.</li>
         <li><strong>Una carpeta</strong>, como la que sincroniza el programa de tu cloud: cada objeto es un archivo con su nombre, debajo de una carpeta con el identificador de la bóveda. En la app, con «Usar otro almacén», la dirección es <code>carpeta:</code> seguido de la ruta.</li>
       </ul>
-      <p>Lo que ve el almacén: cuánto ocupa cada objeto, cuándo llega, tu dirección IP, cuántos dispositivos tienes y cuántos cambios hace cada uno. No ve el nombre de tus archivos, ni lo que dicen, ni cuántos hay.</p>
+      <p>Lo que ve el almacén: cuánto ocupa cada objeto, cuándo llega, tu dirección IP, cuántos dispositivos tienes y cuántos cambios hace cada uno; y, por lo que ocupan los lotes de vectores, más o menos cuántos trozos tiene tu memoria. No ve el nombre de tus archivos, ni lo que dicen, ni cuántos hay.</p>
 
       <h3>Cambiar el código</h3>
       <p>Con «Cambiar el código», en «Tus dispositivos», la memoria pasa a una bóveda nueva, porque el identificador, la credencial y la llave salen los tres del código. Cada objeto se abre con la llave de antes y se cierra con la nueva, con el mismo nombre, y al final se escribe el objeto <code>mudanza</code>. La bóveda de antes se borra.</p>
