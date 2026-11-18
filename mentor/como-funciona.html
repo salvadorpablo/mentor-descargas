@@ -112,7 +112,7 @@
           <li><a href="#carpeta"><span class="numero">03</span>La carpeta</a></li>
           <li><a href="#chat"><span class="numero">04</span>Qué entra en cada chat</a></li>
           <li><a href="#marcas"><span class="numero">05</span>Las marcas</a></li>
-          <li><a href="#buscar"><span class="numero">06</span>Buscar sin índice</a></li>
+          <li><a href="#buscar"><span class="numero">06</span>La búsqueda</a></li>
           <li><a href="#revision"><span class="numero">07</span>La revisión semanal</a></li>
           <li><a href="#contradice"><span class="numero">08</span>Lo que se contradice</a></li>
           <li><a href="#clientes"><span class="numero">09</span>Una memoria por contexto</a></li>
@@ -128,7 +128,7 @@
       </nav>
 
       <article class="cuerpo">
-        <p class="ojo-de-pagina">Por dentro · 22 min</p>
+        <p class="ojo-de-pagina">Por dentro · 25 min</p>
         <h1>Cómo funciona Mentor, por dentro</h1>
         <p class="entradilla">Una carpeta de texto, una marca al final de cada respuesta, una revisión a la semana y un sobre cifrado: las cuatro piezas de una memoria para la IA, dónde las pone Mentor, lo que cuesta cada una y lo que no hace.</p>
 
@@ -149,7 +149,7 @@
         <p>Guardar es lo fácil. Lo difícil es decidir qué merece guardarse, qué hacer cuando lo nuevo contradice lo viejo y qué poner delante del modelo cuando no cabe todo. Un sistema que guarda mucho y ordena poco acaba siendo una caja llena de contradicciones que el modelo lee con desconfianza. Mentor resuelve las dos piezas difíciles con la misma herramienta: la IA del chat que ya estás usando, con tus archivos a la vista, y tú detrás.</p>
         <div class="recuadro esencial">
           <p class="rotulo">Lo esencial</p>
-          <p>Mentor no tiene ningún modelo propio. Lo que apunta lo escribe la IA con la que hablas, al final de su respuesta; lo que ordena lo hace esa misma IA una vez a la semana; lo que busca lo busca tu ordenador, por palabras. Por eso no hace falta un servidor que lea tu memoria, y por eso se puede cifrar con una llave que solo tienes tú.</p>
+          <p>Mentor no tiene ningún modelo propio. Lo que apunta lo escribe la IA con la que hablas, al final de su respuesta; lo que ordena lo hace esa misma IA una vez a la semana; lo que busca lo busca tu ordenador, por palabras y, con un modelo pequeño que solo compara, por significado. Por eso no hace falta un servidor que lea tu memoria, y por eso se puede cifrar con una llave que solo tienes tú.</p>
         </div>
 
         <h2 id="una-de-ellas"><span class="n">02</span>La memoria no es una sola cosa, y Mentor es una de ellas</h2>
@@ -187,7 +187,7 @@
         <ul class="flujo" aria-label="Lo que entra en un chat nuevo">
           <li><span class="quien">Mentor escribe</span>Las instrucciones, tu perfil y las últimas treinta líneas del buzón, en la caja o como archivo.</li>
           <li class="flecha" aria-hidden="true"></li>
-          <li><span class="quien">Tú ves y envías</span>Lo puedes cambiar, quitar o no enviar. Mentor nunca pulsa Enviar por ti.</li>
+          <li><span class="quien">Tú ves y envías</span>Lo puedes cambiar, quitar o no enviar. Mentor nunca envía nada que no hayas enviado tú.</li>
           <li class="flecha" aria-hidden="true"></li>
           <li><span class="quien">La IA contesta</span>Como siempre, y al final deja una línea que empieza por <span class="mono">mentor:</span></li>
         </ul>
@@ -206,7 +206,7 @@
             <thead><tr><th>La marca</th><th>Qué hace Mentor</th><th>Lo que ves</th></tr></thead>
             <tbody>
               <tr><td><code>mentor: recordar | lo aprendido | "tu frase"</code></td><td>Añade una línea al final del buzón, con la fecha de tu ordenador</td><td>«Mentor ha apuntado», con «Deshacer»</td></tr>
-              <tr><td><code>mentor: buscar | dos o tres palabras</code></td><td>Busca en tu carpeta y pone lo que encuentra en la caja</td><td>Las líneas encontradas, para quitar las que no quieras enviar</td></tr>
+              <tr><td><code>mentor: buscar | dos o tres palabras</code></td><td>Busca en tu carpeta, por palabras y por significado</td><td>Una tarjeta con lo encontrado; con «Añadir a la conversación», va a la caja, para quitar lo que no quieras enviar</td></tr>
               <tr><td><code>mentor: avisar | cuándo | lo que tienes que hacer | "tu frase"</code></td><td>Añade un aviso a <code>avisos.md</code>, para el día que toca</td><td>«Mentor te lo recordará», con «Deshacer»</td></tr>
               <tr><td><code>mentor: hilo | el tema | lo que habéis sacado | "tu frase"</code></td><td>Lo añade a la nota de ese tema, en la entrada de esta conversación</td><td>«Mentor ha apuntado en el hilo», con «Ver» y «Deshacer»</td></tr>
               <tr><td><code>mentor: nada</code></td><td>Nada</td><td>Nada</td></tr>
@@ -229,12 +229,23 @@
           <p>Mentor guarda lo que la IA marca. Si alguien mete en un documento una frase pensada para que la IA te apunte algo falso, puede colar. Por eso cada apunte sale en la pantalla con «Deshacer», lleva la frase de la que sale, y nada pasa al perfil sin la revisión semanal, que haces tú. Lo apuntado es texto en un archivo tuyo: se ve y se borra.</p>
         </div>
 
-        <h2 id="buscar"><span class="n">06</span>Buscar sin índice</h2>
-        <p>Casi todas las memorias para la IA buscan por significado: convierten cada recuerdo en un vector y encuentran los que se parecen a la pregunta. Para eso hace falta un índice, y un índice hace falta construirlo y leerlo en algún sitio, que casi siempre es un servidor. Mentor busca de otra manera, más tonta a propósito: por palabras, en tu ordenador.</p>
-        <p>Cuando la IA necesita algo que no está en tu perfil ni en lo apuntado, escribe <code>mentor: buscar</code> con dos o tres palabras que espera encontrar escritas, no una pregunta. Mentor las busca en quién eres, en el buzón, en la bitácora y en el resto de archivos de la carpeta, sin mirar mayúsculas ni tildes. Vale cualquier línea que lleve al menos una de las palabras; van primero las que llevan más, y entre ellas, las más recientes; veinte como mucho. Lo encontrado va a la caja, agrupado por archivo y con una raya al final, y tú quitas lo que no quieras mandar y escribes lo tuyo debajo.</p>
+        <h2 id="buscar"><span class="n">06</span>La búsqueda: por palabras y por significado, en tus dispositivos</h2>
+        <p>Casi todas las memorias para la IA buscan por significado: convierten cada recuerdo en un vector, una lista de números que resume lo que dice, y encuentran los que se parecen a la pregunta. Para eso hace falta un índice, y casi siempre se hace y se lee en un servidor, que para hacerlo tiene que leer tu memoria. Mentor también busca por significado, pero el índice lo hace tu ordenador, y lo que sale de él va cerrado con tu llave.</p>
+        <p>Cuando la IA necesita algo que no está en tu perfil ni en lo apuntado, escribe <code>mentor: buscar</code> con dos o tres palabras que espera encontrar escritas, no una pregunta. Mentor las busca primero por palabras: en quién eres, en el buzón, en la bitácora y en el resto de archivos de la carpeta, sin mirar mayúsculas ni tildes. Vale cualquier línea que lleve al menos una de las palabras; van primero las que llevan más, y entre ellas, las más recientes; veinte como mucho. Como cada línea lleva tu frase literal, las palabras caen sobre las tuyas de verdad.</p>
+        <p>Y a la vez, por significado: entre lo que han traído las palabras intercala, uno de cada, hasta ocho archivos que se parecen de verdad a lo buscado, aunque no lleven ninguna de esas palabras. Lo de las palabras va siempre delante y entero, así que lo que antes se encontraba sale igual. Si una nota dice que quieres ir a ver a tu hermana y la IA busca «visitar parientes», sale.</p>
+        <p>Lo encontrado no entra solo en la caja: sale en una tarjeta, con de qué archivo es cada cosa. Con «Añadir a la conversación» va a la caja, agrupado por archivo y con una raya al final, y tú quitas lo que no quieras mandar y escribes lo tuyo debajo.</p>
+        <div class="tarjeta"><span class="texto">Mentor ha buscado «nube» en tu carpeta y ha encontrado esto:<span class="firma">aprendizajes.md</span><span class="firma">Si lo añades, va a la caja y lo ves antes de mandarlo.</span></span><span class="acciones"><span class="b principal">Añadir a la conversación</span><span class="b">Ahora no</span></span></div>
         <div class="chat">Mentor ha buscado «nube» en mi memoria y ha encontrado esto:<br><br>aprendizajes.md:<br>- 2026-10-02 · Descarta las herramientas de traducción en la nube para los manuales — <i>"Eso no lo puedo subir a ningún sitio, lo pone el contrato."</i><br><br>Hasta aquí, lo de Mentor. Lo que te digo yo va después de la raya.<br>---<div class="enviar"><span>Enviar</span></div></div>
-        <p>Lo que no encuentra, dicho claro: la paráfrasis. Si apuntaste «Puma» y la IA busca «zapatillas», no sale. Dos cosas lo compensan más de lo que parece. Las palabras las elige la IA, que puede probar dos o tres sinónimos y volver a pedir; y como cada línea lleva tu frase literal, la búsqueda cae sobre tus palabras de verdad, que son las que la IA va a oírte otra vez. Lo que no lo compensa, y se dice: no hay historial que buscar, porque Mentor no lo guarda.</p>
-        <p>¿Por qué así, y no con un índice? Porque un índice que entienda el significado tiene que leer tu memoria, y lo que puede leerla es lo que no puede estar cifrado con una llave que solo tienes tú. Mentor eligió la llave.</p>
+        <p><strong>El índice.</strong> Cada trozo de tu carpeta, una línea del buzón o de quién eres, una sección de una nota, se convierte en un vector de 384 números con un modelo pequeño y abierto, bekko-embedding-v1-a25m, con licencia MIT, que corre en tu ordenador. No escribe ni decide nada: solo dice qué se parece a qué. La app lo baja la primera vez que hace falta, unos 233 MB, del sitio de descargas de Radamant, con su huella firmada como las versiones: lo que no la lleve no se usa. El índice se hace en segundo plano, con prioridad baja y la cuarta parte de los núcleos, lo más reciente primero, y mientras tanto se busca solo por palabras. Vive en los datos de la app, fuera de tu carpeta: no es tu memoria, es una caché que se rehace desde ella, y si se borra no se pierde nada.</p>
+        <p><strong>En el teléfono.</strong> Un teléfono calcula más despacio que un ordenador y no deja que una app trabaje mucho rato en segundo plano. Por eso el índice lo calcula el ordenador: sube los vectores a tu bóveda en lotes, en el mismo sobre que tus archivos y cerrados con la misma llave (<a href="#sincronizar">12</a>), y el teléfono los baja al unirse y en cada sincronización. Lo poco que todavía no tenga, como lo que acabas de escribir en él, lo calcula al momento. El modelo lo baja el teléfono una vez, con wifi, porque tu pregunta también hay que convertirla en vector. Solo viajan los vectores de la búsqueda, y el almacén no puede abrirlos, como no puede abrir lo demás.</p>
+        <p><strong>Y una segunda búsqueda, que no pide la IA.</strong> Al enviar un mensaje en una de las webs, o en Claude Code, Mentor lo busca en tu memoria, sección a sección. Si algo lo contesta con mucha seguridad, tres trozos como mucho, lo añade al final del mensaje, detrás de una raya y con su archivo, para que la IA conteste con ello en ese mismo turno. Es lo único que Mentor añade a un mensaje sin que lo veas antes de enviarlo: por eso el listón es alto, por eso se ve en lo enviado, y por eso se apaga en los ajustes, en «Lo que contesta tu memoria».</p>
+        <p>Lo que no encuentra, dicho claro. El modelo es pequeño y sabe poco del mundo: si una nota habla de Mary Poppins y la IA busca «la niñera voladora del paraguas», no sale. Ahí lo compensa la IA cuando elige bien las palabras, que no siempre lo hace: si busca «Mary Poppins», la encuentran las dos. Y lo que no está escrito no lo encuentra nadie: Mentor no guarda tus conversaciones, así que no hay historial que buscar.</p>
+        <p>¿Por qué en tus dispositivos, y no en un servidor? Porque un índice que entienda el significado tiene que leer tu memoria para hacerse, y lo que la lee no puede estar al otro lado de una llave que solo tienes tú. Cuesta un modelo de 233 MB en cada dispositivo y un rato del ordenador la primera vez, más largo cuanto más hayas escrito. A cambio, Mentor no tiene que elegir entre buscar bien y cifrar.</p>
+        <p class="regla">El índice se hace donde está la llave: en tus dispositivos.</p>
+        <div class="recuadro taller">
+          <p class="rotulo">Desde el taller</p>
+          <p>En las pruebas, un teléfono se quedó en «Preparando el índice de tu carpeta, 13 de 168 entradas», con la barra quieta: solo calculaba mientras cargaba, y desenchufado se paraba sin decirlo. Ahora el índice le llega calculado del ordenador, el teléfono solo calcula lo poco que le falta, y la barra sale solo mientras trabaja de verdad.</p>
+        </div>
 
         <h2 id="revision"><span class="n">07</span>La revisión semanal: ordenar sin perder</h2>
         <p>Un buzón que solo crece acaba lleno de cosas repetidas, de cosas que ya no valen y de deducciones que nadie confirmó. Y una memoria así no solo gasta espacio: el modelo la lee, la juzga, y empieza a hacerle menos caso. Olvidar bien es una función, no un descuido.</p>
@@ -268,7 +279,7 @@
         <p>Se escribe de dos formas. Por el camino, la IA termina la respuesta con <code>mentor: hilo | Mary Shelley | lo que hemos sacado | "tu frase"</code>, y Mentor lo junta en la entrada de esa conversación, sin que hagas nada; la deriva de un tema a otro la ponen las notas, enlazadas entre sí. Y con un botón, «Resumir y guardar esta conversación», que pide a la misma IA la entrada de cada tema, con la conversación adjunta, leída de la página, donde tu perfil va como archivo; ves las entradas antes de guardarlas y las cambias si quieres. Nunca con un modelo de Radamant: resume la IA de la conversación.</p>
         <div class="tarjeta maquina"><span class="texto"><span class="que">Mentor ha apuntado en el hilo «Mary Shelley»:</span>Su madre fue Mary Wollstonecraft.<span class="firma">temas/mary-shelley.md</span></span><span class="acciones"><span class="b">Ver</span><span class="b">Deshacer</span></span></div>
         <p>Vuelve de tres formas. Detrás del perfil, en cada chat nuevo, van los nombres de los temas de los que has hablado el último mes, quince como mucho, para que la IA sepa que existen y apunte con el mismo nombre; el resto no viaja. Si nombras uno, la IA pide su hilo con la búsqueda, que devuelve sus entradas enteras con su fecha, y te puede decir cuándo y por qué se habló de eso; si no lo pide, en las webs Mentor te lo ofrece en una tarjeta, «Tienes un hilo de «Mary Shelley»», con «Traerlo». Y «Continuar un hilo», en el botón «M» o en la ventana de Mentor, pone la nota en el chat, también en otra IA. Lo de la nota llega como lo que es: lo que se dijo entonces, no algo comprobado.</p>
-        <p>Las notas son markdown, como todo lo demás: Obsidian las abre con sus propiedades, y <code>[[Mary Shelley]]</code>, escrito en cualquier nota, lleva a la suya. Si ya tienes una bóveda de Obsidian, «Dejarlo todo listo» te ofrece usarla en su sitio como tu carpeta de Mentor, sin copiar nada, y entonces la búsqueda de tus IAs llega a todas tus notas. Lo que no hace todavía: encontrar «aquella autora del monstruo» sin el nombre. Eso es buscar por significado, y va aparte, con un modelo en tu ordenador.</p>
+        <p>Las notas son markdown, como todo lo demás: Obsidian las abre con sus propiedades, y <code>[[Mary Shelley]]</code>, escrito en cualquier nota, lleva a la suya. Si ya tienes una bóveda de Obsidian, «Dejarlo todo listo» te ofrece usarla en su sitio como tu carpeta de Mentor, sin copiar nada, y entonces la búsqueda de tus IAs llega a todas tus notas. Y si no das con el nombre, la búsqueda por significado (<a href="#buscar">06</a>) trae lo que se dijo con otras palabras; lo que pide saber del mundo, como «aquella autora del monstruo», depende de que la IA ponga el nombre.</p>
 
         <h2 id="webs"><span class="n">11</span>Cuando una web cambia</h2>
         <p>Una extensión que escribe en la caja de ChatGPT tiene que saber dónde está la caja, y las cinco webs cambian su página cada pocas semanas. Es la factura permanente de este diseño, y no se puede evitar; lo que se puede es pagarla sin que la pagues tú.</p>
@@ -281,10 +292,10 @@
         <h2 id="sincronizar"><span class="n">12</span>Sincronizar sin que nadie lea</h2>
         <p>Tener la memoria en un solo ordenador es tenerla a medias. Llevarla a otro, y al teléfono, pide un sitio en medio, y un sitio en medio que pueda leerla es la razón por la que casi ninguna memoria para la IA está cifrada de extremo a extremo: para buscar, resumir y limpiar en el servidor hace falta leer. Como Mentor no hace nada de eso en el servidor, puede hacer lo contrario.</p>
         <p><strong>El código.</strong> Al instalar la app nace un secreto al azar de 128 bits, que se te enseña como 12 palabras en castellano. Quien tiene las palabras tiene la memoria; Radamant no las tiene. De ese código salen, por caminos de un solo sentido, tres cosas: el identificador de tu bóveda, una credencial para escribir en ella, y la llave. Las dos primeras las conoce el almacén; con ellas no se llega ni al código ni a la llave. La llave no sale nunca del dispositivo.</p>
-        <p><strong>El sobre.</strong> Cada vez que cambia un archivo, la app mete la versión nueva en un sobre cerrado con la llave y lo deja en el almacén con un número. Tus otros dispositivos preguntan qué sobres hay nuevos, los abren con su copia de la llave y ponen el archivo en su carpeta.</p>
+        <p><strong>El sobre.</strong> Cada vez que cambia un archivo, la app mete la versión nueva en un sobre cerrado con la llave y lo deja en el almacén con un número. Tus otros dispositivos preguntan qué sobres hay nuevos, los abren con su copia de la llave y ponen el archivo en su carpeta. Los vectores del índice de la búsqueda (<a href="#buscar">06</a>) viajan igual, en sus propios sobres.</p>
         <figure class="figura">
           <div class="sobre">
-            <div class="capa fuera">Lo que ve el almacén: <span class="mono">cambios/k7x2…/000000000041</span>, cuánto pesa y cuándo llegó. Ni el nombre del archivo ni una palabra de lo que dice.</div>
+            <div class="capa fuera">Lo que ve el almacén: <span class="mono">cambios/k7x2…/000000000041</span>, cuánto pesa y cuándo llegó; y de los lotes del índice de la búsqueda, <span class="mono">vectores/k7x2…/000000000003</span>, que por lo que pesan dicen más o menos cuántos trozos tiene tu memoria. Ni el nombre del archivo ni una palabra de lo que dice.</div>
             <div class="capa">El sobre: <span class="mono">MNT1</span>, una sal de 16 bytes al azar y el contenido cifrado con AES-256-GCM, con una llave propia para cada sobre, atado al sitio donde está: un sobre movido de sitio no se abre.</div>
             <div class="capa dentro">Dentro: el archivo entero, <span class="mono">aprendizajes.md</span>, con su hora y el dispositivo que lo escribió.</div>
           </div>
@@ -311,7 +322,7 @@
         <p>Mentor encaja si usas más de una IA para trabajar y estás harto de explicarte en cada una; si prefieres ver y corregir lo que se guarda a confiar en una memoria que no puedes abrir; si trabajas con clientes y necesitas que no se mezclen; y si la pregunta «¿quién puede leer esto?» te importa lo bastante como para renunciar a cosas por ella.</p>
         <p>Encaja mal en cuatro casos, y conviene saberlos antes de pagar:</p>
         <ul>
-          <li><strong>Si lo que quieres es buscar en todo lo que has hablado.</strong> Mentor no guarda conversaciones. Para eso hace falta un servidor que las lea, y Mentor no tiene uno.</li>
+          <li><strong>Si lo que quieres es buscar en todo lo que has hablado.</strong> Mentor no guarda conversaciones, solo lo que se saca de ellas, así que no hay dónde buscarlas.</li>
           <li><strong>Si no vas a hacer la revisión.</strong> Es un envío a la semana, pero sin él el buzón crece sin orden y el perfil no aprende.</li>
           <li><strong>Si usas otras webs.</strong> Hoy son cinco: ChatGPT, Claude, Gemini, Grok y DeepSeek. Las demás, cuando Mentor esté a la venta de verdad.</li>
           <li><strong>Si estás en un Mac o en un iPhone.</strong> La app del Mac lleva la firma de Apple y se abre como cualquier otra. El iPhone, próximamente. Android está en pruebas.</li>
@@ -328,6 +339,7 @@
           <li>HKDF, RFC 5869 (<a href="https://www.rfc-editor.org/rfc/rfc5869" rel="noopener">rfc-editor.org</a>): cómo salen del código, por caminos de un solo sentido, el identificador, la credencial y la llave.</li>
           <li>AES-GCM, NIST SP 800-38D (<a href="https://csrc.nist.gov/pubs/sp/800/38/d/final" rel="noopener">csrc.nist.gov</a>): el cifrado de cada sobre, que detecta cualquier cambio en lo cifrado.</li>
           <li>BIP39 (<a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki" rel="noopener">github.com/bitcoin/bips</a>): la lista de palabras en castellano con la que se enseña el código. Solo la lista: ni su frase de paso ni su semilla.</li>
+          <li>bekko-embedding-v1-a25m (<a href="https://huggingface.co/hotchpotch/bekko-embedding-v1-a25m" rel="noopener">huggingface.co</a>), con licencia MIT: el modelo pequeño con que tu ordenador hace el índice de la búsqueda por significado.</li>
           <li>Model Context Protocol (<a href="https://modelcontextprotocol.io" rel="noopener">modelcontextprotocol.io</a>): el protocolo por el que Claude Code, Codex, Cursor y Claude Desktop hablan con el servidor local de Mentor.</li>
           <li>Obsidian Sync, Cryptomator y Bitwarden: la prueba de que cifrar en el dispositivo, guardar en un almacén que no puede leer y sincronizar con el móvil funciona hoy para millones de personas. Mentor no inventa el mecanismo; lo aplica a una carpeta de texto.</li>
           <li>KeePassXC-Browser: la prueba de que una extensión puede hablar con un programa local que guarda lo que es tuyo, sin servidor en medio. Es la forma del puente entre la extensión y la app de Mentor.</li>
